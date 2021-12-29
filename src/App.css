@@ -1,38 +1,115 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto Mono', monospace;
+}
+*:focus {
+	outline: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+	/* This will allow you to use 'rem' all across your project without having to use a 16rem base which is the default font-size of modern browsers. */
+
+	font-size: 62.5%;
+	overflow-x: hidden;
+
+	scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+	text-decoration: none;
+	color: inherit;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+	background-color: #1a1a1a;
+	/* height: 100vh; */
+}
+.app {
+	/* height: 100vh; */
+	color: #fff;
+	max-width: 120rem;
+	margin: 0 auto;
+
+	font-size: 1.8rem;
 }
 
-.App-link {
-  color: #61dafb;
+.nav {
+	height: 9rem;
+	/* max-width: 90%; */
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo-wrapper {
+	display: flex;
+	align-items: center;
+	max-width: 12.5rem;
+}
+
+.logo {
+	width: 50%;
+}
+
+.menu-item {
+	list-style: none;
+}
+.twitter-icon {
+	height: 2.5rem;
+	width: 2.5rem;
+}
+h1 {
+	text-align: center;
+	max-width: 60rem;
+	margin: 6rem auto;
+	font-size: 4.8rem;
+	font-weight: 400;
+}
+
+.flow-wrapper {
+	padding: 6.2rem 8rem 5rem;
+	border-radius: 1.5rem;
+	background-color: #272727;
+}
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 3.2rem;
+}
+.form-heading {
+	margin-bottom: 4rem;
+	position: relative;
+	font-size: 4rem;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+/* .form-heading::after {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	height: 0.25px;
+	width: 100%;
+	background-color: #fff;
+} */
+input {
+	display: block;
+}
+label {
+	display: block;
+}
+
+.input-label {
+	margin-bottom: 1.5rem;
+}
+/* .form-input {
+	width: 100%;
+} */
+.submit-button {
+	max-width: 350px;
+	align-self: center;
 }
