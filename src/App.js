@@ -1,13 +1,7 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {
-	ThemeProvider,
-	createTheme,
-	Input,
-	TextField,
-	Button,
-} from '@mui/material';
+import { ThemeProvider, createTheme, TextField, Button } from '@mui/material';
 
 import Navbar from './components/Navbar';
 import SignUpForm from './components/SignUpForm';
@@ -28,10 +22,6 @@ const App = () => {
 			fontSize: 18,
 		},
 	});
-
-	useEffect(() => {
-		return () => {};
-	}, [newThemeColor]);
 
 	return (
 		<ThemeProvider theme={myTheme}>
