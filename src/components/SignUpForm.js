@@ -1,139 +1,203 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import {
-	TextField,
-	Button,
-	Checkbox,
-	FormControlLabel,
-	FormGroup,
-	FormLabel,
-} from '@mui/material';
-import { Field, Formik, Form, useField, useFormik } from 'formik';
-import { ThemeProvider } from '@mui/private-theming';
+import { TextField, Button, Checkbox } from '@mui/material';
+import { Field, Formik, Form, useFormik } from 'formik';
 import TwitterOauth from './TwitterOauth';
 import axios from 'axios';
 
-const MyInput = ({ label, preLabel, ...props }) => {
-	const [field, meta] = useField(props);
+// Initial Values
+const formInitialValues = {
+	project_name: '',
+	website: '',
+	main_twitter: '',
+	marketplaces: [],
+	twitter: [],
+	discord: [],
+	discord_webhook: '',
+};
+
+const FormikStepper = ({ step, setStep, children, ...props }) => {
+	const childrenArray = React.Children.toArray(children);
+	const currentChild = childrenArray[step];
+	const isLastStep = step === childrenArray.length - 1;
+
+	// Helper
+	const handleSubmit = (data) => {
+		if (!isLastStep) {
+			for (let key in data) {
+				sessionStorage.setItem(key, data[key]);
+			}
+
+			setStep((s) => s + 1);
+		} else {
+			await 
+			console.log('SUBMIT', data);
+		}
+	};
+
 	return (
-		<div className="form-input">
-			<label className="input-label">{preLabel}</label>
-			<TextField fullWidth={true} label={label} {...props} {...field} />
-		</div>
+		<Formik {...props} onSubmit={handleSubmit}>
+			<Form autoComplete="off">
+				{currentChild}
+				<div className="prev-next-wrapper">
+					{step >= 1 ? (
+						<Button
+							variant="outlined"
+							onClick={() => {
+								setStep((s) => s - 1);
+							}}>
+							Back
+						</Button>
+					) : (
+						<div></div>
+					)}
+					{
+						<Button
+							type="submit"
+							variant={isLastStep ? 'contained' : 'outlined'}>
+							{isLastStep ? 'Submit' : 'Next'}
+						</Button>
+					}
+				</div>
+			</Form>
+		</Formik>
 	);
 };
 
+// Component
 const SignUpForm = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [step, setStep] = useState(0);
+	const formik = useFormik({ initialValues: formInitialValues });
+	const [searchParams] = useSearchParams();
 	const screen_name = searchParams.get('screen_name');
-	const oauth_token = searchParams.get('oauth_token');
-	const oauth_token_secret = searchParams.get('oauth_token_secret');
-	const user_id = searchParams.get('user_id');
-	const project_name = localStorage.getItem('project_name');
-	const discord_webhook = localStorage.getItem('discord_webhook');
 
-	const myInitialValues = {
-		project_name: `${project_name ? project_name : ''}`,
-		discord_webhook: `${discord_webhook ? discord_webhook : ''}`,
-		bot_type: [],
-	};
-
-	const myCheckbox = ({ field, value, label, name, form, ...props }) => {
-		return (
-			<label {...field} {...props}>
-				<Field
-					name={name}
-					type="checkbox"
-					value={value}
-					as={Checkbox}
-				/>
-				{label}
-			</label>
-		);
-	};
+	useEffect(() => {
+		if (searchParams.get('step')) {
+			setStep(searchParams.get('step'));
+		}
+		return () => {};
+	}, []);
 
 	return (
 		<>
 			<h2 className="form-heading">Set-up your Moonbot</h2>
-			{/* <p>
-				We just need a couple of bits of information before your new
-				bots are initailized
-			</p>
-			<h3>Twitter Authentication</h3> */}
-			{/* <Twitter /> */}
-			<Formik
-				initialValues={myInitialValues}
-				onSubmit={(data) => {
-					const myObj = {
-						oauth_token_secret,
-						oauth_token,
-						user_id,
-						screen_name,
-						...data,
-					};
-
-					axios
-						.post('http://localhost:8000/submit', myObj)
-						.then((response) => console.log(response));
-
-					localStorage.clear();
-				}}>
-				{({ values, handleChange, handleBlur, handleSubmit }) => (
-					<Form onSubmit={handleSubmit}>
-						<MyInput
-							preLabel="What's your NFT collection called?"
-							label="Project Name"
-							name="project_name"
-							placeholder="SolanaMonkeyBusiness"
-							type="input"
-						/>
-						<MyInput
-							preLabel="Provide a webhook for your Discord sales channel so Moonbots can go BRR! 💸"
-							label="Discord Webhook"
-							placeholder="https://discord.com/api/webhooks/924grege09678643/kgregreYQ7PJFc5Pad7RB_lGqAfbkWOJiCADp3323rfes9o93XbOt5iVP"
-							name="discord_webhook"
-							type="input"
-						/>
-						<label className="checkbox-group-label">
-							Select all that apply:
-							<div className="checkbox-group">
-								<Field
-									name="bot_type"
-									value="discord"
-									as={myCheckbox}
-									label="Discord"
-								/>
-								<Field
-									name="bot_type"
-									value="twitter"
-									as={myCheckbox}
-									label="Twitter"
-								/>
-								<Field
-									name="bot_type"
-									value="sales"
-									as={myCheckbox}
-									label="Sales"
-								/>
-							</div>
+			<FormikStepper
+				step={step}
+				setStep={setStep}
+				initialValues={formik.initialValues}
+					onSubmit={}>
+				<div className="form">
+					<Field
+						name="project_name"
+						as={TextField}
+						label="Project Name"
+						type="input"
+						placeholder="Solana Monkey Business"
+					/>
+					<Field
+						name="website"
+						as={TextField}
+						label="Website"
+						type="input"
+						placeholder="https://solanamonkeybusiness.com"
+					/>
+					<Field
+						name="main_twitter"
+						as={TextField}
+						label="Your project's main Twitter handle"
+						type="input"
+						placeholder="@SolanaMBS"
+					/>
+					<div>
+						<label className="input-label">
+							Which marketplaces is your collection available in?
 						</label>
-						<TwitterOauth
-							screen_name={screen_name}
-							values={values}
-						/>
 
-						<Button
-							className="submit-button"
-							variant="contained"
-							size="large"
-							aria-required
-							type="submit">
-							NEXT
-						</Button>
-						{/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
-					</Form>
-				)}
-			</Formik>
+						<div className="checkbox-group">
+							<label>
+								<Field
+									name="marketplaces"
+									as={Checkbox}
+									value="magic_eden"
+								/>
+								Magic Eden
+							</label>
+							<label>
+								<Field
+									name="marketplaces"
+									as={Checkbox}
+									value="alpha_art"
+								/>
+								Alpha Art
+							</label>
+							<label>
+								<Field
+									name="marketplaces"
+									as={Checkbox}
+									value="solanart"
+								/>
+								Solanart
+							</label>
+						</div>
+					</div>
+					<div>
+						<label className="input-label">
+							Which Bots would you like to have installed?
+						</label>
+						<div className="flex-cl-gap">
+							<div>
+								<label className="input-label">Twitter</label>
+								<label>
+									<Field
+										name="twitter"
+										as={Checkbox}
+										value="sales"
+									/>
+									Sales
+								</label>
+							</div>
+							<div>
+								<label className="input-label">Discord</label>
+								<div className="checkbox-group">
+									<label>
+										<Field
+											name="discord"
+											as={Checkbox}
+											value="sales"
+										/>
+										Sales
+									</label>
+									<label>
+										<Field
+											name="discord"
+											as={Checkbox}
+											value="listings"
+										/>
+										Listings
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<TwitterOauth screen_name={screen_name} />
+				<div className="form">
+					<Field
+						name="discord_webhook_sales"
+						as={TextField}
+						label="Sales Channel Webhook"
+						type="input"
+						placeholder="Solana Monkey Business"
+					/>
+					<Field
+						name="discord_webhook_listings"
+						as={TextField}
+						label="Listings Channel Webhook"
+						type="input"
+						placeholder="https://solanamonkeybusiness.com"
+					/>
+				</div>
+			</FormikStepper>
 		</>
 	);
 };

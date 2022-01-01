@@ -1,12 +1,5 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import axios from 'axios';
-
-const handleTwitterClick = (values) => {
-	for (const key in values) {
-		localStorage.setItem(key, values[key]);
-	}
-}; // const onClick = async () => {};
 
 const TwitterOauth = ({ screen_name, values }) => {
 	return (
@@ -21,7 +14,6 @@ const TwitterOauth = ({ screen_name, values }) => {
 			) : (
 				<Button
 					variant="contained"
-					onClick={() => handleTwitterClick(values)}
 					href="http://localhost:8000/twitter/authorize">
 					Authorize Twitter
 				</Button>

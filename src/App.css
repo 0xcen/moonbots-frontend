@@ -81,8 +81,9 @@ h1 {
 	border-radius: 1.5rem;
 	background-color: #272727;
 	margin-bottom: 9rem;
+	/* min-height: 89rem; */
 }
-form {
+.form {
 	display: flex;
 	flex-direction: column;
 	gap: 3.2rem;
@@ -116,6 +117,11 @@ label {
 /* .form-input {
 	width: 100%;
 } */
+.input-group {
+	display: flex;
+	flex-direction: column;
+	gap: 1.8rem;
+}
 .submit-button {
 	max-width: 350px;
 	align-self: center;
@@ -125,8 +131,18 @@ label {
 	font-size: 1.8rem;
 }
 .checkbox-group {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	/* flex-direction: row; */
+	/* margin-top: 1.5rem; */
+}
+.flex-cl-gap {
 	display: flex;
-	flex-direction: row;
-	margin-top: 1.5rem;
-	gap: 5.6rem;
+	flex-direction: column;
+	gap: 1.8rem;
+}
+.prev-next-wrapper {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 5rem;
 }
