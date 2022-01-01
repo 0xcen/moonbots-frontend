@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TextField, Button, Checkbox } from '@mui/material';
 import { Field, Formik, Form, useFormik } from 'formik';
+import { Persist } from 'formik-persist';
 import TwitterOauth from './TwitterOauth';
 import axios from 'axios';
 
@@ -22,7 +23,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 	const isLastStep = step === childrenArray.length - 1;
 
 	// Helper
-	const handleSubmit = (data) => {
+	const handleSubmit = async (data) => {
 		if (!isLastStep) {
 			for (let key in data) {
 				sessionStorage.setItem(key, data[key]);
@@ -30,7 +31,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 
 			setStep((s) => s + 1);
 		} else {
-			await 
+			await props.onSubmit(data);
 			console.log('SUBMIT', data);
 		}
 	};
@@ -59,6 +60,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 						</Button>
 					}
 				</div>
+				<Persist name="sign-up-form" />
 			</Form>
 		</Formik>
 	);
@@ -70,6 +72,9 @@ const SignUpForm = () => {
 	const formik = useFormik({ initialValues: formInitialValues });
 	const [searchParams] = useSearchParams();
 	const screen_name = searchParams.get('screen_name');
+	const oauth_token = searchParams.get('oauth_token');
+	const oauth_token_secret = searchParams.get('oauth_token_secret');
+	const user_id = searchParams.get('user_id');
 
 	useEffect(() => {
 		if (searchParams.get('step')) {
@@ -85,7 +90,19 @@ const SignUpForm = () => {
 				step={step}
 				setStep={setStep}
 				initialValues={formik.initialValues}
-					onSubmit={}>
+				onSubmit={async (data) => {
+					const myObj = {
+						oauth_token_secret,
+						oauth_token,
+						user_id,
+						screen_name,
+						...data,
+					};
+
+					axios
+						.post('http://localhost:8000/submit', myObj)
+						.then((response) => console.log(response));
+				}}>
 				<div className="form">
 					<Field
 						name="project_name"
@@ -119,6 +136,16 @@ const SignUpForm = () => {
 									name="marketplaces"
 									as={Checkbox}
 									value="magic_eden"
+									defaultChecked={
+										sessionStorage.getItem(
+											'marketplaces'
+										) &&
+										sessionStorage
+											.getItem('marketplaces')
+											.includes('magic_eden')
+											? true
+											: false
+									}
 								/>
 								Magic Eden
 							</label>
@@ -127,6 +154,16 @@ const SignUpForm = () => {
 									name="marketplaces"
 									as={Checkbox}
 									value="alpha_art"
+									defaultChecked={
+										sessionStorage.getItem(
+											'marketplaces'
+										) &&
+										sessionStorage
+											.getItem('marketplaces')
+											.includes('alpha_art')
+											? true
+											: false
+									}
 								/>
 								Alpha Art
 							</label>
@@ -135,6 +172,16 @@ const SignUpForm = () => {
 									name="marketplaces"
 									as={Checkbox}
 									value="solanart"
+									defaultChecked={
+										sessionStorage.getItem(
+											'marketplaces'
+										) &&
+										sessionStorage
+											.getItem('marketplaces')
+											.includes('solanart')
+											? true
+											: false
+									}
 								/>
 								Solanart
 							</label>
@@ -152,6 +199,14 @@ const SignUpForm = () => {
 										name="twitter"
 										as={Checkbox}
 										value="sales"
+										defaultChecked={
+											sessionStorage.getItem('twitter') &&
+											sessionStorage
+												.getItem('twitter')
+												.includes('sales')
+												? true
+												: false
+										}
 									/>
 									Sales
 								</label>
@@ -164,6 +219,16 @@ const SignUpForm = () => {
 											name="discord"
 											as={Checkbox}
 											value="sales"
+											defaultChecked={
+												sessionStorage.getItem(
+													'discord'
+												) &&
+												sessionStorage
+													.getItem('discord')
+													.includes('sales')
+													? true
+													: false
+											}
 										/>
 										Sales
 									</label>
@@ -172,6 +237,16 @@ const SignUpForm = () => {
 											name="discord"
 											as={Checkbox}
 											value="listings"
+											defaultChecked={
+												sessionStorage.getItem(
+													'discord'
+												) &&
+												sessionStorage
+													.getItem('discord')
+													.includes('listings')
+													? true
+													: false
+											}
 										/>
 										Listings
 									</label>
