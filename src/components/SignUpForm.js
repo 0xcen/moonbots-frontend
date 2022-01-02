@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, searchParams } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TextField, Button, Checkbox } from '@mui/material';
 import { Field, Formik, Form, useFormik } from 'formik';
@@ -12,9 +12,10 @@ const formInitialValues = {
 	website: '',
 	main_twitter: '',
 	marketplaces: [],
-	twitter: [],
-	discord: [],
-	discord_webhook: '',
+	twitter_bots: [],
+	discord_bots: [],
+	discord_webhook_sales: '',
+	discord_webhook_listings: '',
 };
 
 const CheckboxPersists = ({ name, value, label, ...props }) => {
