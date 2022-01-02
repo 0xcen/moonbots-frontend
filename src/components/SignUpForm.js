@@ -17,6 +17,56 @@ const formInitialValues = {
 	discord_webhook: '',
 };
 
+const CheckboxPersists = ({ name, value, label, ...props }) => {
+	// <pre>{JSON.stringify(props)}</pre>;
+	return (
+		<label>
+			<Checkbox
+				{...props}
+				name={name}
+				value={value}
+				defaultChecked={
+					sessionStorage.getItem(name) &&
+					sessionStorage.getItem(name).includes(value)
+						? true
+						: false
+				}
+			/>
+			{label}
+		</label>
+	);
+};
+
+const CheckboxGroup = ({ fields, name, label, children, ...props }) => {
+	let checkboxes = [];
+	for (let key in fields) {
+		checkboxes.push(
+			<Field
+				as={CheckboxPersists}
+				value={fields[key].value}
+				name={name}
+				label={fields[key].label}
+				key={checkboxes.length}
+			/>
+		);
+	}
+	return (
+		<div>
+			{label ? <label className="input-label">{label}</label> : null}
+
+			<div
+				className={
+					React.Children.toArray(children).length > 0
+						? 'checkbox-group-group'
+						: 'checkbox-group'
+				}>
+				{checkboxes}
+				{children}
+			</div>
+		</div>
+	);
+};
+
 const FormikStepper = ({ step, setStep, children, ...props }) => {
 	const childrenArray = React.Children.toArray(children);
 	const currentChild = childrenArray[step];
@@ -60,7 +110,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 						</Button>
 					}
 				</div>
-				<Persist name="sign-up-form" />
+				<Persist isSessionStorage={true} name="sign-up-form" />
 			</Form>
 		</Formik>
 	);
@@ -71,10 +121,10 @@ const SignUpForm = () => {
 	const [step, setStep] = useState(0);
 	const formik = useFormik({ initialValues: formInitialValues });
 	const [searchParams] = useSearchParams();
-	const screen_name = searchParams.get('screen_name');
-	const oauth_token = searchParams.get('oauth_token');
-	const oauth_token_secret = searchParams.get('oauth_token_secret');
-	const user_id = searchParams.get('user_id');
+	const screen_name = searchParams.get('screen_name') || '';
+	const oauth_token = searchParams.get('oauth_token') || '';
+	const oauth_token_secret = searchParams.get('oauth_token_secret') || '';
+	const user_id = searchParams.get('user_id') || '';
 
 	useEffect(() => {
 		if (searchParams.get('step')) {
@@ -101,7 +151,7 @@ const SignUpForm = () => {
 
 					axios
 						.post('http://localhost:8000/submit', myObj)
-						.then((response) => console.log(response));
+						.then((response) => console.log('FRONT', response));
 				}}>
 				<div className="form">
 					<Field
@@ -125,135 +175,49 @@ const SignUpForm = () => {
 						type="input"
 						placeholder="@SolanaMBS"
 					/>
-					<div>
-						<label className="input-label">
-							Which marketplaces is your collection available in?
-						</label>
+					<CheckboxGroup
+						name="marketplaces"
+						label="Which marketplaces is your collection available in?"
+						fields={{
+							solsea: { value: 'solsea', label: 'Solsea' },
+							magic_eden: {
+								value: 'magic_eden',
+								label: 'Magic Eden',
+							},
+							solanart: { value: 'solanart', label: 'Solanart' },
+							alpha_art: {
+								value: 'alpha_art',
+								label: 'Alpha Art',
+							},
+						}}
+					/>
+					<CheckboxGroup label="Which bots would you like to have installed?">
+						<CheckboxGroup
+							name="twitter_bots"
+							label="Twitter"
+							fields={{
+								sales: {
+									value: 'sales',
+									label: 'Sales',
+								},
+							}}
+						/>
 
-						<div className="checkbox-group">
-							<label>
-								<Field
-									name="marketplaces"
-									as={Checkbox}
-									value="magic_eden"
-									defaultChecked={
-										sessionStorage.getItem(
-											'marketplaces'
-										) &&
-										sessionStorage
-											.getItem('marketplaces')
-											.includes('magic_eden')
-											? true
-											: false
-									}
-								/>
-								Magic Eden
-							</label>
-							<label>
-								<Field
-									name="marketplaces"
-									as={Checkbox}
-									value="alpha_art"
-									defaultChecked={
-										sessionStorage.getItem(
-											'marketplaces'
-										) &&
-										sessionStorage
-											.getItem('marketplaces')
-											.includes('alpha_art')
-											? true
-											: false
-									}
-								/>
-								Alpha Art
-							</label>
-							<label>
-								<Field
-									name="marketplaces"
-									as={Checkbox}
-									value="solanart"
-									defaultChecked={
-										sessionStorage.getItem(
-											'marketplaces'
-										) &&
-										sessionStorage
-											.getItem('marketplaces')
-											.includes('solanart')
-											? true
-											: false
-									}
-								/>
-								Solanart
-							</label>
-						</div>
-					</div>
-					<div>
-						<label className="input-label">
-							Which Bots would you like to have installed?
-						</label>
-						<div className="flex-cl-gap">
-							<div>
-								<label className="input-label">Twitter</label>
-								<label>
-									<Field
-										name="twitter"
-										as={Checkbox}
-										value="sales"
-										defaultChecked={
-											sessionStorage.getItem('twitter') &&
-											sessionStorage
-												.getItem('twitter')
-												.includes('sales')
-												? true
-												: false
-										}
-									/>
-									Sales
-								</label>
-							</div>
-							<div>
-								<label className="input-label">Discord</label>
-								<div className="checkbox-group">
-									<label>
-										<Field
-											name="discord"
-											as={Checkbox}
-											value="sales"
-											defaultChecked={
-												sessionStorage.getItem(
-													'discord'
-												) &&
-												sessionStorage
-													.getItem('discord')
-													.includes('sales')
-													? true
-													: false
-											}
-										/>
-										Sales
-									</label>
-									<label>
-										<Field
-											name="discord"
-											as={Checkbox}
-											value="listings"
-											defaultChecked={
-												sessionStorage.getItem(
-													'discord'
-												) &&
-												sessionStorage
-													.getItem('discord')
-													.includes('listings')
-													? true
-													: false
-											}
-										/>
-										Listings
-									</label>
-								</div>
-							</div>
-						</div>
-					</div>
+						<CheckboxGroup
+							name="discord_bots"
+							label="Discord"
+							fields={{
+								sales: {
+									value: 'sales',
+									label: 'Sales',
+								},
+								listings: {
+									value: 'listings',
+									label: 'Listings',
+								},
+							}}
+						/>
+					</CheckboxGroup>
 				</div>
 				<TwitterOauth screen_name={screen_name} />
 				<div className="form">
