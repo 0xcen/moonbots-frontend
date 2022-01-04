@@ -178,7 +178,8 @@ const SignUpForm = () => {
 
 	useEffect(() => {
 		if (searchParams.get('step') && searchParams.get('step') >= step) {
-			setStep(searchParams.get('step'));
+			setStep(step + 1);
+			console.log(step);
 		}
 	}, []);
 
@@ -271,6 +272,8 @@ const SignUpForm = () => {
 								textDecoration: 'underline',
 								color: '#5aff47',
 							}}
+							target="_blank"
+							rel="noreferrer"
 							href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks">
 							See Instructions
 						</a>
