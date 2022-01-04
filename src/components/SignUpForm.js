@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { TextField, Button, Checkbox } from '@mui/material';
+import { TextField, Button, Checkbox, Radio } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { Field, Formik, Form, useFormik, useFormikContext } from 'formik';
@@ -18,13 +18,14 @@ const formInitialValues = {
 	website: '',
 	main_twitter: '',
 	marketplaces: [],
+	rarity: '',
 	twitter_bots: [],
 	discord_bots: [],
 	discord_webhook_sales: '',
 	discord_webhook_listings: '',
 };
 
-const MyTextField = ({ name, ...props }) => {
+export const MyTextField = ({ name, ...props }) => {
 	const context = useFormikContext();
 	const showError = context.touched[name] && name in context.errors;
 	return (
@@ -94,6 +95,7 @@ const NavigationButtons = ({ step, setStep, isLastStep }) => {
 		<div className="prev-next-wrapper">
 			{step >= 1 ? (
 				<Button
+					size="large"
 					variant="outlined"
 					onClick={() => {
 						setStep(step - 1);
@@ -104,9 +106,10 @@ const NavigationButtons = ({ step, setStep, isLastStep }) => {
 				<div></div>
 			)}
 			{isSubmitting ? (
-				<LoadingButton loading variant="contained" />
+				<LoadingButton loading variant="contained" size="large" />
 			) : (
 				<Button
+					size="large"
 					type="submit"
 					variant={isLastStep ? 'contained' : 'outlined'}>
 					{isLastStep ? 'Submit' : 'Next'}
@@ -139,7 +142,8 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 		<Formik
 			{...props}
 			onSubmit={handleSubmit}
-			initialValues={formik.initialValues}>
+			initialValues={formik.initialValues}
+			validationSchema={currentChild.props.validationSchema}>
 			<Form autoComplete="off">
 				{currentChild}
 
@@ -251,6 +255,31 @@ const SignUpForm = () => {
 							},
 						}}
 					/>
+					<div>
+						<label className="input-label primary-label">
+							Rarity Tracking
+						</label>
+						<div className="checkbox-group">
+							<label>
+								<Field
+									type="radio"
+									name="rarity"
+									as={Radio}
+									value="howRareIs"
+								/>
+								HowRare.is
+							</label>
+							<label>
+								<Field
+									type="radio"
+									name="rarity"
+									as={Radio}
+									value="solanaFloor"
+								/>
+								MoonRank
+							</label>
+						</div>
+					</div>
 					<CheckboxGroup
 						label="Choose your Bots"
 						className="primary-label">
@@ -283,17 +312,14 @@ const SignUpForm = () => {
 						/>
 					</CheckboxGroup>
 				</FormikStep>
-				<TwitterOauth screen_name={screen_name} />
+				<TwitterOauth screen_name={screen_name} validationSchema="" />
 				<FormikStep validationSchema={DiscordWhValidator}>
 					<label>
 						Please provide a webhook for your discord channel. This
 						allows MoonBots to post in your channel. If you need
 						help (
 						<a
-							style={{
-								textDecoration: 'underline',
-								color: '#5aff47',
-							}}
+							className="link"
 							target="_blank"
 							rel="noreferrer"
 							href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks">
