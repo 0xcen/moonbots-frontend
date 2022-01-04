@@ -34,44 +34,7 @@ const MyTextField = ({ name, ...props }) => {
 };
 
 const ConditionalFields = () => {
-	const context = useFormikContext();
-	const fields = [
-		<label key={0}>
-			Please provide a webhook for your discord channel. This allows
-			MoonBots to post in your channel. If you need help (
-			<a
-				style={{ textDecoration: 'underline', color: '#5aff47' }}
-				href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks">
-				See Instructions
-			</a>
-			). If you only want a twitter bot, skip this step.
-		</label>,
-	];
-	if (context.values.discord_bots.includes('listings'))
-		fields.push(
-			<>
-				<Field
-					name="discord_webhook_listings"
-					as={MyTextField}
-					label="Listings Channel Webhook"
-					type="input"
-					placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
-					key={fields.length}
-				/>
-			</>
-		);
-	if (context.values.discord_bots.includes('sales'))
-		fields.push(
-			<Field
-				name="discord_webhook_sales"
-				as={MyTextField}
-				label="Sales Channel Webhook"
-				type="input"
-				placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
-				key={fields.length}
-			/>
-		);
-	return <>{fields.length > 0 ? fields : fields[0]}</>;
+	return <></>;
 };
 
 const CheckboxPersists = ({ name, value, label, ...props }) => {
@@ -185,7 +148,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 							isLastStep={isLastStep}
 						/>
 
-						<Persist isSessionStorage={true} name="sign-up-form" />
+						<Persist name="sign-up-form" />
 					</Form>
 				);
 			}}
@@ -214,6 +177,7 @@ const SignUpForm = () => {
 			screen_name,
 			...data,
 		};
+		localStorage.clear();
 
 		axios
 			.post('https://moonbots.herokuapp.com/submit', myObj)
@@ -307,10 +271,35 @@ const SignUpForm = () => {
 					</CheckboxGroup>
 				</FormikStep>
 				<TwitterOauth screen_name={screen_name} />
-				<FormikStep
-					validationSchema={DiscordWhValidator}
-					label="Please provide a Discord webhook for your channel">
-					<ConditionalFields />
+				<FormikStep validationSchema={DiscordWhValidator}>
+					<label key={0}>
+						Please provide a webhook for your discord channel. This
+						allows MoonBots to post in your channel. If you need
+						help (
+						<a
+							style={{
+								textDecoration: 'underline',
+								color: '#5aff47',
+							}}
+							href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks">
+							See Instructions
+						</a>
+						). If you only want a twitter bot, skip this step.
+					</label>
+					<Field
+						name="discord_webhook_listings"
+						as={MyTextField}
+						label="Listings Channel Webhook"
+						type="input"
+						placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
+					/>
+					<Field
+						name="discord_webhook_sales"
+						as={MyTextField}
+						label="Sales Channel Webhook"
+						type="input"
+						placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
+					/>
 				</FormikStep>
 			</FormikStepper>
 		</>
