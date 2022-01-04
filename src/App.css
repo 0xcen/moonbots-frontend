@@ -72,8 +72,8 @@ h1 {
 	margin: 6rem auto;
 	font-size: 4.8rem;
 	font-weight: 800;
-	font-family: 'Open Sans', sans-serif;
-	/* text-transform: uppercase; */
+	font-family: 'Roboto Monoa', sans-serif;
+	text-transform: uppercase;
 }
 
 .flow-wrapper {

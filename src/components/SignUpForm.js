@@ -1,10 +1,12 @@
-import React, { useState, useEffect, searchParams } from 'react';
+import React, { useState, useEffect, useContext, Children } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { TextField, Button, Checkbox } from '@mui/material';
-import { Field, Formik, Form, useFormik } from 'formik';
+import { Field, Formik, Form, useFormik, useFormikContext } from 'formik';
 import { Persist } from 'formik-persist';
 import TwitterOauth from './TwitterOauth';
 import axios from 'axios';
+import { UserQuestionaire } from '../Validations/UserQuestionaire';
+import { DiscordWhValidator } from '../Validations/Discord_WH_Validator';
 
 // Initial Values
 const formInitialValues = {
@@ -16,6 +18,60 @@ const formInitialValues = {
 	discord_bots: [],
 	discord_webhook_sales: '',
 	discord_webhook_listings: '',
+};
+
+const MyTextField = ({ name, ...props }) => {
+	const context = useFormikContext();
+	const showError = context.touched[name] && name in context.errors;
+	return (
+		<TextField
+			error={showError}
+			helperText={showError && context.errors[name]}
+			name={name}
+			{...props}
+		/>
+	);
+};
+
+const ConditionalFields = () => {
+	const context = useFormikContext();
+	const fields = [
+		<label>
+			Please provide a webhook for your discord channel. This allows
+			MoonBots to post in your channel. If you need help (
+			<a
+				style={{ textDecoration: 'underline', color: '#5aff47' }}
+				href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks">
+				See Instructions
+			</a>
+			). If you only want a twitter bot, skip this step.
+		</label>,
+	];
+	if (context.values.discord_bots.includes('listings'))
+		fields.push(
+			<>
+				<Field
+					name="discord_webhook_listings"
+					as={MyTextField}
+					label="Listings Channel Webhook"
+					type="input"
+					placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
+					key={fields.length}
+				/>
+			</>
+		);
+	if (context.values.discord_bots.includes('sales'))
+		fields.push(
+			<Field
+				name="discord_webhook_sales"
+				as={MyTextField}
+				label="Sales Channel Webhook"
+				type="input"
+				placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
+				key={fields.length}
+			/>
+		);
+	return <>{fields.length > 0 ? fields : null}</>;
 };
 
 const CheckboxPersists = ({ name, value, label, ...props }) => {
@@ -38,7 +94,7 @@ const CheckboxPersists = ({ name, value, label, ...props }) => {
 	);
 };
 
-const CheckboxGroup = ({ fields, name, label, children, ...props }) => {
+const CheckboxGroup = ({ fields, name, label, children }) => {
 	let checkboxes = [];
 	for (let key in fields) {
 		checkboxes.push(
@@ -68,18 +124,43 @@ const CheckboxGroup = ({ fields, name, label, children, ...props }) => {
 	);
 };
 
+const NavigationButtons = ({ step, setStep, isLastStep }) => {
+	return (
+		<div className="prev-next-wrapper">
+			{step >= 1 ? (
+				<Button
+					variant="outlined"
+					onClick={() => {
+						setStep(step - 1);
+					}}>
+					Back
+				</Button>
+			) : (
+				<div></div>
+			)}
+			{
+				<Button
+					type="submit"
+					variant={isLastStep ? 'contained' : 'outlined'}>
+					{isLastStep ? 'Submit' : 'Next'}
+				</Button>
+			}
+		</div>
+	);
+};
+
 const FormikStepper = ({ step, setStep, children, ...props }) => {
+	const formik = useFormik({ initialValues: formInitialValues });
 	const childrenArray = React.Children.toArray(children);
 	const currentChild = childrenArray[step];
-	const isLastStep = step === childrenArray.length - 1;
+	const [totalSteps, setTotalSteps] = useState(2);
+	const isLastStep = totalSteps === step;
 
-	// Helper
 	const handleSubmit = async (data) => {
 		if (!isLastStep) {
 			for (let key in data) {
 				sessionStorage.setItem(key, data[key]);
 			}
-
 			setStep((s) => s + 1);
 		} else {
 			await props.onSubmit(data);
@@ -88,50 +169,62 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 	};
 
 	return (
-		<Formik {...props} onSubmit={handleSubmit}>
-			<Form autoComplete="off">
-				{currentChild}
-				<div className="prev-next-wrapper">
-					{step >= 1 ? (
-						<Button
-							variant="outlined"
-							onClick={() => {
-								setStep((s) => s - 1);
-							}}>
-							Back
-						</Button>
-					) : (
-						<div></div>
-					)}
-					{
-						<Button
-							type="submit"
-							variant={isLastStep ? 'contained' : 'outlined'}>
-							{isLastStep ? 'Submit' : 'Next'}
-						</Button>
-					}
-				</div>
-				<Persist isSessionStorage={true} name="sign-up-form" />
-			</Form>
+		<Formik
+			{...props}
+			onSubmit={handleSubmit}
+			validationSchema={currentChild.props.validationSchema}
+			initialValues={formik.initialValues}>
+			{({ values, ...props }) => {
+				return (
+					<Form autoComplete="off">
+						{currentChild}
+
+						<NavigationButtons
+							step={step}
+							setStep={setStep}
+							isLastStep={isLastStep}
+						/>
+
+						<Persist isSessionStorage={true} name="sign-up-form" />
+					</Form>
+				);
+			}}
 		</Formik>
 	);
+};
+
+const FormikStep = ({ label, children, validationSchema, ...props }) => {
+	return <div className="form">{children}</div>;
 };
 
 // Component
 const SignUpForm = () => {
 	const [step, setStep] = useState(0);
-	const formik = useFormik({ initialValues: formInitialValues });
 	const [searchParams] = useSearchParams();
 	const screen_name = searchParams.get('screen_name') || '';
 	const oauth_token = searchParams.get('oauth_token') || '';
 	const oauth_token_secret = searchParams.get('oauth_token_secret') || '';
 	const user_id = searchParams.get('user_id') || '';
 
+	const onFormSubmit = async (data) => {
+		const myObj = {
+			oauth_token_secret,
+			oauth_token,
+			user_id,
+			screen_name,
+			...data,
+		};
+
+		axios
+			.post('https://moonbots.herokuapp.com/submit', myObj)
+			.then((response) => console.log('FRONT', response));
+	};
+
 	useEffect(() => {
 		if (searchParams.get('step')) {
 			setStep(searchParams.get('step'));
 		}
-		return () => {};
+		return;
 	}, []);
 
 	return (
@@ -140,38 +233,27 @@ const SignUpForm = () => {
 			<FormikStepper
 				step={step}
 				setStep={setStep}
-				initialValues={formik.initialValues}
-				onSubmit={async (data) => {
-					const myObj = {
-						oauth_token_secret,
-						oauth_token,
-						user_id,
-						screen_name,
-						...data,
-					};
-
-					axios
-						.post('http://localhost:8000/submit', myObj)
-						.then((response) => console.log('FRONT', response));
-				}}>
-				<div className="form">
+				onSubmit={onFormSubmit}>
+				<FormikStep validationSchema={UserQuestionaire}>
 					<Field
 						name="project_name"
-						as={TextField}
+						as={MyTextField}
 						label="Project Name"
 						type="input"
 						placeholder="Solana Monkey Business"
+						key="2"
 					/>
 					<Field
 						name="website"
-						as={TextField}
+						as={MyTextField}
 						label="Website"
 						type="input"
 						placeholder="https://solanamonkeybusiness.com"
+						key="4"
 					/>
 					<Field
 						name="main_twitter"
-						as={TextField}
+						as={MyTextField}
 						label="Your project's main Twitter handle"
 						type="input"
 						placeholder="@SolanaMBS"
@@ -185,7 +267,10 @@ const SignUpForm = () => {
 								value: 'magic_eden',
 								label: 'Magic Eden',
 							},
-							solanart: { value: 'solanart', label: 'Solanart' },
+							solanart: {
+								value: 'solanart',
+								label: 'Solanart',
+							},
 							alpha_art: {
 								value: 'alpha_art',
 								label: 'Alpha Art',
@@ -219,24 +304,13 @@ const SignUpForm = () => {
 							}}
 						/>
 					</CheckboxGroup>
-				</div>
+				</FormikStep>
 				<TwitterOauth screen_name={screen_name} />
-				<div className="form">
-					<Field
-						name="discord_webhook_sales"
-						as={TextField}
-						label="Sales Channel Webhook"
-						type="input"
-						placeholder="Solana Monkey Business"
-					/>
-					<Field
-						name="discord_webhook_listings"
-						as={TextField}
-						label="Listings Channel Webhook"
-						type="input"
-						placeholder="https://solanamonkeybusiness.com"
-					/>
-				</div>
+				<FormikStep
+					validationSchema={DiscordWhValidator}
+					label="Please provide a Discord webhook for your channel">
+					<ConditionalFields />
+				</FormikStep>
 			</FormikStepper>
 		</>
 	);

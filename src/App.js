@@ -14,7 +14,7 @@ const App = () => {
 		palette: {
 			mode: 'dark',
 			primary: {
-				main: activeColor,
+				main: '#5aff47',
 			},
 		},
 		typography: {
@@ -28,7 +28,7 @@ const App = () => {
 			<div className="app">
 				<Router>
 					<Navbar />
-					<TextField
+					{/* <TextField
 						variant="outlined"
 						value={newThemeColor}
 						onChange={(val) => {
@@ -40,10 +40,10 @@ const App = () => {
 							setActiveColor(newThemeColor);
 						}}>
 						Change Color
-					</Button>
+					</Button> */}
 
-					{/* <h1>NFT Bots that really go BRR 🤑</h1> */}
-					<h1>Marketing tools for NFTs</h1>
+					<h1>NFT Bots that really go BRR 🤑</h1>
+					{/* {/* <h1>Marketing tools for NFTs< */}
 					<div className="flow-wrapper">
 						<Routes>
 							<Route path="/" element={<Home />} />
