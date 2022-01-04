@@ -139,7 +139,8 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 		<Formik
 			{...props}
 			onSubmit={handleSubmit}
-			initialValues={formik.initialValues}>
+			initialValues={formik.initialValues}
+			validationSchema={currentChild.props.validationSchema}>
 			<Form autoComplete="off">
 				{currentChild}
 
@@ -283,7 +284,7 @@ const SignUpForm = () => {
 						/>
 					</CheckboxGroup>
 				</FormikStep>
-				<TwitterOauth screen_name={screen_name} />
+				<TwitterOauth screen_name={screen_name} validationSchema="" />
 				<FormikStep validationSchema={DiscordWhValidator}>
 					<label>
 						Please provide a webhook for your discord channel. This
