@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { TextField, Button, Checkbox } from '@mui/material';
+import { TextField, Button, Checkbox, Radio } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { Field, Formik, Form, useFormik, useFormikContext } from 'formik';
@@ -18,6 +18,7 @@ const formInitialValues = {
 	website: '',
 	main_twitter: '',
 	marketplaces: [],
+	rarity: '',
 	twitter_bots: [],
 	discord_bots: [],
 	discord_webhook_sales: '',
@@ -94,6 +95,7 @@ const NavigationButtons = ({ step, setStep, isLastStep }) => {
 		<div className="prev-next-wrapper">
 			{step >= 1 ? (
 				<Button
+					size="large"
 					variant="outlined"
 					onClick={() => {
 						setStep(step - 1);
@@ -104,9 +106,10 @@ const NavigationButtons = ({ step, setStep, isLastStep }) => {
 				<div></div>
 			)}
 			{isSubmitting ? (
-				<LoadingButton loading variant="contained" />
+				<LoadingButton loading variant="contained" size="large" />
 			) : (
 				<Button
+					size="large"
 					type="submit"
 					variant={isLastStep ? 'contained' : 'outlined'}>
 					{isLastStep ? 'Submit' : 'Next'}
@@ -132,6 +135,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 			setStep(step + 1);
 		} else {
 			await props.onSubmit(data);
+			console.log(data);
 		}
 	};
 
@@ -252,6 +256,31 @@ const SignUpForm = () => {
 							},
 						}}
 					/>
+					<div>
+						<label className="input-label primary-label">
+							Rarity Tracking
+						</label>
+						<div className="checkbox-group">
+							<label>
+								<Field
+									type="radio"
+									name="rarity"
+									as={Radio}
+									value="howRareIs"
+								/>
+								HowRare.is
+							</label>
+							<label>
+								<Field
+									type="radio"
+									name="rarity"
+									as={Radio}
+									value="solanaFloor"
+								/>
+								MoonRank
+							</label>
+						</div>
+					</div>
 					<CheckboxGroup
 						label="Choose your Bots"
 						className="primary-label">
