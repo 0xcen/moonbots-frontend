@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useContext, Children } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { TextField, Button, Checkbox } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import { Field, Formik, Form, useFormik, useFormikContext } from 'formik';
 import { Persist } from 'formik-persist';
 import TwitterOauth from './TwitterOauth';
 import axios from 'axios';
 import { UserQuestionaire } from '../Validations/UserQuestionaire';
 import { DiscordWhValidator } from '../Validations/Discord_WH_Validator';
+
+const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
 // Initial Values
 const formInitialValues = {
@@ -84,6 +88,7 @@ const CheckboxGroup = ({ fields, name, label, children }) => {
 };
 
 const NavigationButtons = ({ step, setStep, isLastStep }) => {
+	const { isSubmitting } = useFormikContext();
 	return (
 		<div className="prev-next-wrapper">
 			{step >= 1 ? (
@@ -97,13 +102,16 @@ const NavigationButtons = ({ step, setStep, isLastStep }) => {
 			) : (
 				<div></div>
 			)}
-			{
+			{isSubmitting ? (
+				<LoadingButton loading variant="contained" />
+			) : (
 				<Button
 					type="submit"
 					variant={isLastStep ? 'contained' : 'outlined'}>
 					{isLastStep ? 'Submit' : 'Next'}
+					{isSubmitting && 'loading'}
 				</Button>
-			}
+			)}
 		</div>
 	);
 };
@@ -123,7 +131,6 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 			setStep(step + 1);
 		} else {
 			await props.onSubmit(data);
-			console.log('SUBMIT', data);
 		}
 	};
 
@@ -131,7 +138,6 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 		<Formik
 			{...props}
 			onSubmit={handleSubmit}
-			validationSchema={currentChild?.props?.validationSchema}
 			initialValues={formik.initialValues}>
 			<Form autoComplete="off">
 				{currentChild}
@@ -161,6 +167,7 @@ const SignUpForm = () => {
 	const oauth_token_secret = searchParams.get('oauth_token_secret') || '';
 	const user_id = searchParams.get('user_id') || '';
 
+	const navigate = useNavigate();
 	const onFormSubmit = async (data) => {
 		const myObj = {
 			oauth_token_secret,
@@ -170,10 +177,14 @@ const SignUpForm = () => {
 			...data,
 		};
 		localStorage.clear();
+		await sleep(1500);
+		console.log('FORM SUBMISSION', data);
 
-		axios
-			.post('https://moonbots.herokuapp.com/submit', myObj)
-			.then((response) => console.log('FRONT', response));
+		navigate('/signup/success');
+		// 	axios
+		// 		.post('https://moonbots.herokuapp.com/submit', myObj)
+		// 		.then((response) => console.log('FRONT', response));
+		// };
 	};
 
 	useEffect(() => {
