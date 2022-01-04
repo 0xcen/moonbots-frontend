@@ -120,7 +120,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 			for (let key in data) {
 				sessionStorage.setItem(key, data[key]);
 			}
-			setStep((s) => s + 1);
+			setStep(step + 1);
 		} else {
 			await props.onSubmit(data);
 			console.log('SUBMIT', data);
@@ -177,11 +177,9 @@ const SignUpForm = () => {
 	};
 
 	useEffect(() => {
-		if (searchParams.get('step')) {
+		if (searchParams.get('step') && searchParams.get('step') >= step) {
 			setStep(searchParams.get('step'));
 		}
-		// console.log(step);
-		return;
 	}, []);
 
 	return (
