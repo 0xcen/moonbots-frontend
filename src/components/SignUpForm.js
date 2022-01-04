@@ -135,7 +135,6 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 			setStep(step + 1);
 		} else {
 			await props.onSubmit(data);
-			console.log(data);
 		}
 	};
 
