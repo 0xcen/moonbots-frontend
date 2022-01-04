@@ -7,7 +7,7 @@ const TwitterOauth = ({ screen_name, ...props }) => {
 		<>
 			<div>
 				<label className="input-label">
-					Link the twitter account of your bot.
+					Link your bot's twitter account
 				</label>
 				{screen_name ? (
 					<p

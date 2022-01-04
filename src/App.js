@@ -1,4 +1,6 @@
+import React from 'react';
 import './App.css';
+
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme, TextField, Button } from '@mui/material';
@@ -6,6 +8,7 @@ import { ThemeProvider, createTheme, TextField, Button } from '@mui/material';
 import Navbar from './components/Navbar';
 import SignUpForm from './components/SignUpForm';
 import Home from './components/Home';
+import Success from './components/Success';
 
 const App = () => {
 	const [newThemeColor, setNewThemeColor] = useState('#fff');
@@ -42,17 +45,22 @@ const App = () => {
 						Change Color
 					</Button> */}
 
-					<h1>NFT Bots that really go BRR 🤑</h1>
+					<h1 className="h1">NFT Bots that really go BRR 🤑</h1>
 					{/* {/* <h1>Marketing tools for NFTs< */}
-					<div className="flow-wrapper">
-						<Routes>
-							<Route path="/" element={<Home />} />
-							<Route path="/signup" element={<SignUpForm />} />
-							<Route
-								path="/signup/success"
-								element={<h2>Success!</h2>}
-							/>
-						</Routes>
+					<div className="flow-wrapper-wrapper">
+						<div className="flow-wrapper">
+							<Routes>
+								<Route path="/" element={<Home />} />
+								<Route
+									path="/signup"
+									element={<SignUpForm />}
+								/>
+								<Route
+									path="/signup/success"
+									element={<Success />}
+								/>
+							</Routes>
+						</div>
 					</div>
 				</Router>
 			</div>

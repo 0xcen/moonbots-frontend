@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useContext, Children } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { TextField, Button, Checkbox } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import { Field, Formik, Form, useFormik, useFormikContext } from 'formik';
 import { Persist } from 'formik-persist';
 import TwitterOauth from './TwitterOauth';
 import axios from 'axios';
 import { UserQuestionaire } from '../Validations/UserQuestionaire';
 import { DiscordWhValidator } from '../Validations/Discord_WH_Validator';
+
+const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
 // Initial Values
 const formInitialValues = {
@@ -53,8 +57,9 @@ const CheckboxPersists = ({ name, value, label, ...props }) => {
 	);
 };
 
-const CheckboxGroup = ({ fields, name, label, children }) => {
+const CheckboxGroup = ({ fields, name, label, className, children }) => {
 	let checkboxes = [];
+	const hasChildren = React.Children.toArray(children).length > 0;
 	for (let key in fields) {
 		checkboxes.push(
 			<Field
@@ -68,13 +73,13 @@ const CheckboxGroup = ({ fields, name, label, children }) => {
 	}
 	return (
 		<div>
-			{label ? <label className="input-label">{label}</label> : null}
+			{label ? (
+				<label className={`input-label ${className}`}>{label}</label>
+			) : null}
 
 			<div
 				className={
-					React.Children.toArray(children).length > 0
-						? 'checkbox-group-group'
-						: 'checkbox-group'
+					hasChildren ? 'checkbox-group-group' : 'checkbox-group'
 				}>
 				{checkboxes}
 				{children}
@@ -84,6 +89,7 @@ const CheckboxGroup = ({ fields, name, label, children }) => {
 };
 
 const NavigationButtons = ({ step, setStep, isLastStep }) => {
+	const { isSubmitting } = useFormikContext();
 	return (
 		<div className="prev-next-wrapper">
 			{step >= 1 ? (
@@ -97,13 +103,16 @@ const NavigationButtons = ({ step, setStep, isLastStep }) => {
 			) : (
 				<div></div>
 			)}
-			{
+			{isSubmitting ? (
+				<LoadingButton loading variant="contained" />
+			) : (
 				<Button
 					type="submit"
 					variant={isLastStep ? 'contained' : 'outlined'}>
 					{isLastStep ? 'Submit' : 'Next'}
+					{isSubmitting && 'loading'}
 				</Button>
-			}
+			)}
 		</div>
 	);
 };
@@ -123,7 +132,6 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 			setStep(step + 1);
 		} else {
 			await props.onSubmit(data);
-			console.log('SUBMIT', data);
 		}
 	};
 
@@ -131,7 +139,6 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 		<Formik
 			{...props}
 			onSubmit={handleSubmit}
-			validationSchema={currentChild?.props?.validationSchema}
 			initialValues={formik.initialValues}>
 			<Form autoComplete="off">
 				{currentChild}
@@ -161,6 +168,8 @@ const SignUpForm = () => {
 	const oauth_token_secret = searchParams.get('oauth_token_secret') || '';
 	const user_id = searchParams.get('user_id') || '';
 
+	const navigate = useNavigate();
+
 	const onFormSubmit = async (data) => {
 		const myObj = {
 			oauth_token_secret,
@@ -169,17 +178,26 @@ const SignUpForm = () => {
 			screen_name,
 			...data,
 		};
+
+		// Clears storage
 		localStorage.clear();
 
+		// POST Request to server -> Discord
 		axios
 			.post('https://moonbots.herokuapp.com/submit', myObj)
-			.then((response) => console.log('FRONT', response));
+			.then((response) => {});
+
+		// Render's loading button and gives confirmation
+		await sleep(1500);
+
+		// Redirects
+		navigate('/signup/success');
 	};
 
+	// Sets step from seach params it doesn't really work as I would expect but it "works"
 	useEffect(() => {
 		if (searchParams.get('step') && searchParams.get('step') >= step) {
 			setStep(step + 1);
-			console.log(step);
 		}
 	}, []);
 
@@ -217,8 +235,8 @@ const SignUpForm = () => {
 					<CheckboxGroup
 						name="marketplaces"
 						label="Which marketplaces is your collection available in?"
+						className="primary-label"
 						fields={{
-							solsea: { value: 'solsea', label: 'Solsea' },
 							magic_eden: {
 								value: 'magic_eden',
 								label: 'Magic Eden',
@@ -233,10 +251,13 @@ const SignUpForm = () => {
 							},
 						}}
 					/>
-					<CheckboxGroup label="Which bots would you like to have installed?">
+					<CheckboxGroup
+						label="Choose your Bots"
+						className="primary-label">
 						<CheckboxGroup
 							name="twitter_bots"
 							label="Twitter"
+							className="secondary-label"
 							fields={{
 								sales: {
 									value: 'sales',
@@ -248,6 +269,7 @@ const SignUpForm = () => {
 						<CheckboxGroup
 							name="discord_bots"
 							label="Discord"
+							className="secondary-label"
 							fields={{
 								sales: {
 									value: 'sales',
