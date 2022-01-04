@@ -32,6 +32,7 @@ body {
 .h2-loud {
 	font-size: 3.2rem;
 	text-transform: uppercase;
+	letter-spacing: 1.5;
 }
 .app {
 	/* height: 100vh; */
@@ -185,4 +186,9 @@ label {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 5rem;
+}
+
+.link {
+	color: #5aff47;
+	text-decoration: underline;
 }

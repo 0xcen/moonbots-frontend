@@ -13,6 +13,7 @@ const Success = () => {
 			<div>
 				<Button
 					variant="contained"
+					size="large"
 					fullWidth={false}
 					href="https://discord.gg/ZTsPTbb7Bx">
 					Join MoonBot's Server
