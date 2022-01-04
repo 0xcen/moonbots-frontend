@@ -33,10 +33,6 @@ const MyTextField = ({ name, ...props }) => {
 	);
 };
 
-const ConditionalFields = () => {
-	return <></>;
-};
-
 const CheckboxPersists = ({ name, value, label, ...props }) => {
 	// <pre>{JSON.stringify(props)}</pre>;
 	return (
@@ -116,7 +112,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 	const formik = useFormik({ initialValues: formInitialValues });
 	const childrenArray = React.Children.toArray(children);
 	const currentChild = childrenArray[step];
-	const [totalSteps, setTotalSteps] = useState(2);
+	const totalSteps = childrenArray.length - 1;
 	const isLastStep = totalSteps === step;
 
 	const handleSubmit = async (data) => {
@@ -137,21 +133,17 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 			onSubmit={handleSubmit}
 			validationSchema={currentChild?.props?.validationSchema}
 			initialValues={formik.initialValues}>
-			{({ values, ...props }) => {
-				return (
-					<Form autoComplete="off">
-						{currentChild}
+			<Form autoComplete="off">
+				{currentChild}
 
-						<NavigationButtons
-							step={step}
-							setStep={setStep}
-							isLastStep={isLastStep}
-						/>
+				<NavigationButtons
+					step={step}
+					setStep={setStep}
+					isLastStep={isLastStep}
+				/>
 
-						<Persist name="sign-up-form" />
-					</Form>
-				);
-			}}
+				<Persist name="sign-up-form" />
+			</Form>
 		</Formik>
 	);
 };
@@ -272,7 +264,7 @@ const SignUpForm = () => {
 				</FormikStep>
 				<TwitterOauth screen_name={screen_name} />
 				<FormikStep validationSchema={DiscordWhValidator}>
-					<label key={0}>
+					<label>
 						Please provide a webhook for your discord channel. This
 						allows MoonBots to post in your channel. If you need
 						help (
