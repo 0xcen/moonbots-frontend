@@ -8,6 +8,7 @@ import { ThemeProvider, createTheme, TextField, Button } from '@mui/material';
 import Navbar from './components/Navbar';
 import SignUpForm from './components/SignUpForm';
 import Home from './components/Home';
+import Success from './components/Success';
 
 const App = () => {
 	const [newThemeColor, setNewThemeColor] = useState('#fff');
@@ -52,7 +53,7 @@ const App = () => {
 							<Route path="/signup" element={<SignUpForm />} />
 							<Route
 								path="/signup/success"
-								element={<h2>Success!</h2>}
+								element={<Success />}
 							/>
 						</Routes>
 					</div>

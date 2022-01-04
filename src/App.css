@@ -28,6 +28,11 @@ body {
 	background-color: #1a1a1a;
 	/* height: 100vh; */
 }
+
+.h2-loud {
+	font-size: 3.2rem;
+	text-transform: uppercase;
+}
 .app {
 	/* height: 100vh; */
 	padding-top: 3.6rem;
@@ -37,6 +42,15 @@ body {
 	margin: 0 auto;
 
 	font-size: 1.8rem;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+.centered {
+	text-align: center;
 }
 
 .nav {
@@ -72,10 +86,13 @@ h1 {
 	margin: 6rem auto;
 	font-size: 4.8rem;
 	font-weight: 800;
-	font-family: 'Roboto Monoa', sans-serif;
+	font-family: 'Roboto Mono', sans-serif;
 	text-transform: uppercase;
+	word-spacing: -13px;
 }
-
+p {
+	line-height: 1.8;
+}
 .flow-wrapper {
 	padding: 6.2rem 8rem 5rem;
 	border-radius: 1.5rem;
