@@ -45,17 +45,22 @@ const App = () => {
 						Change Color
 					</Button> */}
 
-					<h1>NFT Bots that really go BRR 🤑</h1>
+					<h1 className="h1">NFT Bots that really go BRR 🤑</h1>
 					{/* {/* <h1>Marketing tools for NFTs< */}
-					<div className="flow-wrapper">
-						<Routes>
-							<Route path="/" element={<Home />} />
-							<Route path="/signup" element={<SignUpForm />} />
-							<Route
-								path="/signup/success"
-								element={<Success />}
-							/>
-						</Routes>
+					<div className="flow-wrapper-wrapper">
+						<div className="flow-wrapper">
+							<Routes>
+								<Route path="/" element={<Home />} />
+								<Route
+									path="/signup"
+									element={<SignUpForm />}
+								/>
+								<Route
+									path="/signup/success"
+									element={<Success />}
+								/>
+							</Routes>
+						</div>
 					</div>
 				</Router>
 			</div>

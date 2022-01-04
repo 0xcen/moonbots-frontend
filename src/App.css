@@ -80,7 +80,7 @@ body {
 	height: 2.5rem;
 	width: 2.5rem;
 }
-h1 {
+.h1 {
 	text-align: center;
 	max-width: 60rem;
 	margin: 6rem auto;
@@ -94,7 +94,7 @@ p {
 	line-height: 1.8;
 }
 .flow-wrapper {
-	padding: 6.2rem 8rem 5rem;
+	padding: 10rem 15rem 8rem;
 	border-radius: 1.5rem;
 	background-color: #272727;
 	margin-bottom: 9rem;
@@ -108,9 +108,10 @@ p {
 .form-heading {
 	margin-bottom: 4rem;
 	position: relative;
-	font-size: 4rem;
+	font-size: 5.2rem;
 	font-weight: 700;
 	text-transform: uppercase;
+	color: #5aff47;
 }
 /* .form-heading::after {
 	content: '';
@@ -130,6 +131,23 @@ label {
 
 .input-label {
 	margin-bottom: 1.5rem;
+}
+.primary-label {
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #5aff47;
+	font-size: 2rem;
+	letter-spacing: 1.4px;
+}
+.secondary-label {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-kerning: 1;
+	letter-spacing: 1.4px;
+	font-size: 1.6rem;
+}
+.checkbox-group-group > .input-label {
+	font-size: 40rem !important;
 }
 /* .form-input {
 	width: 100%;

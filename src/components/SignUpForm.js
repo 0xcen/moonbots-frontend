@@ -57,8 +57,9 @@ const CheckboxPersists = ({ name, value, label, ...props }) => {
 	);
 };
 
-const CheckboxGroup = ({ fields, name, label, children }) => {
+const CheckboxGroup = ({ fields, name, label, className, children }) => {
 	let checkboxes = [];
+	const hasChildren = React.Children.toArray(children).length > 0;
 	for (let key in fields) {
 		checkboxes.push(
 			<Field
@@ -72,13 +73,13 @@ const CheckboxGroup = ({ fields, name, label, children }) => {
 	}
 	return (
 		<div>
-			{label ? <label className="input-label">{label}</label> : null}
+			{label ? (
+				<label className={`input-label ${className}`}>{label}</label>
+			) : null}
 
 			<div
 				className={
-					React.Children.toArray(children).length > 0
-						? 'checkbox-group-group'
-						: 'checkbox-group'
+					hasChildren ? 'checkbox-group-group' : 'checkbox-group'
 				}>
 				{checkboxes}
 				{children}
@@ -168,6 +169,7 @@ const SignUpForm = () => {
 	const user_id = searchParams.get('user_id') || '';
 
 	const navigate = useNavigate();
+
 	const onFormSubmit = async (data) => {
 		const myObj = {
 			oauth_token_secret,
@@ -176,21 +178,26 @@ const SignUpForm = () => {
 			screen_name,
 			...data,
 		};
-		localStorage.clear();
-		await sleep(1500);
-		console.log('FORM SUBMISSION', data);
 
+		// Clears storage
+		localStorage.clear();
+
+		// POST Request to server -> Discord
+		axios
+			.post('https://moonbots.herokuapp.com/submit', myObj)
+			.then((response) => {});
+
+		// Render's loading button and gives confirmation
+		await sleep(1500);
+
+		// Redirects
 		navigate('/signup/success');
-		// 	axios
-		// 		.post('https://moonbots.herokuapp.com/submit', myObj)
-		// 		.then((response) => console.log('FRONT', response));
-		// };
 	};
 
+	// Sets step from seach params it doesn't really work as I would expect but it "works"
 	useEffect(() => {
 		if (searchParams.get('step') && searchParams.get('step') >= step) {
 			setStep(step + 1);
-			console.log(step);
 		}
 	}, []);
 
@@ -228,8 +235,8 @@ const SignUpForm = () => {
 					<CheckboxGroup
 						name="marketplaces"
 						label="Which marketplaces is your collection available in?"
+						className="primary-label"
 						fields={{
-							solsea: { value: 'solsea', label: 'Solsea' },
 							magic_eden: {
 								value: 'magic_eden',
 								label: 'Magic Eden',
@@ -244,10 +251,13 @@ const SignUpForm = () => {
 							},
 						}}
 					/>
-					<CheckboxGroup label="Which bots would you like to have installed?">
+					<CheckboxGroup
+						label="Choose your Bots"
+						className="primary-label">
 						<CheckboxGroup
 							name="twitter_bots"
 							label="Twitter"
+							className="secondary-label"
 							fields={{
 								sales: {
 									value: 'sales',
@@ -259,6 +269,7 @@ const SignUpForm = () => {
 						<CheckboxGroup
 							name="discord_bots"
 							label="Discord"
+							className="secondary-label"
 							fields={{
 								sales: {
 									value: 'sales',
