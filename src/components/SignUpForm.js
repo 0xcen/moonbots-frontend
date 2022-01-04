@@ -36,7 +36,7 @@ const MyTextField = ({ name, ...props }) => {
 const ConditionalFields = () => {
 	const context = useFormikContext();
 	const fields = [
-		<label>
+		<label key={0}>
 			Please provide a webhook for your discord channel. This allows
 			MoonBots to post in your channel. If you need help (
 			<a
@@ -71,7 +71,7 @@ const ConditionalFields = () => {
 				key={fields.length}
 			/>
 		);
-	return <>{fields.length > 0 ? fields : null}</>;
+	return <>{fields.length > 0 ? fields : fields[0]}</>;
 };
 
 const CheckboxPersists = ({ name, value, label, ...props }) => {
@@ -172,7 +172,7 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 		<Formik
 			{...props}
 			onSubmit={handleSubmit}
-			validationSchema={currentChild.props.validationSchema}
+			validationSchema={currentChild?.props?.validationSchema}
 			initialValues={formik.initialValues}>
 			{({ values, ...props }) => {
 				return (
@@ -224,6 +224,7 @@ const SignUpForm = () => {
 		if (searchParams.get('step')) {
 			setStep(searchParams.get('step'));
 		}
+		// console.log(step);
 		return;
 	}, []);
 
