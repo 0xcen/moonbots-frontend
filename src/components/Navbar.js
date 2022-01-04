@@ -6,7 +6,9 @@ const Navbar = () => {
 	return (
 		<div className="nav">
 			<div className="logo-wrapper">
-				<img className="logo" src={logo} alt="moonbots logo" />
+				<a href="/">
+					<img className="logo" src={logo} alt="moonbots logo" />
+				</a>
 			</div>
 			<ul className="main-menu">
 				<a href="https://twitter.com/WenMoonBots">

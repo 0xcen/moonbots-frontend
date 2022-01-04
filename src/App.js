@@ -31,20 +31,6 @@ const App = () => {
 			<div className="app">
 				<Router>
 					<Navbar />
-					{/* <TextField
-						variant="outlined"
-						value={newThemeColor}
-						onChange={(val) => {
-							setNewThemeColor(val.target.value);
-						}}
-					/>
-					<Button
-						onClick={() => {
-							setActiveColor(newThemeColor);
-						}}>
-						Change Color
-					</Button> */}
-
 					<h1 className="h1">NFT Bots that really go BRR 🤑</h1>
 					{/* {/* <h1>Marketing tools for NFTs< */}
 					<div className="flow-wrapper-wrapper">

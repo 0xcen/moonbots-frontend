@@ -24,7 +24,7 @@ const formInitialValues = {
 	discord_webhook_listings: '',
 };
 
-const MyTextField = ({ name, ...props }) => {
+export const MyTextField = ({ name, ...props }) => {
 	const context = useFormikContext();
 	const showError = context.touched[name] && name in context.errors;
 	return (
@@ -290,10 +290,7 @@ const SignUpForm = () => {
 						allows MoonBots to post in your channel. If you need
 						help (
 						<a
-							style={{
-								textDecoration: 'underline',
-								color: '#5aff47',
-							}}
+							className="link"
 							target="_blank"
 							rel="noreferrer"
 							href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks">
