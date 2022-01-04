@@ -1,13 +1,7 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {
-	ThemeProvider,
-	createTheme,
-	Input,
-	TextField,
-	Button,
-} from '@mui/material';
+import { ThemeProvider, createTheme, TextField, Button } from '@mui/material';
 
 import Navbar from './components/Navbar';
 import SignUpForm from './components/SignUpForm';
@@ -20,7 +14,7 @@ const App = () => {
 		palette: {
 			mode: 'dark',
 			primary: {
-				main: activeColor,
+				main: '#5aff47',
 			},
 		},
 		typography: {
@@ -29,16 +23,12 @@ const App = () => {
 		},
 	});
 
-	useEffect(() => {
-		return () => {};
-	}, [newThemeColor]);
-
 	return (
 		<ThemeProvider theme={myTheme}>
 			<div className="app">
 				<Router>
 					<Navbar />
-					<TextField
+					{/* <TextField
 						variant="outlined"
 						value={newThemeColor}
 						onChange={(val) => {
@@ -50,10 +40,10 @@ const App = () => {
 							setActiveColor(newThemeColor);
 						}}>
 						Change Color
-					</Button>
+					</Button> */}
 
-					{/* <h1>NFT Bots that really go BRR 🤑</h1> */}
-					<h1>Marketing tools for NFTs</h1>
+					<h1>NFT Bots that really go BRR 🤑</h1>
+					{/* {/* <h1>Marketing tools for NFTs< */}
 					<div className="flow-wrapper">
 						<Routes>
 							<Route path="/" element={<Home />} />

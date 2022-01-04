@@ -1,139 +1,317 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useContext, Children } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import {
-	TextField,
-	Button,
-	Checkbox,
-	FormControlLabel,
-	FormGroup,
-	FormLabel,
-} from '@mui/material';
-import { Field, Formik, Form, useField, useFormik } from 'formik';
-import { ThemeProvider } from '@mui/private-theming';
+import { TextField, Button, Checkbox } from '@mui/material';
+import { Field, Formik, Form, useFormik, useFormikContext } from 'formik';
+import { Persist } from 'formik-persist';
 import TwitterOauth from './TwitterOauth';
 import axios from 'axios';
+import { UserQuestionaire } from '../Validations/UserQuestionaire';
+import { DiscordWhValidator } from '../Validations/Discord_WH_Validator';
 
-const MyInput = ({ label, preLabel, ...props }) => {
-	const [field, meta] = useField(props);
+// Initial Values
+const formInitialValues = {
+	project_name: '',
+	website: '',
+	main_twitter: '',
+	marketplaces: [],
+	twitter_bots: [],
+	discord_bots: [],
+	discord_webhook_sales: '',
+	discord_webhook_listings: '',
+};
+
+const MyTextField = ({ name, ...props }) => {
+	const context = useFormikContext();
+	const showError = context.touched[name] && name in context.errors;
 	return (
-		<div className="form-input">
-			<label className="input-label">{preLabel}</label>
-			<TextField fullWidth={true} label={label} {...props} {...field} />
+		<TextField
+			error={showError}
+			helperText={showError && context.errors[name]}
+			name={name}
+			{...props}
+		/>
+	);
+};
+
+const ConditionalFields = () => {
+	const context = useFormikContext();
+	const fields = [
+		<label>
+			Please provide a webhook for your discord channel. This allows
+			MoonBots to post in your channel. If you need help (
+			<a
+				style={{ textDecoration: 'underline', color: '#5aff47' }}
+				href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks">
+				See Instructions
+			</a>
+			). If you only want a twitter bot, skip this step.
+		</label>,
+	];
+	if (context.values.discord_bots.includes('listings'))
+		fields.push(
+			<>
+				<Field
+					name="discord_webhook_listings"
+					as={MyTextField}
+					label="Listings Channel Webhook"
+					type="input"
+					placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
+					key={fields.length}
+				/>
+			</>
+		);
+	if (context.values.discord_bots.includes('sales'))
+		fields.push(
+			<Field
+				name="discord_webhook_sales"
+				as={MyTextField}
+				label="Sales Channel Webhook"
+				type="input"
+				placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
+				key={fields.length}
+			/>
+		);
+	return <>{fields.length > 0 ? fields : null}</>;
+};
+
+const CheckboxPersists = ({ name, value, label, ...props }) => {
+	// <pre>{JSON.stringify(props)}</pre>;
+	return (
+		<label>
+			<Checkbox
+				{...props}
+				name={name}
+				value={value}
+				defaultChecked={
+					sessionStorage.getItem(name) &&
+					sessionStorage.getItem(name).includes(value)
+						? true
+						: false
+				}
+			/>
+			{label}
+		</label>
+	);
+};
+
+const CheckboxGroup = ({ fields, name, label, children }) => {
+	let checkboxes = [];
+	for (let key in fields) {
+		checkboxes.push(
+			<Field
+				as={CheckboxPersists}
+				value={fields[key].value}
+				name={name}
+				label={fields[key].label}
+				key={checkboxes.length}
+			/>
+		);
+	}
+	return (
+		<div>
+			{label ? <label className="input-label">{label}</label> : null}
+
+			<div
+				className={
+					React.Children.toArray(children).length > 0
+						? 'checkbox-group-group'
+						: 'checkbox-group'
+				}>
+				{checkboxes}
+				{children}
+			</div>
 		</div>
 	);
 };
 
+const NavigationButtons = ({ step, setStep, isLastStep }) => {
+	return (
+		<div className="prev-next-wrapper">
+			{step >= 1 ? (
+				<Button
+					variant="outlined"
+					onClick={() => {
+						setStep(step - 1);
+					}}>
+					Back
+				</Button>
+			) : (
+				<div></div>
+			)}
+			{
+				<Button
+					type="submit"
+					variant={isLastStep ? 'contained' : 'outlined'}>
+					{isLastStep ? 'Submit' : 'Next'}
+				</Button>
+			}
+		</div>
+	);
+};
+
+const FormikStepper = ({ step, setStep, children, ...props }) => {
+	const formik = useFormik({ initialValues: formInitialValues });
+	const childrenArray = React.Children.toArray(children);
+	const currentChild = childrenArray[step];
+	const [totalSteps, setTotalSteps] = useState(2);
+	const isLastStep = totalSteps === step;
+
+	const handleSubmit = async (data) => {
+		if (!isLastStep) {
+			for (let key in data) {
+				sessionStorage.setItem(key, data[key]);
+			}
+			setStep((s) => s + 1);
+		} else {
+			await props.onSubmit(data);
+			console.log('SUBMIT', data);
+		}
+	};
+
+	return (
+		<Formik
+			{...props}
+			onSubmit={handleSubmit}
+			validationSchema={currentChild.props.validationSchema}
+			initialValues={formik.initialValues}>
+			{({ values, ...props }) => {
+				return (
+					<Form autoComplete="off">
+						{currentChild}
+
+						<NavigationButtons
+							step={step}
+							setStep={setStep}
+							isLastStep={isLastStep}
+						/>
+
+						<Persist isSessionStorage={true} name="sign-up-form" />
+					</Form>
+				);
+			}}
+		</Formik>
+	);
+};
+
+const FormikStep = ({ label, children, validationSchema, ...props }) => {
+	return <div className="form">{children}</div>;
+};
+
+// Component
 const SignUpForm = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const screen_name = searchParams.get('screen_name');
-	const oauth_token = searchParams.get('oauth_token');
-	const oauth_token_secret = searchParams.get('oauth_token_secret');
-	const user_id = searchParams.get('user_id');
-	const project_name = localStorage.getItem('project_name');
-	const discord_webhook = localStorage.getItem('discord_webhook');
+	const [step, setStep] = useState(0);
+	const [searchParams] = useSearchParams();
+	const screen_name = searchParams.get('screen_name') || '';
+	const oauth_token = searchParams.get('oauth_token') || '';
+	const oauth_token_secret = searchParams.get('oauth_token_secret') || '';
+	const user_id = searchParams.get('user_id') || '';
 
-	const myInitialValues = {
-		project_name: `${project_name ? project_name : ''}`,
-		discord_webhook: `${discord_webhook ? discord_webhook : ''}`,
-		bot_type: [],
+	const onFormSubmit = async (data) => {
+		const myObj = {
+			oauth_token_secret,
+			oauth_token,
+			user_id,
+			screen_name,
+			...data,
+		};
+
+		axios
+			.post('https://moonbots.herokuapp.com/submit', myObj)
+			.then((response) => console.log('FRONT', response));
 	};
 
-	const myCheckbox = ({ field, value, label, name, form, ...props }) => {
-		return (
-			<label {...field} {...props}>
-				<Field
-					name={name}
-					type="checkbox"
-					value={value}
-					as={Checkbox}
-				/>
-				{label}
-			</label>
-		);
-	};
+	useEffect(() => {
+		if (searchParams.get('step')) {
+			setStep(searchParams.get('step'));
+		}
+		return;
+	}, []);
 
 	return (
 		<>
 			<h2 className="form-heading">Set-up your Moonbot</h2>
-			{/* <p>
-				We just need a couple of bits of information before your new
-				bots are initailized
-			</p>
-			<h3>Twitter Authentication</h3> */}
-			{/* <Twitter /> */}
-			<Formik
-				initialValues={myInitialValues}
-				onSubmit={(data) => {
-					const myObj = {
-						oauth_token_secret,
-						oauth_token,
-						user_id,
-						screen_name,
-						...data,
-					};
-
-					axios
-						.post('http://localhost:8000/submit', myObj)
-						.then((response) => console.log(response));
-
-					localStorage.clear();
-				}}>
-				{({ values, handleChange, handleBlur, handleSubmit }) => (
-					<Form onSubmit={handleSubmit}>
-						<MyInput
-							preLabel="What's your NFT collection called?"
-							label="Project Name"
-							name="project_name"
-							placeholder="SolanaMonkeyBusiness"
-							type="input"
-						/>
-						<MyInput
-							preLabel="Provide a webhook for your Discord sales channel so Moonbots can go BRR! 💸"
-							label="Discord Webhook"
-							placeholder="https://discord.com/api/webhooks/924grege09678643/kgregreYQ7PJFc5Pad7RB_lGqAfbkWOJiCADp3323rfes9o93XbOt5iVP"
-							name="discord_webhook"
-							type="input"
-						/>
-						<label className="checkbox-group-label">
-							Select all that apply:
-							<div className="checkbox-group">
-								<Field
-									name="bot_type"
-									value="discord"
-									as={myCheckbox}
-									label="Discord"
-								/>
-								<Field
-									name="bot_type"
-									value="twitter"
-									as={myCheckbox}
-									label="Twitter"
-								/>
-								<Field
-									name="bot_type"
-									value="sales"
-									as={myCheckbox}
-									label="Sales"
-								/>
-							</div>
-						</label>
-						<TwitterOauth
-							screen_name={screen_name}
-							values={values}
+			<FormikStepper
+				step={step}
+				setStep={setStep}
+				onSubmit={onFormSubmit}>
+				<FormikStep validationSchema={UserQuestionaire}>
+					<Field
+						name="project_name"
+						as={MyTextField}
+						label="Project Name"
+						type="input"
+						placeholder="Solana Monkey Business"
+						key="2"
+					/>
+					<Field
+						name="website"
+						as={MyTextField}
+						label="Website"
+						type="input"
+						placeholder="https://solanamonkeybusiness.com"
+						key="4"
+					/>
+					<Field
+						name="main_twitter"
+						as={MyTextField}
+						label="Your project's main Twitter handle"
+						type="input"
+						placeholder="@SolanaMBS"
+					/>
+					<CheckboxGroup
+						name="marketplaces"
+						label="Which marketplaces is your collection available in?"
+						fields={{
+							solsea: { value: 'solsea', label: 'Solsea' },
+							magic_eden: {
+								value: 'magic_eden',
+								label: 'Magic Eden',
+							},
+							solanart: {
+								value: 'solanart',
+								label: 'Solanart',
+							},
+							alpha_art: {
+								value: 'alpha_art',
+								label: 'Alpha Art',
+							},
+						}}
+					/>
+					<CheckboxGroup label="Which bots would you like to have installed?">
+						<CheckboxGroup
+							name="twitter_bots"
+							label="Twitter"
+							fields={{
+								sales: {
+									value: 'sales',
+									label: 'Sales',
+								},
+							}}
 						/>
 
-						<Button
-							className="submit-button"
-							variant="contained"
-							size="large"
-							aria-required
-							type="submit">
-							NEXT
-						</Button>
-						{/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
-					</Form>
-				)}
-			</Formik>
+						<CheckboxGroup
+							name="discord_bots"
+							label="Discord"
+							fields={{
+								sales: {
+									value: 'sales',
+									label: 'Sales',
+								},
+								listings: {
+									value: 'listings',
+									label: 'Listings',
+								},
+							}}
+						/>
+					</CheckboxGroup>
+				</FormikStep>
+				<TwitterOauth screen_name={screen_name} />
+				<FormikStep
+					validationSchema={DiscordWhValidator}
+					label="Please provide a Discord webhook for your channel">
+					<ConditionalFields />
+				</FormikStep>
+			</FormikStepper>
 		</>
 	);
 };
