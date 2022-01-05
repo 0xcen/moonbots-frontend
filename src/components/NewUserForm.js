@@ -29,12 +29,6 @@ export const NewUserForm = () => {
 	const navigate = useNavigate();
 	const [bounced, setBounced] = useState(false);
 
-	const sleep = (time) =>
-		new Promise((acc) => {
-			setTimeout(acc, time);
-			return Promise.reject(new Error('Request took too long'));
-		});
-
 	const [currentStep, setCurrentStep] = useState(0);
 
 	const makeRequest = async (formData) => {
@@ -53,8 +47,14 @@ export const NewUserForm = () => {
 		);
 
 		// // Waits for three seconds or the promise to resolve before redirecting or printing error
-		// Promise.race([Promise.reject, res])
-		Promise.race([sleep(5000), res])
+		const timoutPromise = new Promise((resolve, reject) => {
+			let wait = setTimeout(() => {
+				clearTimout(wait);
+				reject('Request took too long');
+			}, 3000);
+		});
+
+		Promise.race([timoutPromise, res])
 			.then(() => {
 				localStorage.clear();
 				sessionStorage.clear();
@@ -62,7 +62,7 @@ export const NewUserForm = () => {
 			})
 			.catch((e) => {
 				navigate('/signup/fail');
-				window.location.reload(false);
+				window.location.reload();
 				console.log(e);
 				localStorage.clear();
 				sessionStorage.clear();
