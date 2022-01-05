@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import { NewUserForm } from './components/NewUserForm';
 import Home from './components/Home';
 import Success from './components/Success';
+import Fail from './components/Fail';
 
 const App = () => {
 	const [newThemeColor, setNewThemeColor] = useState('#fff');
@@ -45,6 +46,7 @@ const App = () => {
 									path="/signup/success"
 									element={<Success />}
 								/>
+								<Route path="/signup/fail" element={<Fail />} />
 							</Routes>
 						</div>
 					</div>

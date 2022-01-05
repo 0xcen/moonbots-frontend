@@ -45,14 +45,18 @@ export const NewUserForm = () => {
 		console.log('Form Submitted', myObj);
 
 		// POST Request to server -> Discord
-		const res = await axios
-			.post('https://moonbots.herokuapp.com/submit', myObj)
-			.then((response) => {});
+		const res = await axios.post(
+			'https://moonbots.herokuapp.com/submit',
+			myObj
+		);
 
 		// Waits for two seconds or the promise to resolve before redirecting or printing error
 		Promise.any([sleep(2000), res])
 			.then(() => navigate('/signup/success'))
-			.catch((e) => console.log(e));
+			.catch((e) => {
+				console.log(e);
+				navigate('/signup/fail');
+			});
 	};
 
 	useEffect(() => {
