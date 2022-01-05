@@ -86,8 +86,8 @@ export const NewUserForm = () => {
 
 	if (!bounced && searchParams.has('step')) {
 		setBounced(true);
+		setData(JSON.parse(sessionStorage.getItem('formData')));
 		setCurrentStep(1);
-		console.log(1);
 	}
 	return (
 		<>
