@@ -74,6 +74,7 @@ export const StepTwo = (props) => {
 							</Button>
 						</div>
 					</div>
+					<Persist name="stepTwo" />
 				</Form>
 			)}
 		</Formik>

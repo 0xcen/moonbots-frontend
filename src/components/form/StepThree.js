@@ -82,6 +82,7 @@ export const StepThree = (props) => {
 								</Button>
 							)}
 						</div>
+						<Persist name="stepThree" />
 					</Form>
 				);
 			}}
