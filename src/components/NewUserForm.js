@@ -52,7 +52,11 @@ export const NewUserForm = () => {
 
 		// Waits for three seconds or the promise to resolve before redirecting or printing error
 		Promise.any([sleep(3000), res])
-			.then(() => navigate('/signup/success'))
+			.then(() => {
+				localStorage.clear();
+				sessionStorage.clear();
+				navigate('/signup/success');
+			})
 			.catch((e) => {
 				console.log(e);
 				localStorage.clear();
