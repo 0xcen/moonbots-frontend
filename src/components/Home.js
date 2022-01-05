@@ -5,7 +5,7 @@ import EmailWidget from './EmailWidget';
 const Home = () => {
 	return (
 		<div className="container centered">
-			<h2 className="h2-loud">🚀 Preparing for Liftoff! 🌕</h2>
+			<h2 className="h2-loud">🚀 Preparing for Liftoff!</h2>
 			<p>
 				MoonBots is getting ready to go online for everyone... In the
 				meantime we're onboarding a few projects manually, so if you'd

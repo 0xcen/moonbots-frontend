@@ -19,13 +19,13 @@
 /********************************/
 @media (max-width: 49em) {
 	.h1 {
-		font-size: 3.2rem;
+		font-size: 3.6rem;
 		word-spacing: normal;
 		padding: 0 2rem;
 	}
 
 	.h2-loud {
-		font-size: 3rem;
+		font-size: 3.2rem;
 	}
 
 	.form-heading {
@@ -33,7 +33,7 @@
 	}
 
 	.flow-wrapper {
-		padding: 4.5rem 2rem 5rem;
+		padding: 5.4rem 3.5rem 5rem;
 		margin: 0 1rem;
 	}
 }
