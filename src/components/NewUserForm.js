@@ -47,20 +47,22 @@ export const NewUserForm = () => {
 		);
 
 		// // Waits for three seconds or the promise to resolve before redirecting or printing error
+		let id;
 		const timoutPromise = new Promise((resolve, reject) => {
-			let wait = setTimeout(() => {
-				clearTimout(wait);
+			id = setTimeout(() => {
 				reject('Request took too long');
 			}, 3000);
 		});
 
 		Promise.race([timoutPromise, res])
 			.then(() => {
+				clearTimeout(id);
 				localStorage.clear();
 				sessionStorage.clear();
 				navigate('/signup/success');
 			})
 			.catch((e) => {
+				clearTimeout(id);
 				navigate('/signup/fail');
 				window.location.reload();
 				console.log(e);
