@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Button } from '@mui/material';
-import { MyTextField } from '../SignUpForm';
+import { MyTextField } from './CustomFormComponents';
 import * as Yup from 'yup';
 
 // Validation

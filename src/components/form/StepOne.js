@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { TextField, Button, Checkbox, Radio } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import * as Yup from 'yup';
-import { CheckboxGroup, MyTextField } from '../SignUpForm';
+import { CheckboxGroup, MyTextField } from './CustomFormComponents';
 import { Persist } from 'formik-persist';
 
 export const UserQuestionaire = Yup.object().shape({
