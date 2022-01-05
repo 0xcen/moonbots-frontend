@@ -10,11 +10,7 @@ const TwitterOauth = ({ screen_name, ...props }) => {
 					Link your bot's twitter account
 				</label>
 				{screen_name ? (
-					<p
-						style={{
-							color: 'green',
-							textDecoration: 'underline',
-						}}>
+					<p className="link">
 						{`@${screen_name} Successfully Linked`}
 					</p>
 				) : (

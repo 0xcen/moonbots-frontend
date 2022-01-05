@@ -7,8 +7,6 @@ import { Field, Formik, Form, useFormik, useFormikContext } from 'formik';
 import { Persist } from 'formik-persist';
 import TwitterOauth from './TwitterOauth';
 import axios from 'axios';
-import { UserQuestionaire } from '../Validations/UserQuestionaire';
-import { DiscordWhValidator } from '../Validations/Discord_WH_Validator';
 
 const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
@@ -38,7 +36,7 @@ export const MyTextField = ({ name, ...props }) => {
 	);
 };
 
-const CheckboxPersists = ({ name, value, label, ...props }) => {
+export const CheckboxPersists = ({ name, value, label, ...props }) => {
 	// <pre>{JSON.stringify(props)}</pre>;
 	return (
 		<label>
@@ -58,7 +56,7 @@ const CheckboxPersists = ({ name, value, label, ...props }) => {
 	);
 };
 
-const CheckboxGroup = ({ fields, name, label, className, children }) => {
+export const CheckboxGroup = ({ fields, name, label, className, children }) => {
 	let checkboxes = [];
 	const hasChildren = React.Children.toArray(children).length > 0;
 	for (let key in fields) {
@@ -89,17 +87,17 @@ const CheckboxGroup = ({ fields, name, label, className, children }) => {
 	);
 };
 
-const NavigationButtons = ({ step, setStep, isLastStep }) => {
+export const NavigationButtons = ({ setStep, step, isLastStep }) => {
 	const { isSubmitting } = useFormikContext();
+
+	const backwards = () => {
+		setStep((s) => s - 1);
+	};
+
 	return (
 		<div className="prev-next-wrapper">
-			{step >= 1 ? (
-				<Button
-					size="large"
-					variant="outlined"
-					onClick={() => {
-						setStep(step - 1);
-					}}>
+			{step > 0 ? (
+				<Button size="large" variant="outlined" onClick={backwards}>
 					Back
 				</Button>
 			) : (
@@ -121,36 +119,47 @@ const NavigationButtons = ({ step, setStep, isLastStep }) => {
 };
 
 const FormikStepper = ({ step, setStep, children, ...props }) => {
+	const [searchParams] = useSearchParams();
 	const formik = useFormik({ initialValues: formInitialValues });
 	const childrenArray = React.Children.toArray(children);
-	const currentChild = childrenArray[step];
-	const totalSteps = childrenArray.length - 1;
-	const isLastStep = totalSteps === step;
+	const [currentChild, setCurrentChild] = useState(childrenArray[0]);
+
+	useEffect(() => {
+		setCurrentChild(childrenArray[step]);
+		return () => {};
+	}, [step]);
+
+	useEffect(() => {
+		if (searchParams.get('step') === 1 && step !== 1) {
+			console.log('if');
+			setStep(1);
+		}
+		return () => {};
+	}, []);
 
 	const handleSubmit = async (data) => {
-		if (!isLastStep) {
-			for (let key in data) {
-				sessionStorage.setItem(key, data[key]);
-			}
-			setStep(step + 1);
-		} else {
+		if (currentChild.props.isLastStep) {
 			await props.onSubmit(data);
+			return;
 		}
+
+		for (let key in data) {
+			sessionStorage.setItem(key, data[key]);
+		}
+		setStep((s) => s + 1);
 	};
 
 	return (
 		<Formik
 			{...props}
 			onSubmit={handleSubmit}
-			initialValues={formik.initialValues}
-			validationSchema={currentChild.props.validationSchema}>
+			initialValues={formik.initialValues}>
 			<Form autoComplete="off">
 				{currentChild}
-
 				<NavigationButtons
 					step={step}
 					setStep={setStep}
-					isLastStep={isLastStep}
+					isLastStep={currentChild.props.isLastStep}
 				/>
 
 				<Persist name="sign-up-form" />
@@ -159,7 +168,13 @@ const FormikStepper = ({ step, setStep, children, ...props }) => {
 	);
 };
 
-const FormikStep = ({ label, children, validationSchema, ...props }) => {
+const FormikStep = ({
+	label,
+	children,
+	validationSchema,
+	isLastStep = false,
+	...props
+}) => {
 	return <div className="form">{children}</div>;
 };
 
@@ -171,7 +186,6 @@ const SignUpForm = () => {
 	const oauth_token = searchParams.get('oauth_token') || '';
 	const oauth_token_secret = searchParams.get('oauth_token_secret') || '';
 	const user_id = searchParams.get('user_id') || '';
-
 	const navigate = useNavigate();
 
 	const onFormSubmit = async (data) => {
@@ -198,21 +212,11 @@ const SignUpForm = () => {
 		navigate('/signup/success');
 	};
 
-	// Sets step from seach params it doesn't really work as I would expect but it "works"
-	useEffect(() => {
-		if (searchParams.get('step') && searchParams.get('step') >= step) {
-			setStep(step + 1);
-		}
-	}, []);
-
 	return (
 		<>
 			<h2 className="form-heading">Set-up your Moonbot</h2>
-			<FormikStepper
-				step={step}
-				setStep={setStep}
-				onSubmit={onFormSubmit}>
-				<FormikStep validationSchema={UserQuestionaire}>
+			<FormikStepper onSubmit={onFormSubmit}>
+				<FormikStep>
 					<Field
 						name="project_name"
 						as={MyTextField}
@@ -274,7 +278,7 @@ const SignUpForm = () => {
 									type="radio"
 									name="rarity"
 									as={Radio}
-									value="solanaFloor"
+									value="moonRank"
 								/>
 								MoonRank
 							</label>
@@ -312,8 +316,8 @@ const SignUpForm = () => {
 						/>
 					</CheckboxGroup>
 				</FormikStep>
-				<TwitterOauth screen_name={screen_name} validationSchema="" />
-				<FormikStep validationSchema={DiscordWhValidator}>
+				<TwitterOauth screen_name={screen_name} />
+				<FormikStep isLastStep={true}>
 					<label>
 						Please provide a webhook for your discord channel. This
 						allows MoonBots to post in your channel. If you need
