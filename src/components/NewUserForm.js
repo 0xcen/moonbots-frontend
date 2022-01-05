@@ -51,7 +51,7 @@ export const NewUserForm = () => {
 		);
 
 		// Waits for three seconds or the promise to resolve before redirecting or printing error
-		Promise.any([sleep(3000), res])
+		await Promise.any([sleep(3000), res])
 			.then(() => {
 				localStorage.clear();
 				sessionStorage.clear();
@@ -97,7 +97,11 @@ export const NewUserForm = () => {
 
 	if (!bounced && searchParams.has('step')) {
 		setBounced(true);
-		// setData(localStorage.getItem('stepOne'))
+		const storedData = {};
+		for (let key in data) {
+			storedData[key] = sessionStorage.getItem(key);
+		}
+		setData(storedData);
 		setCurrentStep(1);
 	}
 	return (
