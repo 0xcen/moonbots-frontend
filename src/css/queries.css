@@ -18,6 +18,9 @@
 /* Tablets Below 784px */
 /********************************/
 @media (max-width: 49em) {
+	.nav {
+		padding: 0 3.5rem;
+	}
 	.h1 {
 		font-size: 3.6rem;
 		word-spacing: normal;
