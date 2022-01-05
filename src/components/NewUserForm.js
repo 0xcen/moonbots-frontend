@@ -32,7 +32,7 @@ export const NewUserForm = () => {
 	const sleep = (time) =>
 		new Promise((acc) => {
 			setTimeout(acc, time);
-			return Promise.reject('Request took too long');
+			return Promise.reject(new Error('Request took too long'));
 		});
 
 	const [currentStep, setCurrentStep] = useState(0);
@@ -53,7 +53,7 @@ export const NewUserForm = () => {
 		);
 
 		// Waits for three seconds or the promise to resolve before redirecting or printing error
-		await Promise.any([sleep(3000), res])
+		await Promise.any([sleep(5000), res])
 			.then(() => {
 				localStorage.clear();
 				sessionStorage.clear();
