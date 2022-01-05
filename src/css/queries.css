@@ -1,0 +1,39 @@
+/********************************/
+/* Small Desktops Below 1344px */
+/********************************/
+/********************************/
+/* Landscape Tablets Below 1200px */
+/********************************/
+
+@media (max-width: 75em) {
+	html {
+		font-size: 56.26%;
+	}
+	.flow-wrapper {
+		padding: 10rem 10rem 5rem;
+	}
+}
+
+/********************************/
+/* Tablets Below 784px */
+/********************************/
+@media (max-width: 49em) {
+	.h1 {
+		font-size: 3.2rem;
+		word-spacing: normal;
+		padding: 0 2rem;
+	}
+
+	.h2-loud {
+		font-size: 3rem;
+	}
+
+	.form-heading {
+		font-size: 3.2rem;
+	}
+
+	.flow-wrapper {
+		padding: 4.5rem 2rem 5rem;
+		margin: 0 1rem;
+	}
+}
