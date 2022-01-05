@@ -8,7 +8,6 @@ const Fail = (props) => {
 			<a className="link" href="/signup">
 				Try Again
 			</a>
-			<p>{JSON.stringify(...props)}</p>
 			<div></div>
 		</div>
 	);

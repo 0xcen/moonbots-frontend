@@ -52,8 +52,9 @@ export const NewUserForm = () => {
 			myObj
 		);
 
-		// Waits for three seconds or the promise to resolve before redirecting or printing error
-		await Promise.any([sleep(5000), res])
+		// // Waits for three seconds or the promise to resolve before redirecting or printing error
+		// Promise.race([Promise.reject, res])
+		Promise.race([sleep(5000), res])
 			.then(() => {
 				localStorage.clear();
 				sessionStorage.clear();
@@ -61,6 +62,7 @@ export const NewUserForm = () => {
 			})
 			.catch((e) => {
 				navigate('/signup/fail');
+				window.location.reload(false);
 				console.log(e);
 				localStorage.clear();
 				sessionStorage.clear();
