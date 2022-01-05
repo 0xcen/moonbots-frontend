@@ -29,7 +29,11 @@ export const NewUserForm = () => {
 	const navigate = useNavigate();
 	const [bounced, setBounced] = useState(false);
 
-	const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
+	const sleep = (time) =>
+		new Promise((acc) => {
+			setTimeout(acc, time);
+			return Promise.reject('Request took too long');
+		});
 
 	const [currentStep, setCurrentStep] = useState(0);
 
@@ -41,8 +45,6 @@ export const NewUserForm = () => {
 			screen_name,
 			...formData,
 		};
-
-		console.log('Form Submitted', myObj);
 
 		// POST Request to server -> Discord
 		const res = await axios.post(
@@ -58,10 +60,10 @@ export const NewUserForm = () => {
 				navigate('/signup/success');
 			})
 			.catch((e) => {
+				navigate('/signup/fail');
 				console.log(e);
 				localStorage.clear();
 				sessionStorage.clear();
-				navigate('/signup/fail');
 			});
 	};
 
@@ -69,7 +71,6 @@ export const NewUserForm = () => {
 		for (let key in data) {
 			sessionStorage.setItem(key, data[key]);
 		}
-		console.log('USE EFFECT', data);
 		return;
 	}, [data]);
 
