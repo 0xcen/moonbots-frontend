@@ -45,24 +45,26 @@ export const NewUserForm = () => {
 		console.log('Form Submitted', myObj);
 
 		// POST Request to server -> Discord
-		axios
+		const res = await axios
 			.post('https://moonbots.herokuapp.com/submit', myObj)
 			.then((response) => {});
 
-		await sleep(1500);
-
-		// Redirects
-		navigate('/signup/success');
+		// Waits for two seconds or the promise to resolve before redirecting or printing error
+		Promise.any([sleep(2000), res])
+			.then(() => navigate('/signup/success'))
+			.catch((e) => console.log(e));
 	};
 
 	useEffect(() => {
 		for (let key in data) {
 			sessionStorage.setItem(key, data[key]);
 		}
+		console.log('USE EFFECT', data);
 		return;
 	}, [data]);
 
 	const handleNextStep = (newData, final = false) => {
+		sessionStorage.clear();
 		setData((prev) => ({ ...prev, ...newData }));
 
 		if (final) {
@@ -86,7 +88,7 @@ export const NewUserForm = () => {
 
 	if (!bounced && searchParams.has('step')) {
 		setBounced(true);
-		setData(JSON.parse(sessionStorage.getItem('formData')));
+		// setData(localStorage.getItem('stepOne'))
 		setCurrentStep(1);
 	}
 	return (

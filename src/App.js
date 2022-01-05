@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme, TextField, Button } from '@mui/material';
 
 import Navbar from './components/Navbar';
-// import SignUpForm from './components/SignUpForm';
 import { NewUserForm } from './components/NewUserForm';
 import Home from './components/Home';
 import Success from './components/Success';
