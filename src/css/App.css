@@ -28,6 +28,14 @@ body {
 	background-color: #1a1a1a;
 	/* height: 100vh; */
 }
+footer {
+	margin: 0 auto;
+	max-width: 95%;
+	font-size: 1rem;
+	color: #444;
+	text-align: right;
+	height: 5rem;
+}
 
 .h2-loud {
 	font-size: 3.2rem;
@@ -35,6 +43,7 @@ body {
 	letter-spacing: 1.5;
 }
 .app {
+	position: relative;
 	/* height: 100vh; */
 	padding-top: 3.6rem;
 	color: #fff;

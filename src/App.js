@@ -52,6 +52,9 @@ const App = () => {
 						</div>
 					</div>
 				</Router>
+				<footer>
+					{<span>&#169; {new Date().getFullYear()} MoonBots</span>}
+				</footer>
 			</div>
 		</ThemeProvider>
 	);
