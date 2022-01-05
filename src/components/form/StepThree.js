@@ -29,7 +29,6 @@ export const StepThree = (props) => {
 			initialValues={props.data}
 			onSubmit={handleSubmit}>
 			{({ values, isSubmitting }) => {
-				console.log(props);
 				return (
 					<Form className="form" autoComplete="off">
 						<label>
