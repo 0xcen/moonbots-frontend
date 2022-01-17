@@ -37,7 +37,7 @@ export const NewUserForm = () => {
 			oauth_token_secret,
 			oauth_token,
 			user_id,
-			screen_name,
+			screen_name: `https://twitter.com/${screen_name}`,
 			...formData,
 		};
 
