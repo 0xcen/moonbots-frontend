@@ -33,7 +33,7 @@ export const StepTwo = (props) => {
 						) : (
 							<Button
 								variant="contained"
-								href="https://moonbots.herokuapp.com/twitter/authorize">
+								href="https://callistobots.herokuapp.com/twitter/authorize">
 								Authorize Twitter
 							</Button>
 						)}

@@ -16,6 +16,8 @@ const QuickTwitterOauth = () => {
 
 	const handleClick = () => {
 		setIsLoading(true);
+		window.location.href =
+			'https://callistobots.herokuapp.com/twitter/authorize';
 	};
 
 	return (

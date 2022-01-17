@@ -42,7 +42,7 @@ export const NewUserForm = () => {
 
 		// POST Request to server -> Discord
 		const res = await axios.post(
-			'https://moonbots.herokuapp.com/submit',
+			'https://callistobots.herokuapp.com/submit',
 			myObj
 		);
 
