@@ -31,6 +31,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={myTheme}>
 			<div className="app">
+				<div class="moon"></div>
 				<Router>
 					<Navbar />
 					<h1 className="h1">NFT Bots that really go BRR 🤑</h1>
