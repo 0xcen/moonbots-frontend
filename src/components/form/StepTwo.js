@@ -6,6 +6,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import * as Yup from 'yup';
 import { CheckboxGroup, MyTextField } from './CustomFormComponents';
 import { Persist } from 'formik-persist';
+import ButtonWithLoading from './ButtonWithLoading';
 
 export const StepTwo = (props) => {
 	const [searchParams] = useSearchParams();
@@ -16,6 +17,7 @@ export const StepTwo = (props) => {
 
 	const handleSubmit = (values) => {
 		props.next(values);
+		return;
 	};
 
 	return (
@@ -27,15 +29,17 @@ export const StepTwo = (props) => {
 							Link your bot's twitter account
 						</label>
 						{screen_name ? (
-							<p className="link">
-								{`@${screen_name} Successfully Linked`}
+							<p
+								className="link"
+								style={{ marginBottom: '2rem' }}>
+								@{screen_name} Successfully Linked
 							</p>
 						) : (
-							<Button
+							<ButtonWithLoading
+								text="Authorize Twitter"
 								variant="contained"
-								href="https://callistobots.herokuapp.com/twitter/authorize">
-								Authorize Twitter
-							</Button>
+								href="https://callistobots.herokuapp.com/twitter/authorize"
+							/>
 						)}
 						<div className="prev-next-wrapper">
 							<Button

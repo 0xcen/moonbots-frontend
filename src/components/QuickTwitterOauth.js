@@ -38,7 +38,6 @@ const QuickTwitterOauth = () => {
 			) : (
 				<Button
 					variant="contained"
-					htref=""
 					onClick={handleClick}
 					// href="https://moonbots.herokuapp.com/twitter/authorize">
 				>

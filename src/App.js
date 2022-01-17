@@ -12,6 +12,7 @@ import Home from './components/Home';
 import Success from './components/Success';
 import Fail from './components/Fail';
 import QuickTwitterOauth from './components/QuickTwitterOauth';
+import ButtonWithLoading from './components/form/ButtonWithLoading';
 
 const App = () => {
 	const [newThemeColor, setNewThemeColor] = useState('#fff');
@@ -32,7 +33,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={myTheme}>
 			<div className="app">
-				<div class="moon"></div>
+				<div className="moon"></div>
 				<Router>
 					<Navbar />
 					<h1 className="h1">NFT Bots that really go BRR 🤑</h1>

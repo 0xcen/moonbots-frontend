@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import { MyTextField } from './CustomFormComponents';
 import * as Yup from 'yup';
 import { Persist } from 'formik-persist';
+import ButtonWithLoading from './ButtonWithLoading';
 // Validation
 export const DiscordWhValidator = Yup.object().shape({
 	discord_webhook_listings: Yup.string().matches(
@@ -30,7 +31,7 @@ export const StepThree = (props) => {
 			onSubmit={handleSubmit}>
 			{({ values, isSubmitting }) => {
 				return (
-					<Form className="form" autoComplete="off">
+					<Form className="form" id="myForm" autoComplete="off">
 						<label>
 							Please provide a webhook for your discord channel.
 							This allows MoonBots to post in your channel. If you
@@ -67,20 +68,13 @@ export const StepThree = (props) => {
 								onClick={() => props.prev(values)}>
 								Back
 							</Button>
-							{isSubmitting ? (
-								<LoadingButton
-									loading
-									variant="contained"
-									size="large"
-								/>
-							) : (
-								<Button
-									size="large"
-									type="submit"
-									variant={'contained'}>
-									Submit
-								</Button>
-							)}
+							<ButtonWithLoading
+								size="large"
+								type="submit"
+								variant="contained"
+								text="Submit"
+								onClick={() => handleSubmit(values)}
+							/>
 						</div>
 						<Persist name="stepThree" />
 					</Form>

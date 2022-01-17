@@ -11,6 +11,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 export const NewUserForm = () => {
 	const [data, setData] = useState({
 		project_name: '',
+		screen_name: '',
 		website: '',
 		main_twitter: '',
 		marketplaces: [],
