@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { useFormikContext } from 'formik';
+import { LoadingButton } from '@mui/lab';
+import ButtonWithLoading from './form/ButtonWithLoading';
 
 const TwitterOauth = ({ screen_name, ...props }) => {
 	return (
@@ -14,11 +16,11 @@ const TwitterOauth = ({ screen_name, ...props }) => {
 						{`@${screen_name} Successfully Linked`}
 					</p>
 				) : (
-					<Button
+					<ButtonWithLoading
 						variant="contained"
-						href="https://moonbots.herokuapp.com/twitter/authorize">
-						Authorize Twitter
-					</Button>
+						href="https://moonbots.herokuapp.com/twitter/authorize"
+						text="Authorize Twitter"
+					/>
 				)}
 			</div>
 		</>

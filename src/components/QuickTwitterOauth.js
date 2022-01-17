@@ -5,6 +5,7 @@ import { Persist } from 'formik-persist';
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
+import ButtonWithLoading from './form/ButtonWithLoading';
 
 const QuickTwitterOauth = () => {
 	const [IsLoading, setIsLoading] = useState(false);
@@ -13,12 +14,6 @@ const QuickTwitterOauth = () => {
 	const oauth_token = searchParams.get('oauth_token') || '';
 	const oauth_token_secret = searchParams.get('oauth_token_secret') || '';
 	const user_id = searchParams.get('user_id') || '';
-
-	const handleClick = () => {
-		setIsLoading(true);
-		window.location.href =
-			'https://callistobots.herokuapp.com/twitter/authorize';
-	};
 
 	return (
 		<div style={{ textAlign: 'center' }}>
@@ -31,18 +26,13 @@ const QuickTwitterOauth = () => {
 				<p className="link" style={{ marginBottom: '2rem' }}>
 					@{screen_name} Successfully Linked
 				</p>
-			) : IsLoading ? (
-				<LoadingButton loading variant="contained" size="large">
-					Authorize Twitter
-				</LoadingButton>
 			) : (
-				<Button
+				<ButtonWithLoading
 					variant="contained"
-					onClick={handleClick}
-					// href="https://moonbots.herokuapp.com/twitter/authorize">
-				>
-					Authorize Twitter
-				</Button>
+					size="large"
+					href="https://callistobots.herokuapp.com/twitter/authorize"
+					text="Link Twitter"
+				/>
 			)}
 		</div>
 	);
