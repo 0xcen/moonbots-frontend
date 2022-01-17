@@ -11,6 +11,7 @@ import { NewUserForm } from './components/NewUserForm';
 import Home from './components/Home';
 import Success from './components/Success';
 import Fail from './components/Fail';
+import QuickTwitterOauth from './components/QuickTwitterOauth';
 
 const App = () => {
 	const [newThemeColor, setNewThemeColor] = useState('#fff');
@@ -49,6 +50,10 @@ const App = () => {
 									element={<Success />}
 								/>
 								<Route path="/signup/fail" element={<Fail />} />
+								<Route
+									path="/twitter-auth"
+									element={<QuickTwitterOauth />}
+								/>
 							</Routes>
 						</div>
 					</div>
