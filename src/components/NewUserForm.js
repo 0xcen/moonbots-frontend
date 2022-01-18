@@ -4,9 +4,6 @@ import axios from 'axios';
 import { StepOne } from './form/StepOne';
 import { StepTwo } from './form/StepTwo';
 import { StepThree } from './form/StepThree';
-import { Button } from '@mui/material';
-
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 export const NewUserForm = () => {
 	const [data, setData] = useState({
