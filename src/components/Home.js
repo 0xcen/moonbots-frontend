@@ -9,7 +9,7 @@ const Home = () => {
 				meantime, we're onboarding a projects manually, so if you'd like
 				to get onboarded ASAP shoot us an{' '}
 				<a href="mailto:wenmoonbots@gmail.com" className="link">
-					email
+					Email
 				</a>{' '}
 				or reach out to us on{' '}
 				<a href="https://twitter.com/wenmoonbots" className="link">
