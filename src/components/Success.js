@@ -4,7 +4,15 @@ import { Button } from '@mui/material';
 const Success = () => {
 	return (
 		<div className="container centered">
-			<h2 className="h2-loud">🚀 Liftoff! 🌕</h2>
+			<h2 className="h2-loud">
+				<span role="img" aria-label="rocket">
+					🚀
+				</span>{' '}
+				Liftoff!{' '}
+				<span role="img" aria-label="moon">
+					🌕
+				</span>
+			</h2>
 			<p>
 				Your bot will be installed shortly. In the meantime, feel free
 				to reach out to us on discord or{' '}

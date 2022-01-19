@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Formik, Form, Field, isString } from 'formik';
-import { Button, Radio } from '@mui/material';
+import { Formik, Form, Field } from 'formik';
+import { Radio } from '@mui/material';
 import { CheckboxGroup, MyTextField } from './form/CustomFormComponents';
 import { capitalize } from '../helpers/capitalize';
 import { Persist } from 'formik-persist';
@@ -42,7 +42,6 @@ export const SignUpForm = () => {
 			oauth_token,
 			screen_name,
 			user_id,
-			screen_name,
 			...newData,
 		};
 		const res = await axios.post(
@@ -209,7 +208,7 @@ export const SignUpForm = () => {
 										' collection link'
 									}
 									placeholder={`https://${values.rarity.toLowerCase()}.${
-										values.rarity == 'moonRank'
+										values.rarity === 'moonRank'
 											? 'app'
 											: 'is'
 									}/SolanaMonkeyBusiness`}
