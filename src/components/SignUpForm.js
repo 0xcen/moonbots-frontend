@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
-import { Radio } from '@mui/material';
+import { Radio, Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { CheckboxGroup, MyTextField } from './form/CustomFormComponents';
 import { capitalize } from '../helpers/capitalize';
 import { Persist } from 'formik-persist';
@@ -293,15 +294,19 @@ export const SignUpForm = () => {
 						</CheckboxGroup>
 						<div className="prev-next-wrapper">
 							<div></div>
-							<ButtonWithLoading
-								size="large"
-								type="submit"
-								text="Submit"
-								variant="contained"
-								{...isValid}
-								{...isSubmitting}
-								onClick={() => submitForm(values)}
-							/>
+
+							{isValid && isSubmitting ? (
+								<LoadingButton
+									loading
+									variant="contained"
+									size="large">
+									Submit
+								</LoadingButton>
+							) : (
+								<Button variant="contained" type="submit">
+									Submit
+								</Button>
+							)}
 						</div>
 						<Persist name="stepOne" />
 					</Form>
