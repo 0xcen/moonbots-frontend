@@ -46,8 +46,7 @@ export const SignUpForm = () => {
 			...newData,
 		};
 		const res = await axios.post(
-			// 'https://callistobots.herokuapp.com/submit',
-			'http://localhost:8000/submit',
+			'https://callistobots.herokuapp.com/submit',
 			obj
 		);
 
@@ -251,7 +250,7 @@ export const SignUpForm = () => {
 												sx={{ marginTop: '-2rem' }}
 												text="Authorize Twitter"
 												variant="contained"
-												href="http://localhost:8000/twitter/authorize"
+												href="https://callistobots.herokuapp.com/twitter/authorize"
 												onClick={() =>
 													handleRedirect(values)
 												}
