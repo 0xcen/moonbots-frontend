@@ -5,7 +5,7 @@ import { Persist } from 'formik-persist';
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import ButtonWithLoading from './form/ButtonWithLoading';
+import { ButtonWithLoading } from './form/ButtonWithLoading';
 
 const QuickTwitterOauth = () => {
 	const [IsLoading, setIsLoading] = useState(false);

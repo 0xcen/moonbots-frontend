@@ -16,7 +16,6 @@ export const MyTextField = ({ name, ...props }) => {
 };
 
 export const CheckboxPersists = ({ name, value, label, ...props }) => {
-	// <pre>{JSON.stringify(props)}</pre>;
 	return (
 		<label>
 			<Checkbox
@@ -24,8 +23,8 @@ export const CheckboxPersists = ({ name, value, label, ...props }) => {
 				name={name}
 				value={value}
 				defaultChecked={
-					sessionStorage.getItem(name) &&
-					sessionStorage.getItem(name).includes(value)
+					JSON.parse(sessionStorage.getItem(name)) &&
+					JSON.parse(sessionStorage.getItem(name)).includes(value)
 						? true
 						: false
 				}

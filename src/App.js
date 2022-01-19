@@ -7,12 +7,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme, TextField, Button } from '@mui/material';
 
 import Navbar from './components/Navbar';
-import { NewUserForm } from './components/NewUserForm';
+import { SignUpForm } from './components/SignUpForm';
 import Home from './components/Home';
 import Success from './components/Success';
 import Fail from './components/Fail';
 import QuickTwitterOauth from './components/QuickTwitterOauth';
-import ButtonWithLoading from './components/form/ButtonWithLoading';
 
 const App = () => {
 	const [newThemeColor, setNewThemeColor] = useState('#fff');
@@ -44,7 +43,7 @@ const App = () => {
 								<Route path="/" element={<Home />} />
 								<Route
 									path="/signup"
-									element={<NewUserForm />}
+									element={<SignUpForm />}
 								/>
 								<Route
 									path="/signup/success"

@@ -1,8 +1,8 @@
 import { LoadingButton } from '@mui/lab';
 import { Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ButtonWithLoading = ({
+export const ButtonWithLoading = ({
 	variant,
 	text,
 	size,
@@ -12,11 +12,20 @@ const ButtonWithLoading = ({
 	...props
 }) => {
 	const [IsLoading, setIsLoading] = useState(false);
-	const handleClick = () => {
-		setIsLoading(true);
 
+	useEffect(() => {
+		if (props.isSubmitting && props.isValid) {
+			setIsLoading(true);
+		} else {
+			setIsLoading(false);
+		}
+		return;
+	}, [props.subbitting, props.valid]);
+
+	const handleClick = () => {
 		return onClick ? onClick() : null;
 	};
+
 	return IsLoading ? (
 		<LoadingButton loading variant={variant} size={size}>
 			{text}
@@ -32,5 +41,3 @@ const ButtonWithLoading = ({
 		</Button>
 	);
 };
-
-export default ButtonWithLoading;
