@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 * {
 	margin: 0;
 	padding: 0;
@@ -203,4 +204,38 @@ label {
 .link {
 	color: #5aff47;
 	text-decoration: underline;
+}
+
+.discord-embed-wrapper {
+	padding-top: 1.6rem;
+}
+
+.discord-embed .discord-embed-author {
+	font-family: 'Lato', sans-serif !important;
+	font-size: 1.8rem;
+	margin-top: 0;
+}
+.discord-embed .discord-embed-title {
+	font-family: 'Lato', sans-serif !important;
+	font-size: 2rem;
+	margin: 2rem 0;
+}
+
+/* Discord */
+.discord-field,
+.discord-embed-field,
+.discord-field-title {
+	font-family: 'Lato', sans-serif;
+	gap: 1.9rem;
+	line-height: 2rem !important;
+	font-size: 1.6rem !important;
+	overflow: hidden;
+}
+.discord-embed-field > a {
+	color: rgb(82, 215, 255);
+	text-decoration: underline;
+}
+
+.discord-embed-media {
+	max-width: 400px;
 }
