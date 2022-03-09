@@ -10,6 +10,7 @@ import { SignUpForm } from './components/SignUpForm';
 import Home from './components/Home';
 import Success from './components/Success';
 import Fail from './components/Fail';
+import MarketingTool from './components/MarketingTool';
 import QuickTwitterOauth from './components/QuickTwitterOauth';
 
 const App = () => {
@@ -30,33 +31,37 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={myTheme}>
-			<div className="app">
-				<div className="moon"></div>
+			<div className='app'>
+				<div className='moon'></div>
 				<Router>
 					<Navbar />
-					<h1 className="h1">
+					<h1 className='h1'>
 						NFT Bots that really go BRR{' '}
-						<span role="img" aria-label="money face">
+						<span role='img' aria-label='money face'>
 							🤑
 						</span>
 					</h1>
 					{/* {/* <h1>Marketing tools for NFTs< */}
-					<div className="flow-wrapper-wrapper">
-						<div className="flow-wrapper">
+					<div className='flow-wrapper-wrapper'>
+						<div className='flow-wrapper'>
 							<Routes>
-								<Route path="/" element={<Home />} />
+								<Route path='/' element={<Home />} />
 								<Route
-									path="/signup"
+									path='/signup'
 									element={<SignUpForm />}
 								/>
 								<Route
-									path="/signup/success"
+									path='/signup/success'
 									element={<Success />}
 								/>
-								<Route path="/signup/fail" element={<Fail />} />
+								<Route path='/signup/fail' element={<Fail />} />
 								<Route
-									path="/twitter-auth"
+									path='/twitter-auth'
 									element={<QuickTwitterOauth />}
+								/>
+								<Route
+									path='/moonbase/demo'
+									element={<MarketingTool />}
 								/>
 							</Routes>
 						</div>

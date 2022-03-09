@@ -9,15 +9,14 @@ import {
 import img from './../img/favicon/me_favicon.png';
 
 const DiscordSalesMockup = ({ props }) => {
-	const inlineIndex = () => {
-		let i = 1;
-		// if (fp_solananart) i++;
-		// if (fp_me) i++;
-		// if (total_listed) i++;
-		// FIX: return i
-		return 2;
-	};
-
+	if (!props) return null;
+	const floor = props.floorPrice / 1000000000;
+	const price = props.parsedTransaction.total_amount / 1000000000;
+	const priceUSD = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'usd',
+		maximumFractionDigits: 2,
+	}).format(props.usd * price);
 	return (
 		<DiscordMessage slot='embed'>
 			<DiscordEmbed
@@ -31,8 +30,8 @@ const DiscordSalesMockup = ({ props }) => {
 					<DiscordEmbedField fieldTitle='Price'>
 						{(
 							props.parsedTransaction.total_amount / 1000000000
-						).toFixed(2)}{' '}
-						Ⓞ
+						).toFixed(2)}
+						{'  '}Ⓞ ({priceUSD})
 					</DiscordEmbedField>
 					<DiscordEmbedField
 						fieldTitle='Buyer'
@@ -64,38 +63,20 @@ const DiscordSalesMockup = ({ props }) => {
 							)}`}</a>
 						}
 					</DiscordEmbedField>
+
 					<DiscordEmbedField fieldTitle='Mint Token (Click for TXN)'>
-						{
-							<a
-								href={`https://solscan.io/token/${props.mint}`}
-								target='_blank'
-								rel='noreferrer'>
-								{props.mint}
-							</a>
-						}
+						<a
+							href={`https://solscan.io/token/${props.mint}`}
+							target='_blank'
+							rel='noreferrer'>
+							{props.mint.slice(0, 10)}....
+						</a>
+					</DiscordEmbedField>
+					<DiscordEmbedField fieldTitle='FP Magic Eden'>
+						{floor.toFixed(2)} Ⓞ
 					</DiscordEmbedField>
 
-					{
-						<DiscordEmbedField
-							fieldTitle='FP Magic Eden'
-							inline
-							inlineIndex={1}>
-							{`${(props.floorPrice / 1000000000).toFixed(2)} Ⓞ`}
-						</DiscordEmbedField>
-					}
-
-					{props.fp_solanart && (
-						<DiscordEmbedField
-							fieldTitle='FP Solanart'
-							inline
-							inlineIndex={2}>
-							{'0.25 Ⓞ'}
-						</DiscordEmbedField>
-					)}
-					<DiscordEmbedField
-						fieldTitle='Total Listed'
-						inline
-						inlineIndex={inlineIndex() === 3 ? 3 : 2}>
+					<DiscordEmbedField fieldTitle='Total Listed'>
 						{props.listedCount}
 					</DiscordEmbedField>
 				</DiscordEmbedFields>
