@@ -1,6 +1,9 @@
 .tweet-wrapper {
-	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+
 	border-radius: 15px;
+	background-color: #fff;
 	color: #111;
 	padding: 1.6rem;
 	font-weight: 400;
@@ -8,6 +11,7 @@
 	max-width: 425px;
 	/* max-height: 718px; */
 	align-self: flex-start;
+	min-height: 500px;
 }
 .tweet-header {
 	display: flex;
@@ -43,6 +47,7 @@
 }
 .tweet-content {
 	padding: 10px 0;
+	flex-grow: 1;
 }
 .tweet-content > p {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -65,6 +70,9 @@
 		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
+.footer {
+	justify-self: flex-end !important;
+}
 .social-icons {
 	display: flex;
 	justify-content: space-around;
