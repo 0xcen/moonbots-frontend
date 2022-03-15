@@ -63,6 +63,9 @@ footer {
 .centered {
 	text-align: center;
 }
+.align-start {
+	align-self: flex-start !important;
+}
 
 .nav {
 	height: 9rem;
