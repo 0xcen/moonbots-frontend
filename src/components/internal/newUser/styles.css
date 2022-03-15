@@ -1,0 +1,30 @@
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
+}
+.grid-2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: center;
+}
+
+.form-section {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+
+.text-field {
+	margin: 1.8rem auto;
+}
+
+.tweet-demos {
+	gap: 2rem;
+}
