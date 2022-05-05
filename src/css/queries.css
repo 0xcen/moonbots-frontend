@@ -4,16 +4,84 @@
 /********************************/
 /* Landscape Tablets Below 1200px */
 /********************************/
+@media (max-width: 102em) {
+	html {
+		font-size: 50%;
+	}
+}
 
 @media (max-width: 75em) {
 	html {
 		font-size: 56.26%;
 	}
+	.app-wrapper {
+		padding: 0 2rem;
+	}
 	.flow-wrapper {
 		padding: 10rem 10rem 5rem;
 	}
-}
+	.section-customers img {
+		align-self: center;
+		/* width: 1vh; */
+	}
 
+	.section-twitter .background {
+		padding: 3.2rem 4rem;
+	}
+}
+@media (max-width: 57.5em) {
+	html {
+		font-size: 50%;
+	}
+	.main-menu {
+		display: none;
+		/* todo: display main menu */
+		flex-direction: column;
+		position: fixed;
+		height: 100vh;
+		width: 100%;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+	}
+
+	.grid,
+	.grid-2,
+	.grid-3,
+	.grid-5 {
+		grid-template-columns: 1fr;
+	}
+	.discord-demo img {
+		/* display: none; */
+	}
+	.section-discord .discord-demo {
+		grid-column: span 2;
+		grid-row: span 2;
+		overflow: hidden;
+	}
+	.discord-demo .demo-img {
+		bottom: -40%;
+	}
+	.discord-demo img {
+	}
+	.section-discord .grid {
+		max-height: none;
+		/* overflow: hidden; */
+	}
+	.grid-card {
+		max-height: none;
+	}
+	.discord-whitelist {
+		grid-template-columns: repeat(5, 1fr);
+		grid-column: span 3;
+	}
+	.section-discord .sub-grid {
+		/* grid-template-columns: 1fr; */
+		grid-column: span 3;
+		/* grid-row: auto; */
+	}
+}
 /********************************/
 /* Tablets Below 784px */
 /********************************/
@@ -39,5 +107,7 @@
 		padding: 5.4rem 3.5rem 5rem;
 		margin: 0 1rem;
 		margin-bottom: 3rem;
+		display: flex;
+		flex-direction: column;
 	}
 }

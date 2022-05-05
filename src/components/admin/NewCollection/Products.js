@@ -15,17 +15,17 @@ const Products = () => {
 				<div>
 					<h3>Sales</h3>
 					<FormControlLabel
-						control={<Checkbox name="product_sales_enabled" />}
+						control={<Checkbox name="productSalesEnabled" />}
 						label="Enabled"
 					/>
 					<h4>Bots</h4>
 					<div className="grid-2">
 						<FormControlLabel
-							control={<Checkbox name="product_sales_bots_discord" />}
+							control={<Checkbox name="productSalesBotsDiscord" />}
 							label="Discord Sales Bot"
 						/>
 						<FormControlLabel
-							control={<Checkbox name="product_sales_bots_twitter" />}
+							control={<Checkbox name="productSalesBotsTwitter" />}
 							label="Twitter Sales Bot"
 						/>
 					</div>
@@ -33,24 +33,24 @@ const Products = () => {
 				<div>
 					<h3>Listings</h3>
 					<FormControlLabel
-						control={<Checkbox name="product_listings_enabled" />}
+						control={<Checkbox name="productListingsEnabled" />}
 						label="Enabled"
 					/>
 				</div>
 				<div>
 					<h3>Auction</h3>
 					<FormControlLabel
-						control={<Checkbox name="product_auction_enabled" />}
+						control={<Checkbox name="productAuctionEnabled" />}
 						label="Enabled"
 					/>
 					<TextField
-						name="product_auction_magic_eden_auction_url"
+						name="productAuctionMagicEdenAuctionURL"
 						margin="normal"
 						fullWidth
 						label="Magic Eden Auction Url"
 					/>
 					<TextField
-						name="product_auction_holaplex_auction_contract"
+						name="productAuctionHolaplaxAuctionContract"
 						margin="normal"
 						fullWidth
 						label="Holaplex Auction Contract"
@@ -59,11 +59,11 @@ const Products = () => {
 				<div>
 					<h3>Staking</h3>
 					<FormControlLabel
-						control={<Checkbox name="product_staking_enabled" />}
+						control={<Checkbox name="productStakingEnabled" />}
 						label="Enabled"
 					/>
 					<TextField
-						name="product_staking_contract"
+						name="productStakingContract"
 						margin="normal"
 						fullWidth
 						label="Staking Contract"

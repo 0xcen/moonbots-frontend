@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import TweetDemo from '../../TwitterDemo/TweetDemo';
 import './styles.css';
-import { UserContext } from './UserProvider';
 
 const TwitterData = () => {
 	const [tweet, setTweet] = useState(
@@ -18,7 +17,6 @@ const TwitterData = () => {
 		'👀 Sales Bot Go BRRR! 👀 \n\n🚨 {{NUM}} {{PLURAL}} have SOLD in the last 60s🚨\n\n🐦 {{TWITTER}} #LFG \n\n'
 	);
 
-	const userContext = useContext(UserContext);
 	const [twitterHandle, setTwitterHandle] = useState('@');
 	const [twitterApiData, setTwitterApiData] = useState({
 		user_id: '',
@@ -29,7 +27,7 @@ const TwitterData = () => {
 		<>
 			<div className="grid">
 				<TextField
-					name="twitter_at_handle"
+					name="mainTwitterHandle"
 					margin="normal"
 					fullWidth
 					label="Main Twitter Handle"
@@ -39,40 +37,40 @@ const TwitterData = () => {
 				<div>
 					<h3>Twitter API</h3>
 					<TextField
-						name="user_id"
+						name="userId"
 						margin="normal"
 						fullWidth
 						label="user_id"
 						onChange={(e) =>
-							setTwitterApiData({ ...twitterApiData, user_id: e.target.value })
+							setTwitterApiData({ ...twitterApiData, userId: e.target.value })
 						}
-						value={twitterApiData.user_id}
+						value={twitterApiData.userId}
 					/>
 					<TextField
-						name="access_token"
+						name="accessToken"
 						margin="normal"
 						fullWidth
 						label="access_token"
 						onChange={(e) =>
 							setTwitterApiData({
 								...twitterApiData,
-								access_token: e.target.value,
+								accessToken: e.target.value,
 							})
 						}
-						value={twitterApiData.access_token}
+						value={twitterApiData.accessToken}
 					/>
 					<TextField
-						name="access_token_secret"
+						name="accessTokenSecret"
 						margin="normal"
 						fullWidth
 						label="access_token_secret"
 						onChange={(e) =>
 							setTwitterApiData({
 								...twitterApiData,
-								access_token_secret: e.target.value,
+								accessTokenSecret: e.target.value,
 							})
 						}
-						value={twitterApiData.access_token_secret}
+						value={twitterApiData.accessTokenSecret}
 					/>
 				</div>
 				<div>
@@ -107,7 +105,8 @@ const TwitterData = () => {
 							className="align-start"
 							control={
 								<TextareaAutosize
-									name="summary_tweet"
+									// todo: tweets to formData
+									name="summaryTweet"
 									minRows={10}
 									margin="normal"
 									style={{

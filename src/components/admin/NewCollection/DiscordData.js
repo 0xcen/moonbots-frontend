@@ -13,25 +13,25 @@ const DiscordData = () => {
 		<>
 			<div className="">
 				<TextField
-					name="discord_sales_wh"
+					name="discordSalesWH"
 					margin="normal"
 					fullWidth
 					label="Discord Sales Webhook"
 				/>
 				<TextField
-					name="discord_listings_wh"
+					name="discordListingsWH"
 					margin="normal"
 					fullWidth
 					label="Discord Listings Webhook"
 				/>
 				<TextField
-					name="discord_auction_wh"
+					name="discordAuctionWH"
 					margin="normal"
 					fullWidth
 					label="Discord Auction Webhook"
 				/>
 				<TextField
-					name="discord_staking_wh"
+					name="discordStakingWH"
 					margin="normal"
 					fullWidth
 					label="Discord Stakin Webhook"

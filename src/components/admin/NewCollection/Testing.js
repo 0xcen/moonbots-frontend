@@ -7,19 +7,19 @@ const Testing = () => {
 		<>
 			<div className="grid-2">
 				<FormControlLabel
-					control={<Checkbox name="testing_sales" />}
+					control={<Checkbox name="testingSales" />}
 					label="Sales"
 				/>
 				<FormControlLabel
-					control={<Checkbox name="testing_listings" />}
+					control={<Checkbox name="testingListings" />}
 					label="Listings"
 				/>
 				<FormControlLabel
-					control={<Input type="number" name="testing_amount" />}
+					control={<Input type="number" name="testingAmount" />}
 					label="Amount"
 				/>
 				<FormControlLabel
-					control={<Checkbox name="testing_moonbots_server" />}
+					control={<Checkbox name="testingMoonbotsServer" />}
 					label="Post to Moonbots Server?"
 				/>
 			</div>

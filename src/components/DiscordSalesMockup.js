@@ -18,65 +18,57 @@ const DiscordSalesMockup = ({ props }) => {
 		maximumFractionDigits: 2,
 	}).format(props.usd * price);
 	return (
-		<DiscordMessage slot='embed'>
+		<DiscordMessage slot="embed" className="discord-message">
 			<DiscordEmbed
-				authorName='Magic Eden'
-				authorUrl='https://magiceden.io/collections/ubik'
+				authorName="Magic Eden"
+				authorUrl="https://magiceden.io/collections/ubik"
 				authorImage={img}
 				embedTitle={`${props.mintObject.title} → SOLD`}
 				image={props.mintObject.img}
-				color='#802482'>
-				<DiscordEmbedFields slot='fields'>
-					<DiscordEmbedField fieldTitle='Price'>
-						{(
-							props.parsedTransaction.total_amount / 1000000000
-						).toFixed(2)}
+				color="#802482"
+			>
+				<DiscordEmbedFields slot="fields">
+					<DiscordEmbedField fieldTitle="Price">
+						{(props.parsedTransaction.total_amount / 1000000000).toFixed(2)}
 						{'  '}Ⓞ ({priceUSD})
 					</DiscordEmbedField>
-					<DiscordEmbedField
-						fieldTitle='Buyer'
-						inline
-						inlineIndex={1}>
+					<DiscordEmbedField fieldTitle="Buyer" inline inlineIndex={1}>
 						<a
 							href={`https://solscan.io/account/${props.parsedTransaction.buyer_address}`}
-							target='_blank'
-							rel='noreferrer'>{`${props.parsedTransaction.buyer_address.slice(
+							target="_blank"
+							rel="noreferrer"
+						>{`${props.parsedTransaction.buyer_address.slice(
 							0,
 							4
-						)}...${props.parsedTransaction.buyer_address.slice(
-							-4
-						)}`}</a>
+						)}...${props.parsedTransaction.buyer_address.slice(-4)}`}</a>
 					</DiscordEmbedField>
-					<DiscordEmbedField
-						fieldTitle='Seller'
-						inline
-						inlineIndex={2}>
+					<DiscordEmbedField fieldTitle="Seller" inline inlineIndex={2}>
 						{
 							<a
 								href={`https://solscan.io/account/${props.parsedTransaction.seller_address}`}
-								target='_blank'
-								rel='noreferrer'>{`${props.parsedTransaction.seller_address.slice(
+								target="_blank"
+								rel="noreferrer"
+							>{`${props.parsedTransaction.seller_address.slice(
 								0,
 								4
-							)}...${props.parsedTransaction.seller_address.slice(
-								-4
-							)}`}</a>
+							)}...${props.parsedTransaction.seller_address.slice(-4)}`}</a>
 						}
 					</DiscordEmbedField>
 
-					<DiscordEmbedField fieldTitle='Mint Token (Click for TXN)'>
+					<DiscordEmbedField fieldTitle="Mint Token (Click for TXN)">
 						<a
 							href={`https://solscan.io/token/${props.mint}`}
-							target='_blank'
-							rel='noreferrer'>
+							target="_blank"
+							rel="noreferrer"
+						>
 							{props.mint.slice(0, 10)}....
 						</a>
 					</DiscordEmbedField>
-					<DiscordEmbedField fieldTitle='FP Magic Eden'>
+					<DiscordEmbedField fieldTitle="FP Magic Eden">
 						{floor.toFixed(2)} Ⓞ
 					</DiscordEmbedField>
 
-					<DiscordEmbedField fieldTitle='Total Listed'>
+					<DiscordEmbedField fieldTitle="Total Listed">
 						{props.listedCount}
 					</DiscordEmbedField>
 				</DiscordEmbedFields>

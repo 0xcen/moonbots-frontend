@@ -5,13 +5,13 @@
 	border-radius: 15px;
 	background-color: #fff;
 	color: #111;
-	padding: 1.6rem;
+	padding: 2rem;
 	font-weight: 400;
 	font-size: 1.85rem;
-	max-width: 425px;
-	/* max-height: 718px; */
-	align-self: flex-start;
-	min-height: 500px;
+	max-width: 45rem;
+	max-height: 87rem;
+
+	overflow: hidden;
 }
 .tweet-header {
 	display: flex;
@@ -46,8 +46,11 @@
 		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 .tweet-content {
+	position: relative;
+	height: 74rem;
 	padding: 10px 0;
 	flex-grow: 1;
+	min-width: 41rem;
 }
 .tweet-content > p {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -56,12 +59,19 @@
 	line-height: 2.4rem;
 	color: rgb(15, 20, 25);
 	max-width: 48ch;
+
+	max-height: 30.5rem;
+	overflow: scroll;
+	flex-grow: 2;
 }
 
 .tweet-content > img {
 	width: 100%;
 	margin-top: 0.6rem;
 	border-radius: 8px;
+
+	position: absolute;
+	bottom: 2rem;
 }
 .marketplace-link > a {
 	color: rgb(29, 155, 240);

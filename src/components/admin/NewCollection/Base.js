@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import { Button, TextField, Checkbox, FormControlLabel } from '@mui/material';
-import { UpdateUserContext } from './UserProvider';
+import {
+	CollectionContext,
+	UpdateCollectionContext,
+} from '../../../contextProviders/CollectionProvider';
 
 const Base = () => {
-	const updateContext = useContext(UpdateUserContext);
+	const updateCollection = useContext(UpdateCollectionContext);
+	const collection = useContext(CollectionContext);
+
 	return (
 		<div>
 			<FormControlLabel
-				control={<Checkbox name="user_enabled" />}
+				control={<Checkbox name="userEnabled" />}
 				label="Enabled"
 			/>
 
@@ -16,8 +21,10 @@ const Base = () => {
 				margin="normal"
 				label="Collection Name"
 				fullWidth
+				onChange={(e) =>
+					updateCollection({ ...collection, name: e.target.value })
+				}
 				autoComplete="new-password"
-				onChange={(e) => updateContext({ name: e.target.value })}
 			/>
 		</div>
 	);

@@ -37,23 +37,19 @@ const TwitterSalesMockup = ({ props }) => {
 	};
 
 	return (
-		<div className='tweet-wrapper'>
-			<div className='tweet-header'>
-				<div className='profile-pic-bg'>
-					<img
-						src={props.image}
-						alt='profile image'
-						className='profile-pic'
-					/>
+		<div className="tweet-wrapper">
+			<div className="tweet-header">
+				<div className="profile-pic-bg">
+					<img className="profile-pic" src={props.image} alt="profile" />
 				</div>
-				<div className='user-data'>
-					<h3 className='user-name'>{collectionName} Sales Bot</h3>
-					<span className='user-handle'>
+				<div className="user-data">
+					<h3 className="user-name">{collectionName} Sales Bot</h3>
+					<span className="user-handle">
 						@{collectionName.replace(' ', '')}SalesBot
 					</span>
 				</div>
 			</div>
-			<div className='tweet-content'>
+			<div className="tweet-content">
 				<p>
 					🤖 {props.mintObject.title}
 					<br />
@@ -67,23 +63,24 @@ const TwitterSalesMockup = ({ props }) => {
 					<br />
 					<br />
 				</p>
-				<p className='marketplace-link'>
+				<p className="marketplace-link">
 					Grab yours on Magic Eden:{' '}
 					<a
 						href={`https://magiceden.io/marketplace/${props.collection_symbol}`}
-						target='_blank'
-						rel='noreferrer'>
+						target="_blank"
+						rel="noreferrer"
+					>
 						https://t.co/7Sc4Gk4ktt
 					</a>
 				</p>
-				<img src={props.mintObject.img} alt='nft-img' />
+				<img src={props.mintObject.img} alt="nft-img" />
 			</div>
-			<div className='footer'>
-				<div className='social-icons'>
-					<img src={heartIcon} alt='heart' />
-					<img src={optionsIcon} alt='retweet' />
-					<img src={commentIcon} alt='comment' />
-					<img src={saveIcon} alt='save' />
+			<div className="footer">
+				<div className="social-icons">
+					<img src={heartIcon} alt="heart" />
+					<img src={optionsIcon} alt="retweet" />
+					<img src={commentIcon} alt="comment" />
+					<img src={saveIcon} alt="save" />
 				</div>
 			</div>
 		</div>
