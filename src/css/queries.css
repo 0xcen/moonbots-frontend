@@ -27,6 +27,7 @@
 
 	.section-twitter .background {
 		padding: 3.2rem 4rem;
+		min-height: auto;
 	}
 }
 @media (max-width: 57.5em) {
@@ -52,9 +53,27 @@
 	.grid-5 {
 		grid-template-columns: 1fr;
 	}
-	.discord-demo img {
-		/* display: none; */
+
+	.section-customers img {
+		width: 13.5vh;
 	}
+
+	.section-twitter .background .grid-2 {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.section-twitter .background .demo {
+		transform: scale(0.6);
+		margin: -15rem -15rem -15rem -5rem;
+	}
+
+	.section-twitter .content span:last-of-type {
+		display: none;
+	}
+	.section-twitter .content button {
+		display: none;
+	}
+
 	.section-discord .discord-demo {
 		grid-column: span 2;
 		grid-row: span 2;
@@ -63,8 +82,7 @@
 	.discord-demo .demo-img {
 		bottom: -40%;
 	}
-	.discord-demo img {
-	}
+
 	.section-discord .grid {
 		max-height: none;
 		/* overflow: hidden; */
@@ -72,20 +90,49 @@
 	.grid-card {
 		max-height: none;
 	}
-	.discord-whitelist {
-		grid-template-columns: repeat(5, 1fr);
+
+	.section-discord .sub-grid {
 		grid-column: span 3;
 	}
-	.section-discord .sub-grid {
-		/* grid-template-columns: 1fr; */
+
+	.section-discord .sub-grid .grid-card {
+		order: 1;
+	}
+
+	.section-discord .sub-grid .x-ray {
+		order: 3;
+	}
+
+	.section-discord .discord-whitelist {
 		grid-column: span 3;
-		/* grid-row: auto; */
+		grid-template-columns: 1fr 1fr;
+	}
+	.section-discord .discord-whitelist .content {
+		grid-column: span 1;
+	}
+	.section-discord .discord-whitelist .wallet-collection-demo {
+		grid-column: span 1;
+	}
+
+	.section-socials .grid-2 {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.section-socials .card {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		/* align-items: center; */
+		height: 100%;
 	}
 }
 /********************************/
 /* Tablets Below 784px */
 /********************************/
 @media (max-width: 49em) {
+	html {
+		font-size: 45%;
+	}
 	.nav {
 		padding: 0 3.5rem;
 	}
@@ -109,5 +156,121 @@
 		margin-bottom: 3rem;
 		display: flex;
 		flex-direction: column;
+	}
+
+	.section-more .grid-2 {
+		grid-template-columns: 1fr;
+	}
+
+	.section-more .card {
+		height: 50rem;
+		grid-column: span 1;
+		overflow: hidden;
+	}
+
+	.section-more .card .content {
+		grid-column: span 1;
+	}
+
+	.section-more .staking-img-container {
+		height: 23rem;
+		grid-column: span 1;
+	}
+	.section-more .staking-img-container,
+	.section-more .btn-container .section-more .card .img {
+		grid-column: span 1;
+	}
+	.section-more .card div:last-child {
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 36em) {
+	html {
+		font-size: 40%;
+	}
+	.section-twitter .text-area {
+		height: 25rem;
+	}
+	.text-area textarea {
+		padding: 2rem 2.5rem;
+		font-size: 1.2rem;
+	}
+
+	.section-twitter .content h3 {
+		font-size: 2rem;
+	}
+
+	.section-twitter .background {
+		padding: 4.5rem 3rem;
+	}
+
+	.section-twitter .background .demo {
+		transform: scale(0.5);
+		margin: -20rem -13rem -20rem -8rem;
+	}
+
+	/* discord */
+
+	.section-discord .grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.section-discord .discord-demo,
+	.section-discord .grid-card {
+		grid-column: span 1;
+		grid-row: span 1;
+	}
+	.section-discord .sub-grid {
+		grid-row: span 2;
+		grid-column: span 2;
+	}
+
+	.section-discord .sub-grid .grid-card {
+		order: 1;
+	}
+
+	.section-discord .sub-grid .x-ray {
+		order: 0;
+		grid-column: span 2;
+	}
+
+	.section-discord .discord-demo {
+		grid-column: span 2;
+		grid-row: span 2;
+		height: 60rem;
+	}
+
+	.section-discord .discord-whitelist {
+		grid-column: span 2;
+		display: flex;
+		flex-direction: column;
+		height: 50rem;
+	}
+
+	.section-discord .discord-whitelist .content {
+		flex-grow: 1;
+		flex-shrink: 0;
+	}
+	.section-discord .discord-whitelist .wallet-collection-demo {
+		flex-grow: 1;
+		flex-shrink: 0;
+		height: fit-content;
+	}
+
+	.section-socials .grid-2 {
+		grid-template-columns: 1fr;
+	}
+
+	.section-socials .card {
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+	}
+
+	.section-more .staking-img-container img {
+		max-width: 30rem;
 	}
 }

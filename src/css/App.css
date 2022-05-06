@@ -589,7 +589,7 @@ textarea.blur {
 .section-twitter .text-area {
 	position: relative;
 
-	width: 45.5rem;
+	max-width: 45.5rem;
 	height: 30rem;
 
 	transition: all 500ms;
@@ -879,17 +879,17 @@ textarea.blur {
 }
 
 .slider-toggle-indicator.position-1 {
-	top: 0.25rem;
+	top: 0%;
 }
 
 .slider-toggle-indicator.position-2 {
-	top: 5.6rem;
+	top: 29%;
 }
 .slider-toggle-indicator.position-3 {
-	top: 10.8rem;
+	top: 55%;
 }
 .slider-toggle-indicator.position-4 {
-	top: 16.4rem;
+	top: 83%;
 }
 
 .wallet-collection-img {
@@ -1129,8 +1129,8 @@ label.active {
 	font-family: 'Inter';
 	font-style: normal;
 	font-weight: 400;
-	font-size: 19px;
-	line-height: 2.5rem;
+	font-size: 1.9rem;
+	line-height: 1.8;
 
 	text-align: center;
 	letter-spacing: -0.02em;

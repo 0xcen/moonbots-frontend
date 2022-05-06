@@ -124,7 +124,7 @@ const Discord = () => {
 							</p>
 						</div>
 					</div>
-					<div className="grid-card blue-gradient">
+					<div className="grid-card blue-gradient x-ray">
 						<div className="grid-icon">🩻</div>
 						<div className="content">
 							<h3>X-Ray</h3>
