@@ -1,7 +1,7 @@
 import React from 'react';
-import degenFlipImg from '../../img/degen-flip-bot.png';
-import staking1 from '../../img/staking-1.png';
-import staking2 from '../../img/staking-2.png';
+import degenFlipImg from '../../img/degen-flip-bot.webp';
+import staking1 from '../../img/staking-1.webp';
+import staking2 from '../../img/staking-2.webp';
 
 const More = () => {
 	return (

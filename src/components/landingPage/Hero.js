@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import tweetScreenshot from '../../img/astrals-twitter-bot.png';
+import tweetScreenshot from '../../img/astrals-twitter-bot.webp';
 import twitterBird from '../../img/twitter-white.svg';
 import discordLogo from '../../img/Discord-Logo-White.svg';
-import discordSales from '../../img/okayBear-sale.png';
-import discordListings from '../../img/okayBear-listing.png';
+import discordSales from '../../img/okayBear-sale.webp';
+import discordListings from '../../img/okayBear-listing.webp';
 
 const Hero = () => {
 	return (
@@ -30,7 +30,11 @@ const Hero = () => {
 							className="twitter-bird m-md"
 							alt="twitter logo"
 						/>
-						<img src={tweetScreenshot} alt="tweet" />
+						<img
+							className="hero-twitter-img"
+							src={tweetScreenshot}
+							alt="tweet"
+						/>
 					</div>
 					<div className="hero-discord ">
 						<img className="discord-logo m-md" src={discordLogo} alt="" />

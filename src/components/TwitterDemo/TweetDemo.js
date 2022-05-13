@@ -4,7 +4,7 @@ import twitter from 'twitter-text';
 
 import './TwitterSalesMockup.css';
 
-import moonbotsLogo from './../../img/favicon/moonbots.png';
+import moonbotsLogo from './../../img/favicon/moonbots.webp';
 import heartIcon from './../../img/favicon/twitterIcons/heart.svg';
 import commentIcon from './../../img/favicon/twitterIcons/comment.svg';
 import optionsIcon from './../../img/favicon/twitterIcons/options.svg';
@@ -111,16 +111,17 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 					style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
 					dangerouslySetInnerHTML={{ __html: jsonToHtml(content) }}
 				></p>
-
-				{type === 'normal'
-					? image && <img src={image} alt="collection" />
-					: summaryImage && <img src={summaryImage} alt="summary" />}
-				{!image && type !== 'summary' && (
-					<input
-						type="file"
-						onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
-					/>
-				)}
+				<div className="tweet-img">
+					{type === 'normal'
+						? image && <img src={image} alt="collection" />
+						: summaryImage && <img src={summaryImage} alt="summary" />}
+					{!image && type !== 'summary' && (
+						<input
+							type="file"
+							onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
+						/>
+					)}
+				</div>
 			</div>
 			<div className="footer">
 				<div className="social-icons">

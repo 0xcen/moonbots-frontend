@@ -35,14 +35,14 @@ const Footer = () => {
 						<h3>Already a Customer?</h3>
 						<ul>
 							<li>
-								<Link to="/dashboard">Dashboard</Link>
+								<Link to="/login">Dashboard</Link>
 							</li>
 							<li>
-								<Link to="/settings">Settings</Link>
+								<Link to="/login">Settings</Link>
 							</li>
 						</ul>
 					</div>
-					<div>
+					{/* <div>
 						<h3>More important things</h3>
 						<ul>
 							<li>
@@ -52,7 +52,7 @@ const Footer = () => {
 								<Link to="/toc">Terms & Conditions</Link>
 							</li>
 						</ul>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</footer>

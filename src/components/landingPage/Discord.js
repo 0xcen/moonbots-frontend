@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
-import discordSale from '../../img/sales-demo.png';
-import discordListing from '../../img/listings-demo.png';
-import moonrankIcon from '../../img/favicon/moonrank.png';
-import howrareIcon from '../../img/favicon/howrare.png';
-import failImg from '../../img/whitelist/not-found.png';
-import foundImg from '../../img/whitelist/found.png';
-import sucessImg from '../../img/whitelist/sucess.png';
-import instructionsImg from '../../img/whitelist/instructions.png';
-import errorImg from '../../img/whitelist/error.png';
+import discordSale from '../../img/sales-demo.webp';
+import discordListing from '../../img/listings-demo.webp';
+import moonrankIcon from '../../img/favicon/moonrank.webp';
+import howrareIcon from '../../img/favicon/howrare.webp';
+import failImg from '../../img/whitelist/not-found.webp';
+import foundImg from '../../img/whitelist/found.webp';
+import sucessImg from '../../img/whitelist/sucess.webp';
+import instructionsImg from '../../img/whitelist/instructions.webp';
+import errorImg from '../../img/whitelist/error.webp';
 
 const Discord = () => {
 	const [activeTab, setActiveTab] = useState('sales');

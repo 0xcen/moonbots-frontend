@@ -1,11 +1,11 @@
 import React from 'react';
-import dcf from '../../img/customer-logos/dcf.png';
-import astrals from '../../img/customer-logos/astrals.png';
-import cyborgapes from '../../img/customer-logos/cyborgapes.png';
-import dogetrack from '../../img/customer-logos/dogetrack.png';
-import ehecatl from '../../img/customer-logos/ehecatl.png';
-import mekkafroggo from '../../img/customer-logos/mekkafroggo.png';
-import ubik from '../../img/customer-logos/ubik.png';
+import dcf from '../../img/customer-logos/dcf.webp';
+import astrals from '../../img/customer-logos/astrals.webp';
+import cyborgapes from '../../img/customer-logos/cyborgapes.webp';
+import dogetrack from '../../img/customer-logos/dogetrack.webp';
+import ehecatl from '../../img/customer-logos/ehecatl.webp';
+import mekkafroggo from '../../img/customer-logos/mekkafroggo.webp';
+import ubik from '../../img/customer-logos/ubik.webp';
 
 const Customers = () => {
 	return (

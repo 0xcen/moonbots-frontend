@@ -6,6 +6,7 @@ const Twitter = () => {
 		'💫 {{NFT}} \n\n💰 SOLD for {{PRICE}} \n\n🚀 #LFG \n\n🪐 {{TXURL}} \n\n 🛒 {{MARKETPLACE}}'
 	);
 	const [active, setActive] = useState(false);
+	const windowSize = window.screen.width;
 
 	const handleClick = (e) => {
 		setActive(true);
@@ -35,6 +36,7 @@ const Twitter = () => {
 									Try here
 								</div>
 								<textarea
+									readOnly={windowSize < 577}
 									className={active ? '' : 'blur'}
 									name="twitter-content"
 									value={tweetText}

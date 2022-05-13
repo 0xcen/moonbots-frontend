@@ -73,7 +73,9 @@ const TwitterSalesMockup = ({ props }) => {
 						https://t.co/7Sc4Gk4ktt
 					</a>
 				</p>
-				<img src={props.mintObject.img} alt="nft-img" />
+				<div className="tweet-img">
+					<img src={props.mintObject.img} alt="nft-img" />
+				</div>
 			</div>
 			<div className="footer">
 				<div className="social-icons">

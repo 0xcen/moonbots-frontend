@@ -3,7 +3,7 @@ import React from 'react';
 const WhoAreWe = () => {
 	return (
 		<>
-			<section className="whoAreWe ">
+			<section id="about" className="whoAreWe ">
 				<h2 className="section-title">Who are we?</h2>
 				<p>
 					MooonBots started as a way to help nft comunities that we were a part

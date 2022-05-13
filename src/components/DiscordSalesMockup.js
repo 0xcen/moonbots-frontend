@@ -6,7 +6,7 @@ import {
 	DiscordEmbedFields,
 	DiscordMessage,
 } from '@skyra/discord-components-react';
-import img from './../img/favicon/me_favicon.png';
+import img from './../img/favicon/me_favicon.webp';
 
 const DiscordSalesMockup = ({ props }) => {
 	if (!props) return null;

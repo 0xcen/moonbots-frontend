@@ -6,7 +6,6 @@ import discordLogo from '../../img/Discord-Logo-White.svg';
 const Socials = () => {
 	return (
 		<section className="section-soclials">
-			<div id="contact"></div>
 			<div className="section-socials">
 				<div className="grid-2">
 					<a

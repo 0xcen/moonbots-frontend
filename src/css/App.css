@@ -33,7 +33,6 @@ li {
 body {
 	background-color: #0c0c0c;
 	margin: 0 auto;
-	/* height: 100vh; */
 }
 
 .h2-loud {
@@ -90,6 +89,7 @@ body {
 }
 .nav {
 	display: flex;
+	position: relative;
 	justify-content: space-between;
 	align-items: center;
 
@@ -99,12 +99,32 @@ body {
 
 	font-size: 1.5rem;
 }
+
+.hamburger svg {
+	color: #fff;
+}
+
+.hamburger {
+	z-index: 997;
+	width: 3rem;
+	height: 3rem;
+	background: none;
+	border: none;
+	display: none;
+}
+
+.hamburger.close {
+	position: absolute;
+	top: 4.5rem;
+	right: 4.5rem;
+}
+
 .holo-highlight {
 	background: linear-gradient(92.97deg, #ff4e50 -5.37%, #f9d423 103.78%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
-	text-fill-color: transparent;
+	/* text-fill-color: transparent; */
 	font-weight: 700;
 }
 
@@ -119,7 +139,11 @@ body {
 
 .main-menu {
 	flex-grow: 3;
-
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.main-menu ul {
 	margin: 0 auto;
 
 	display: flex;
@@ -130,15 +154,13 @@ body {
 
 	color: #c6c6c6;
 }
-.main-menu a {
+.main-menu ul a {
 	transition: color 320ms;
-}
-.main-menu a:hover {
-	color: #ffffff;
-}
 
-.menu-item {
-	list-style: none;
+	padding: 0 2rem;
+}
+.main-menu ul a:hover {
+	color: #ffffff;
 }
 
 .twitter-icon {
@@ -277,6 +299,7 @@ label {
 	/* flex-grow: 1; */
 	gap: 3.5rem;
 }
+
 .btn-cta {
 	position: relative;
 	background: linear-gradient(90deg, #ff4e50 -76.44%, #f9d423 124.52%);
@@ -438,15 +461,18 @@ label {
 	display: block;
 }
 
-.hero-container img {
+.hero-container .hero-tweet img {
 	max-width: 35rem;
 	border-radius: 8px;
 	box-shadow: -4px 4px 35px -11px rgba(0, 0, 0, 0.55);
 }
 
+.hero-container .hero-discord {
+	width: 35rem;
+	flex-shrink: 0;
+}
 .hero-container .hero-discord-img {
 	position: relative;
-	width: 100%;
 	height: 100%;
 
 	display: flex;
@@ -540,9 +566,27 @@ label {
 		rgba(85, 58, 17, 0) 100.36%
 	);
 	border-radius: 14px;
+
+	position: relative;
+}
+
+.section-twitter .background::before {
+	content: '';
+	width: 100%;
+	height: 100%;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	z-index: -1;
+
+	background-color: #0c0c0c;
+	border-radius: 14px;
 }
 
 .section-twitter .grid-2 {
+	gap: 2rem;
 	align-items: center;
 }
 .section-twitter .content h3 {
@@ -618,7 +662,7 @@ textarea.blur {
 	font-weight: 700;
 	letter-spacing: -0.03em;
 
-	z-index: 999;
+	z-index: 100;
 	cursor: pointer;
 
 	transition: all 0.25s;
@@ -659,7 +703,8 @@ textarea.blur {
 .demo {
 	justify-self: center;
 	align-self: flex-start;
-	transform: scale(0.85);
+	/* width: 100%; */
+	margin: 0 auto;
 }
 .demo span {
 	display: inline-block;
@@ -735,20 +780,23 @@ textarea.blur {
 	max-width: 27.3rem;
 	position: absolute;
 	top: 5rem;
-	transition: opacity 0.6s 0.1s, transform 0.6s ease,
-		-webkit-transform 0.6s ease filter 0.6s 0.1s;
+	transition: opacity 0.6s 0.1s, transform 0.6s ease;
+	-webkit-transition: opacity 0.6s 0.1s, transform 0.6s ease;
 	transform: translateX(-2rem) translateY(-0.8rem);
+	-webkit-transform: translateX(-2rem) translateY(-0.8rem);
 	filter: blur(2px);
 	opacity: 0.4;
 }
 
 .demo-img.active {
 	transform: translateX(0) translateX(0);
+	-webkit-transform: translateX(0) translateX(0);
 	box-shadow: -4px 4px 105px -11px rgba(0, 0, 0, 0.55);
 	z-index: 100;
 	filter: blur(0px);
 	opacity: 1;
 }
+
 .grid-card {
 	background-color: rebeccapurple;
 	width: 100%;
@@ -765,6 +813,7 @@ textarea.blur {
 
 	overflow: hidden;
 }
+
 .grid-icon img {
 	margin-top: 0.75rem;
 	max-height: 3rem;
@@ -847,12 +896,14 @@ textarea.blur {
 .wallet-collection-slider-indicator .indicator:hover {
 	opacity: 0.7;
 	transform: scale(1.1);
+	-webkit-transform: scale(1.1);
 }
 
 .wallet-collection-slider-indicator .indicator.active {
 	opacity: 1;
 	text-shadow: 1px 2px 11px rgba(0, 0, 0, 0.3);
 }
+
 .slider-toggle {
 	position: relative;
 
@@ -868,6 +919,7 @@ textarea.blur {
 
 	transition: all 1s;
 }
+
 .slider-toggle-indicator {
 	position: absolute;
 
@@ -906,8 +958,7 @@ textarea.blur {
 	position: absolute;
 	left: 0;
 
-	transition: opacity 0.6s 0.1s, transform 0.6s ease,
-		-webkit-transform 0.6s ease;
+	transition: opacity 0.6s 0.1s, transform 0.6s ease;
 
 	box-shadow: -4px 4px 105px -5px rgba(0, 0, 0, 0.136);
 	opacity: 1;
@@ -1024,7 +1075,7 @@ label.active {
 	text-shadow: 1px 2px 11px rgba(0, 0, 0, 0.3);
 }
 
-.toggle-indicator.right {
+.discord-demo .toggle-indicator.right {
 	transform: translateX(5rem);
 }
 .toggle-btn.selected {
