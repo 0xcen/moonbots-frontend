@@ -39,16 +39,16 @@ const Navbar = () => {
 				className={`main-menu ${openNav ? 'show' : ''}`}
 			>
 				<ul>
-					<a href="#customers">
+					<a href="/#customers">
 						<li>Customers</li>
 					</a>
-					<a href="#products">
+					<a href="/#products">
 						<li>Products</li>
 					</a>
-					<a href="#about">
+					<a href="/#about">
 						<li>About us</li>
 					</a>
-					<a href="#security">
+					<a href="/#security">
 						<li>Security</li>
 					</a>
 					{userContext?.role === 'admin' ? (
@@ -61,7 +61,7 @@ const Navbar = () => {
 					<Link className="btn-login" to="/login">
 						Login
 					</Link>
-					<Link className="btn-cta" to="/sign-up">
+					<Link className="btn-cta" to="/signup">
 						Sign-up
 					</Link>
 				</div>

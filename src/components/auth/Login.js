@@ -45,19 +45,15 @@ const Login = () => {
 	};
 
 	return (
-		<div className="wrapper">
+		<div className="full-page">
 			<h3 className="auth-title">Login</h3>
 			<form onSubmit={handleLogin} name="login" method="POST">
 				<TextField name="username" type="text" label="username" fullWidth />
 				<TextField type="password" name="password" label="password" fullWidth />
 				{<span>{errors}</span>}
-				<Button
-					type="submit"
-					variant="outlined"
-					style={{ maxWidth: '3rem', margin: '0 auto' }}
-				>
+				<button className="btn-cta" type="submit" variant="outlined">
 					Submit
-				</Button>
+				</button>
 			</form>
 		</div>
 	);

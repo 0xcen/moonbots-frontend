@@ -45,12 +45,12 @@ const Twitter = () => {
 									}}
 								/>
 							</div>
-							<span>
+							{/* <span>
 								If your collection is already in secondary marketplaces provide
 								a link to your collection to use the demo with your real
 								collection’s data.
 							</span>
-							<button>Load my collection</button>
+							<button>Load my collection</button> */}
 						</div>
 						<div className="demo">
 							<TweetDemo content={tweetText} />

@@ -17,7 +17,7 @@ const Hero = () => {
 					celebrate while you focus on building!
 				</p>
 
-				<Link to="/sign-up" className="btn-cta p-xl">
+				<Link to="/signup" className="btn-cta p-xl">
 					Sign up now →
 				</Link>
 				<span className="text-xs">

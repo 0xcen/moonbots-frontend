@@ -18,6 +18,7 @@ import AdminDashboard from './components/admin/AdminDashboard';
 import CollectionProvider from './contextProviders/CollectionProvider';
 import LandingPage from './components/landingPage/LandingPage';
 import AppProvider from './contextProviders/AppProvider';
+import CodeProtected from './components/CodeProtected';
 
 const App = () => {
 	return (
@@ -30,7 +31,7 @@ const App = () => {
 						</div>
 						<Routes>
 							<Route path="/" element={<LandingPage />} />
-							<Route path="/signup" element={<SignUpForm />} />
+							<Route path="/signup" element={<CodeProtected />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/signup/success" element={<Success />} />
 							<Route path="/signup/fail" element={<Fail />} />
