@@ -21,19 +21,14 @@ const Twitter = () => {
 		const formData = new FormData(e.target);
 
 		const formProps = Object.fromEntries(formData);
-		console.log(
-			'🚀 ~ file: Twitter.js ~ line 23 ~ getNextCollection ~ formProps',
-			formProps
-		);
 
 		if (formProps.collection.startsWith('https://magiceden.io/marketplace/')) {
 			setPopupState(false);
 			console.log('getting next collection');
-			console.log(formProps);
 			const newCol = formProps.collection.split('/');
 
 			const { data } = await axios.get(
-				`http://localhost:8000/api/v1/collections/marketplaces/${
+				`https://moonbots-dev.herokuapp.com/api/v1/collections/marketplaces/${
 					newCol[newCol.length - 1]
 				}`
 			);
