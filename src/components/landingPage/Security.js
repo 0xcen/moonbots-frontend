@@ -6,7 +6,7 @@ const Security = () => {
 			<h2 className="section-title">Security</h2>
 			<div className="content">
 				<p>
-					If you've spent any extended periods of time in the Solana NFT space,
+					If you've spent any extended period of time in the Solana NFT space,
 					you've seen them happen. Security breaches, Data leaks, Bot Hacks,
 					Fake mint links etc. As a service provider it's crucial for us to
 					ensure the security of our customers information.

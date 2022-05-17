@@ -15,7 +15,7 @@ html {
 	/* This will allow you to use 'rem' all across your project without having to use a 16rem base which is the default font-size of modern browsers. */
 
 	box-sizing: border-box;
-	font-size: 62.5%;
+	font-size: 69.5%;
 	overflow-x: hidden;
 	font-family: 'Inter', sans-serif;
 	scroll-behavior: smooth;
@@ -774,27 +774,38 @@ textarea.blur {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	position: relative;
 }
 .discord-demo img {
 	max-width: 27.3rem;
 	position: absolute;
 	top: 5rem;
-	transition: opacity 0.6s 0.1s, transform 0.6s ease;
-	-webkit-transition: opacity 0.6s 0.1s, transform 0.6s ease;
-	transform: translateX(-2rem) translateY(-0.8rem);
-	-webkit-transform: translateX(-2rem) translateY(-0.8rem);
+
 	filter: blur(2px);
 	opacity: 0.4;
+
+	transform: translate3d(-2rem, -0.8rem, -1rem);
+	-webkit-transform: translate3d(-2rem, -0.8rem, -1rem);
+	-webkit-transform-style: preserve-3d;
+
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+	transition: opacity 0.6s 0.1s, transform 0.6s ease;
+	-webkit-transition: opacity 0.6s 0.1s, transform 0.6s ease;
 }
 
 .demo-img.active {
-	transform: translateX(0) translateX(0);
-	-webkit-transform: translateX(0) translateX(0);
-	box-shadow: -4px 4px 105px -11px rgba(0, 0, 0, 0.55);
-	z-index: 100;
+	transform: translate3d(0, 0, 0);
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transform-style: preserve-3d;
+	/* box-shadow: -4px 4px 105px -11px rgba(0, 0, 0, 0.55); */
 	filter: blur(0px);
 	opacity: 1;
+
+	-webkit-backface-visibility: hidden;
+	will-change: transform, opacity; /* Prevents flicker in Safari */
 }
 
 .grid-card {
@@ -1022,7 +1033,7 @@ textarea.blur {
 
 .discord-demo .toggle-btns {
 	display: flex;
-	width: 10rem;
+	width: 12rem;
 	padding: 0 1rem;
 	justify-content: space-between;
 }
@@ -1076,7 +1087,7 @@ label.active {
 }
 
 .discord-demo .toggle-indicator.right {
-	transform: translateX(5rem);
+	transform: translateX(6rem);
 }
 .toggle-btn.selected {
 	opacity: 1;

@@ -15,7 +15,7 @@ const More = () => {
 				<div className="card grid-2">
 					<div className="content">
 						<h4>@DegenFlipBot</h4>
-						<h3>Unnoficial Degen Flip Bot</h3>
+						<h3>Unofficial Degen Flip Bot</h3>
 						<p>Win streaks for degens. 😎 Official #degen, unofficial bot.</p>
 					</div>
 					<div className="img">
@@ -27,7 +27,7 @@ const More = () => {
 						<h4>Ubik NFT</h4>
 						<h3>Staking Notification Bot</h3>
 						<p>
-							Celebrate every new sheep that gets staked in the farm with a new
+							Celebrates every new sheep that gets staked in the farm with a new
 							quote from the novel Ubik by Philip K. Dick.
 						</p>
 					</div>
@@ -40,7 +40,7 @@ const More = () => {
 					<div className="content">
 						<h3>Here’s some free αlpha</h3>
 						<p>
-							Say 👋 on our discord DMs and get a free 3 day trial on all of our
+							Say 👋 in our discord DMs and get a free 3 day trial on all of our
 							Discord and Twitter Marketing bots.
 						</p>
 					</div>
@@ -50,7 +50,7 @@ const More = () => {
 							rel="noreferrer"
 							target="_blank"
 						>
-							Gimmie the free trial →
+							Gimme the free trial →
 						</a>
 					</div>
 				</div>

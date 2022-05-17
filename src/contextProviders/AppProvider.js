@@ -14,10 +14,12 @@ const AppProvider = ({ children }) => {
 	useEffect(() => {
 		if (!app.solana) {
 			(async () => {
-				const price = await axios.get(
-					'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true%27'
+				const {
+					data: { solana: price },
+				} = await axios.get(
+					'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd'
 				);
-				console.log(price);
+				setApp({ solana: price });
 			})();
 		}
 	});

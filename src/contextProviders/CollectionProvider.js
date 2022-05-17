@@ -20,7 +20,21 @@ const CollectionProvider = ({ children }) => {
 		price: 9.39,
 	});
 	const updateCollection = (next) => {
-		setCollection({ ...collection, ...next });
+		setCollection({
+			name: next.mintObject.title,
+			embedColor: '#fff',
+			signature:
+				'65npuq7VvwtN2UoeTcZvnV5qFUr1XDjkVNxsa46MrGPWkGCdovgtPs3mbpPV8ZH5A4WJTYT6V586PVAhNBpLcxUc',
+			tokenMint: 'BS6fPnS9JRsvBPiHCAuTK9tcSWR1R1WRoZm1YYnY7MPp',
+			collection: next.collection_symbol,
+			buyer: '3CWSZPj5HwHFsuST2XCKtwp6ar56yqRCuTmKnJsFqXsn',
+			buyerReferral: '',
+			seller: 'JDQRQR5QjkmYMUevv7qxduRdrGTRDwVWjm8i937GUwWe',
+			sellerReferral: '',
+			img: next.mintObject.img,
+			media: next.mintObject.img,
+			price: next.parsedTransaction.total_amount / 1000000000,
+		});
 	};
 
 	// todo: get marketplace data

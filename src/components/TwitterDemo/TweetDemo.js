@@ -20,6 +20,15 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 	const [image, setImage] = useState(collection.img);
 	const normalTweet = useRef(null);
 
+	useEffect(() => {
+		// if (summaryImage) {
+		// 	setSummaryImage(URL.createObjectURL(collection.media));
+		// }V
+		if (collection?.media) {
+			setImage(collection.media);
+		}
+	}, [collection.media, summaryImage]);
+
 	const capitalize = (name) => {
 		if (!name) return;
 		return name
@@ -29,15 +38,17 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 	};
 
 	const collectionName = capitalize(collection.name) || '';
+
+	// if (!app?.solana?.usd) return;
 	const priceUSD = new Intl.NumberFormat('en-US', {
 		style: 'currency',
 		currency: 'usd',
 		maximumFractionDigits: 2,
-	}).format(app.solana * collection.price);
+	}).format(app?.solana?.usd * collection.price);
 
 	const price = `${collection.price.toFixed(2)}Ⓞ (${priceUSD})`;
-	console.log('🚀 ~ file: TweetDemo.js ~ line 39 ~ TweetDemo ~ price', price);
 
+	console.log(collection);
 	const jsonToHtml = (text) => {
 		let myText = text
 			.replace('{{PRICE}}', price)
@@ -74,12 +85,6 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 		// });
 		return myText;
 	};
-
-	useEffect(() => {
-		if (collection.media && !summaryImage) {
-			setSummaryImage(URL.createObjectURL(collection.media));
-		}
-	}, [collection.media, summaryImage]);
 
 	return (
 		<div className="tweet-wrapper">

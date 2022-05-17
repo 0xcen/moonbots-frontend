@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import TweetDemo from '../TwitterDemo/TweetDemo';
+import { UpdateCollectionContext } from '../../contextProviders/CollectionProvider';
 
 const Twitter = () => {
 	const [tweetText, setTweetText] = useState(
@@ -7,6 +9,21 @@ const Twitter = () => {
 	);
 	const [active, setActive] = useState(false);
 	const windowSize = window.screen.width;
+	const setCollection = useContext(UpdateCollectionContext);
+
+	const getCollection = async () => {
+		// await
+		const {
+			data: {
+				results: [sale, ...rest],
+			},
+		} = await axios.get(
+			`https://api-mainnet.magiceden.io/rpc/getGlobalActivitiesByQuery?q={"$match":{"collection_symbol":"degods", "txType": "exchange"},"$sort":{"blockTime":-1,"createdAt":-1},"$skip":0, "$limit":5}`
+		);
+
+		console.log(sale);
+		setCollection(sale);
+	};
 
 	const handleClick = (e) => {
 		setActive(true);
@@ -26,7 +43,9 @@ const Twitter = () => {
 				<div className="background">
 					<div className="grid-2">
 						<div className="content">
-							<h3>Write anything, see your tweet update live. </h3>
+							<h3>
+								Write anything, watch your tweet dynamically update in realtime.
+							</h3>
 							<p>Use placeholders for the dynamicly generated data.</p>
 							<div className={active ? 'text-area' : 'text-area blur'}>
 								<div
@@ -45,12 +64,12 @@ const Twitter = () => {
 									}}
 								/>
 							</div>
-							{/* <span>
+							<span>
 								If your collection is already in secondary marketplaces provide
 								a link to your collection to use the demo with your real
 								collection’s data.
 							</span>
-							<button>Load my collection</button> */}
+							<button onClick={getCollection}>Load my collection</button>
 						</div>
 						<div className="demo">
 							<TweetDemo content={tweetText} />

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import logo from '../img/moonbots-logo.svg';
 import twitterIcon from '../img/twitter-white.svg';
 import { UserContext } from '../contextProviders/UserProvider';
@@ -39,18 +39,18 @@ const Navbar = () => {
 				className={`main-menu ${openNav ? 'show' : ''}`}
 			>
 				<ul>
-					<a href="/#customers">
+					<Link to="/#customers">
 						<li>Customers</li>
-					</a>
-					<a href="/#products">
+					</Link>
+					<Link to="/#products">
 						<li>Products</li>
-					</a>
-					<a href="/#about">
+					</Link>
+					<Link to="/#about">
 						<li>About us</li>
-					</a>
-					<a href="/#security">
+					</Link>
+					<Link to="/#security">
 						<li>Security</li>
-					</a>
+					</Link>
 					{userContext?.role === 'admin' ? (
 						<Link to="/admin/dashboard">
 							<li>Dashboard</li>
@@ -72,11 +72,11 @@ const Navbar = () => {
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
-							stroke-width="2"
+							strokeWidth="2"
 						>
 							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 								d="M6 18L18 6M6 6l12 12"
 							/>
 						</svg>
@@ -90,11 +90,11 @@ const Navbar = () => {
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
-						stroke-width="2"
+						strokeWidth="2"
 					>
 						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
+							strokeLinecap="round"
+							strokeLinejoin="round"
 							d="M4 6h16M4 12h16M4 18h16"
 						/>
 					</svg>

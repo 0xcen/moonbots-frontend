@@ -6,13 +6,13 @@
 /********************************/
 @media (max-width: 102em) {
 	html {
-		font-size: 50%;
+		/* font-size: 50%; */
 	}
 }
 
 @media (max-width: 75em) {
 	html {
-		font-size: 56.26%;
+		font-size: 62.26%;
 	}
 	.app-wrapper {
 		padding: 0 2rem;
@@ -32,7 +32,7 @@
 }
 @media (max-width: 64.5em) {
 	html {
-		font-size: 50%;
+		/* font-size: 50%; */
 	}
 
 	.main-menu ul {
@@ -275,9 +275,10 @@
 	}
 
 	.hero-container {
-		height: 80rem;
+		height: 68rem;
 		padding-top: 4rem;
 	}
+
 	.section-twitter .text-area {
 		height: 25rem;
 	}
