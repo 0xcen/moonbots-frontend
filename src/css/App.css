@@ -87,6 +87,11 @@ body {
 .m-xl {
 	margin: 4.6rem auto;
 }
+
+.only-desktop {
+	display: none !important;
+}
+
 .nav {
 	display: flex;
 	position: relative;
@@ -703,7 +708,7 @@ textarea.blur {
 .demo {
 	justify-self: center;
 	align-self: flex-start;
-	/* width: 100%; */
+	position: relative;
 	margin: 0 auto;
 }
 .demo span {
@@ -725,6 +730,71 @@ textarea.blur {
 	font-size: 1.5rem;
 	padding: 3rem 5rem;
 	color: #fff;
+}
+
+.section-twitter .collection-input-popup {
+	position: absolute;
+	bottom: 16rem;
+	left: 15rem;
+
+	max-width: 40rem;
+	z-index: 500;
+
+	background: linear-gradient(
+		113.09deg,
+		rgba(9, 9, 17, 0.926) -4.08%,
+		rgba(33, 31, 20, 0.957) 53.54%,
+		rgb(16, 15, 8) 120.09%
+	);
+
+	border-radius: 14px;
+	padding: 4.5rem;
+	border-radius: 14px;
+
+	color: #fff;
+
+	box-shadow: -4px 4px 105px -11px rgba(0, 0, 0, 0.55);
+}
+.section-twitter .collection-input-popup input {
+	height: 3rem;
+	width: 100%;
+	background-color: transparent;
+	border: solid 1px;
+	border-color: #c9c9c9;
+	color: #c9c9c9;
+	padding: 0 1rem;
+
+	border-radius: 4px;
+}
+
+.section-twitter .collection-input-popup input:focus {
+	color: #fff;
+	border-color: #fff;
+}
+
+.section-twitter .collection-input-popup form {
+	display: block;
+}
+
+.section-twitter .collection-input-popup.hidden {
+	display: none;
+}
+
+.section-twitter .collection-input-popup h4 {
+	font-size: 1.3rem;
+	margin-bottom: 1rem;
+}
+
+.section-twitter .collection-input-popup button,
+.section-twitter .collection-input-popup button:active {
+	color: #c8c8c8;
+	border-color: #c8c8c8;
+	margin: 2rem auto 0;
+}
+
+.section-twitter .collection-input-popup button:hover {
+	color: #fff;
+	border-color: #fff;
 }
 
 /* Discord */
@@ -797,12 +867,13 @@ textarea.blur {
 }
 
 .demo-img.active {
-	transform: translate3d(0, 0, 0);
-	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 1px);
+	-webkit-transform: translate3d(0, 0, 1px);
 	-webkit-transform-style: preserve-3d;
-	/* box-shadow: -4px 4px 105px -11px rgba(0, 0, 0, 0.55); */
+	box-shadow: -4px 4px 105px -11px rgba(0, 0, 0, 0.55);
 	filter: blur(0px);
 	opacity: 1;
+	z-index: 20;
 
 	-webkit-backface-visibility: hidden;
 	will-change: transform, opacity; /* Prevents flicker in Safari */

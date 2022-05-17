@@ -12,6 +12,7 @@ import saveIcon from './../../img/favicon/twitterIcons/save.svg';
 
 import { CollectionContext } from '../../contextProviders/CollectionProvider';
 import { AppContext } from '../../contextProviders/AppProvider';
+import isEmpty from '../../helpers/isEmpty';
 
 const TweetDemo = ({ content, type = 'normal' }) => {
 	const app = useContext(AppContext);
@@ -21,13 +22,14 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 	const normalTweet = useRef(null);
 
 	useEffect(() => {
-		// if (summaryImage) {
-		// 	setSummaryImage(URL.createObjectURL(collection.media));
-		// }V
-		if (collection?.media) {
-			setImage(collection.media);
+		if (!collection.media && summaryImage) {
+			return setSummaryImage(URL.createObjectURL(collection.media));
 		}
-	}, [collection.media, summaryImage]);
+		if (collection.img) {
+			console.log('here');
+			return setImage(collection.media);
+		}
+	}, [collection, summaryImage]);
 
 	const capitalize = (name) => {
 		if (!name) return;
@@ -37,23 +39,21 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 			.join(' ');
 	};
 
-	const collectionName = capitalize(collection.name) || '';
+	const collectionName = capitalize(collection.collection) || '';
 
-	// if (!app?.solana?.usd) return;
 	const priceUSD = new Intl.NumberFormat('en-US', {
 		style: 'currency',
 		currency: 'usd',
 		maximumFractionDigits: 2,
 	}).format(app?.solana?.usd * collection.price);
 
-	const price = `${collection.price.toFixed(2)}Ⓞ (${priceUSD})`;
+	const price = `${collection?.price?.toFixed(2) || ''}Ⓞ (${priceUSD || ''})`;
 
-	console.log(collection);
 	const jsonToHtml = (text) => {
 		let myText = text
 			.replace('{{PRICE}}', price)
-			.replace('{{NFT}}', `${collection.name || 'SMB'} #3028`)
-			.replace('{{PLURAL}}', capitalize(collection.pluralOfNft) || 'Monkes')
+			.replace('{{NFT}}', `${collection.name || ''} `)
+			.replace('{{PLURAL}}', capitalize(collection.pluralOfNft) || '')
 			.replace('{{NUM}}', '69')
 			.replaceAll('<', '')
 			.replaceAll('>', '')
@@ -120,12 +120,6 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 					{type === 'normal'
 						? image && <img src={image} alt="collection" />
 						: summaryImage && <img src={summaryImage} alt="summary" />}
-					{!image && type !== 'summary' && (
-						<input
-							type="file"
-							onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
-						/>
-					)}
 				</div>
 			</div>
 			<div className="footer">

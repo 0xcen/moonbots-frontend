@@ -17,7 +17,10 @@ const AppProvider = ({ children }) => {
 				const {
 					data: { solana: price },
 				} = await axios.get(
-					'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd'
+					'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd',
+					{
+						withCredentials: false,
+					}
 				);
 				setApp({ solana: price });
 			})();

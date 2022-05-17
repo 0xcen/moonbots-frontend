@@ -112,13 +112,6 @@
 		grid-template-columns: 1fr 1fr;
 	}
 
-	.section-twitter .content span:last-of-type {
-		display: none;
-	}
-	.section-twitter .content button {
-		display: none;
-	}
-
 	.section-discord .discord-demo {
 		grid-column: span 2;
 		grid-row: span 2;
@@ -281,6 +274,20 @@
 
 	.section-twitter .text-area {
 		height: 25rem;
+	}
+	.section-twitter .content span {
+		display: none;
+	}
+	.section-twitter .content button {
+		display: none;
+	}
+
+	.section-twitter .colection-input-popup {
+		display: none;
+	}
+
+	.only-desktop {
+		display: block !important;
 	}
 
 	.blur-title {
