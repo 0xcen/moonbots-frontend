@@ -5,9 +5,6 @@
 /* Landscape Tablets Below 1200px */
 /********************************/
 @media (max-width: 102em) {
-	html {
-		/* font-size: 50%; */
-	}
 }
 
 @media (max-width: 75em) {
@@ -32,7 +29,7 @@
 }
 @media (max-width: 64.5em) {
 	html {
-		/* font-size: 50%; */
+		font-size: 52%;
 	}
 
 	.main-menu ul {
@@ -368,11 +365,6 @@
 		display: flex;
 		flex-direction: column;
 		height: 50rem;
-	}
-
-	.section-discord .discord-whitelist {
-		/* height: 55rem; */
-		/* padding-bottom: 5rem; */
 	}
 
 	.section-discord .wallet-collection-demo {

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
-import isEmpty from '../helpers/isEmpty';
 
 export const UpdateCollectionContext = createContext();
 export const CollectionContext = createContext();
@@ -130,16 +129,16 @@ const CollectionProvider = ({ children }) => {
 			embedColor: '#fff',
 			signature:
 				'65npuq7VvwtN2UoeTcZvnV5qFUr1XDjkVNxsa46MrGPWkGCdovgtPs3mbpPV8ZH5A4WJTYT6V586PVAhNBpLcxUc',
-			tokenMint: 'BS6fPnS9JRsvBPiHCAuTK9tcSWR1R1WRoZm1YYnY7MPp',
+			tokenMint: next.mint,
+			transaction_id: next.transaction_id,
 			collection: next.collection_symbol,
 			buyer: '3CWSZPj5HwHFsuST2XCKtwp6ar56yqRCuTmKnJsFqXsn',
-			buyerReferral: '',
 			seller: 'JDQRQR5QjkmYMUevv7qxduRdrGTRDwVWjm8i937GUwWe',
-			sellerReferral: '',
 			img: next.mintObject.img,
 			media: next.mintObject.img,
 			price: next.parsedTransaction.total_amount / 1000000000,
 		});
+		console.log(next);
 	};
 
 	// todo: get marketplace data

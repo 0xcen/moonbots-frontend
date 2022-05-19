@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import TweetDemo from '../TwitterDemo/TweetDemo';
 import { UpdateCollectionContext } from '../../contextProviders/CollectionProvider';
-import { TextField } from '@mui/material';
 
 const Twitter = () => {
 	const [tweetText, setTweetText] = useState(
@@ -10,7 +9,6 @@ const Twitter = () => {
 	);
 	const [active, setActive] = useState(false);
 	const [popupState, setPopupState] = useState(false);
-	const goodURL = 'https://magiceden.io/marketplace/';
 
 	const windowSize = window.screen.width;
 	const setCollection = useContext(UpdateCollectionContext);

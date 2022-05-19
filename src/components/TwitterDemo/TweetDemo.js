@@ -12,7 +12,6 @@ import saveIcon from './../../img/favicon/twitterIcons/save.svg';
 
 import { CollectionContext } from '../../contextProviders/CollectionProvider';
 import { AppContext } from '../../contextProviders/AppProvider';
-import isEmpty from '../../helpers/isEmpty';
 
 const TweetDemo = ({ content, type = 'normal' }) => {
 	const app = useContext(AppContext);
@@ -40,7 +39,7 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 	};
 
 	const collectionName = capitalize(collection.collection) || '';
-
+	console.log(collection);
 	const priceUSD = new Intl.NumberFormat('en-US', {
 		style: 'currency',
 		currency: 'usd',
@@ -60,7 +59,7 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 			.replaceAll('\n', '<br/>')
 			.replace(
 				'{{MARKETPLACE}}',
-				`Grab yours on Magic Eden: <span style="color: rgb(29, 155, 240);  cursor: pointer; font-family: sans-serif" >magiceden.io/marketplace/...</span>`
+				`Grab yours on Magic Eden: <a about="_blank" target="nonrefferer" href=https://magiceden.io/item-details/${collection.tokenMint} style="color: rgb(29, 155, 240);  cursor: pointer; font-family: sans-serif" >magiceden.io/marketplace/...</a>`
 			)
 			.replace(
 				'{{TWITTER}}',
@@ -72,7 +71,7 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 
 			.replace(
 				'{{TXURL}}',
-				'<span style="color: rgb(29, 155, 240);  cursor: pointer; font-family: sans-serif" >https://solscan.co/7fesefggrgrdt</span>'
+				`<a href='https://solscan.io/tx/${collection.transaction_id}' about="_blank" target="nonrefferer" style="color: rgb(29, 155, 240);  cursor: pointer; font-family: sans-serif" >https://solscan.co/7fesefggrgrdt</a>`
 			);
 
 		// fixme: Turned off hashtag highlighting for now.
