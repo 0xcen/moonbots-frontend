@@ -34,9 +34,9 @@ const Login = () => {
 			if (res.status === 200) {
 				updateUser(data.user);
 				// console.log(
-					'🚀 ~ file: Login.js ~ line 36 ~ handleLogin ~ data.user',
-					data.user
-				);
+				// 	'🚀 ~ file: Login.js ~ line 36 ~ handleLogin ~ data.user',
+				// 	data.user
+				// );
 				navigate('/');
 			} else {
 				setErrors(data.message);

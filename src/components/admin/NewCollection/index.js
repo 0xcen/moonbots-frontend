@@ -30,8 +30,8 @@ const NewCollection = () => {
 
 		axios
 			.post('http://localhost:8000/api/v1/collections', formData)
-			.then(// console.log)
-			.catch(// console.log);
+			.then(console.log)
+			.catch(console.log);
 	};
 
 	return (
