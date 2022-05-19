@@ -12,10 +12,12 @@ import saveIcon from './../../img/favicon/twitterIcons/save.svg';
 
 import { CollectionContext } from '../../contextProviders/CollectionProvider';
 import { AppContext } from '../../contextProviders/AppProvider';
+import { CircularProgress } from '@mui/material';
 
 const TweetDemo = ({ content, type = 'normal' }) => {
 	const app = useContext(AppContext);
 	const [summaryImage, setSummaryImage] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 	const collection = useContext(CollectionContext);
 	const [image, setImage] = useState(collection.img);
 	const normalTweet = useRef(null);
@@ -25,7 +27,7 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 			return setSummaryImage(URL.createObjectURL(collection.media));
 		}
 		if (collection.img) {
-			// console.log('here');
+			setIsLoading(false);
 			return setImage(collection.media);
 		}
 	}, [collection, summaryImage]);
@@ -81,54 +83,60 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 		// 		`<span style="color: rgb(29, 155, 240);  cursor: pointer; font-family: sans-serif" >${w}</span>`
 		// 	);
 		// });
+
 		return myText;
 	};
 
 	return (
-		<div className="tweet-wrapper">
-			{normalTweet.current &&
-				!twitter.parseTweet(htmlToText(normalTweet.current.innerHTML))
-					.valid && (
-					<span>
-						{JSON.stringify(
-							twitter.parseTweet(htmlToText(normalTweet.current.innerHTML)),
-							null,
-							4
+		<>
+			{isLoading && <CircularProgress />}
+			{!isLoading && (
+				<div className="tweet-wrapper">
+					{normalTweet.current &&
+						!twitter.parseTweet(htmlToText(normalTweet.current.innerHTML))
+							.valid && (
+							<span>
+								{JSON.stringify(
+									twitter.parseTweet(htmlToText(normalTweet.current.innerHTML)),
+									null,
+									4
+								)}
+							</span>
 						)}
-					</span>
-				)}
 
-			<div className="tweet-header">
-				<div className="profile-pic-bg">
-					<img src={moonbotsLogo} alt="profile" className="profile-pic" />
+					<div className="tweet-header">
+						<div className="profile-pic-bg">
+							<img src={moonbotsLogo} alt="profile" className="profile-pic" />
+						</div>
+						<div className="user-data">
+							<h3 className="user-name">{collectionName} Sales Bot</h3>
+							<span className="user-handle">
+								@{collectionName.replace(' ', '')}SalesBot
+							</span>
+						</div>
+					</div>
+					<div ref={normalTweet} className="tweet-content">
+						<p
+							style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+							dangerouslySetInnerHTML={{ __html: jsonToHtml(content) }}
+						></p>
+						<div className="tweet-img">
+							{type === 'normal'
+								? image && <img src={image} alt="collection" />
+								: summaryImage && <img src={summaryImage} alt="summary" />}
+						</div>
+					</div>
+					<div className="footer">
+						<div className="social-icons">
+							<img src={heartIcon} alt="heart" />
+							<img src={optionsIcon} alt="retweet" />
+							<img src={commentIcon} alt="comment" />
+							<img src={saveIcon} alt="save" />
+						</div>
+					</div>
 				</div>
-				<div className="user-data">
-					<h3 className="user-name">{collectionName} Sales Bot</h3>
-					<span className="user-handle">
-						@{collectionName.replace(' ', '')}SalesBot
-					</span>
-				</div>
-			</div>
-			<div ref={normalTweet} className="tweet-content">
-				<p
-					style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
-					dangerouslySetInnerHTML={{ __html: jsonToHtml(content) }}
-				></p>
-				<div className="tweet-img">
-					{type === 'normal'
-						? image && <img src={image} alt="collection" />
-						: summaryImage && <img src={summaryImage} alt="summary" />}
-				</div>
-			</div>
-			<div className="footer">
-				<div className="social-icons">
-					<img src={heartIcon} alt="heart" />
-					<img src={optionsIcon} alt="retweet" />
-					<img src={commentIcon} alt="comment" />
-					<img src={saveIcon} alt="save" />
-				</div>
-			</div>
-		</div>
+			)}
+		</>
 	);
 };
 

@@ -6,7 +6,7 @@ const AppThemeProvider = ({ children }) => {
 		palette: {
 			mode: 'dark',
 			primary: {
-				main: '#5aff47',
+				main: '#c9c9c9',
 			},
 		},
 		typography: {

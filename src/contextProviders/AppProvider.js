@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import isEmpty from '../helpers/isEmpty';
+import AppThemeProvider from './AppThemeProvider';
 
 export const UpdateAppContext = createContext();
 export const AppContext = createContext();
@@ -28,11 +29,13 @@ const AppProvider = ({ children }) => {
 	});
 
 	return (
-		<AppContext.Provider value={app}>
-			<UpdateAppContext.Provider value={updateApp}>
-				{children}
-			</UpdateAppContext.Provider>
-		</AppContext.Provider>
+		<AppThemeProvider>
+			<AppContext.Provider value={app}>
+				<UpdateAppContext.Provider value={updateApp}>
+					{children}
+				</UpdateAppContext.Provider>
+			</AppContext.Provider>
+		</AppThemeProvider>
 	);
 };
 
