@@ -39,7 +39,6 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 	};
 
 	const collectionName = capitalize(collection.collection) || '';
-	console.log(collection);
 	const priceUSD = new Intl.NumberFormat('en-US', {
 		style: 'currency',
 		currency: 'usd',

@@ -138,7 +138,6 @@ const CollectionProvider = ({ children }) => {
 			media: next.mintObject.img,
 			price: next.parsedTransaction.total_amount / 1000000000,
 		});
-		console.log(next);
 	};
 
 	// todo: get marketplace data
