@@ -110,8 +110,13 @@ const CollectionProvider = ({ children }) => {
 		(async () => {
 			console.log('here');
 			const { data } = await axios.get(
-				`http://localhost:8000/api/v1/collections/marketplaces/okay_bears`,
-				{ validateStatus: false }
+				`https://moonbots-dev.herokuapp.com/api/v1/collections/marketplaces/okay_bears`,
+				{
+					validateStatus: false,
+					headers: {
+						'Access-Control-Allow-Origin': window.location.origin,
+					},
+				}
 			);
 			if (!data) return updateCollection(defaultCollection);
 

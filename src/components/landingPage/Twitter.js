@@ -30,7 +30,12 @@ const Twitter = () => {
 			const { data } = await axios.get(
 				`https://moonbots-dev.herokuapp.com/api/v1/collections/marketplaces/${
 					newCol[newCol.length - 1]
-				}`
+				}`,
+				{
+					headers: {
+						'Access-Control-Allow-Origin': window.location.origin,
+					},
+				}
 			);
 			setCollection(data);
 		} else {
