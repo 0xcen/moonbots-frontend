@@ -5,10 +5,8 @@ const root = './src/img/customer-logos';
 
 const dirs = fs.readdirSync(root);
 
-console.log(dirs);
-
 dirs.forEach((dir) => {
-	// console.log(dir.slice(-3));
+	// // console.log(dir.slice(-3));
 
 	const name = dir.slice(0, dir.length - 4);
 

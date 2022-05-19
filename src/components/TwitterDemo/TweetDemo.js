@@ -26,7 +26,7 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 			return setSummaryImage(URL.createObjectURL(collection.media));
 		}
 		if (collection.img) {
-			console.log('here');
+			// console.log('here');
 			return setImage(collection.media);
 		}
 	}, [collection, summaryImage]);
@@ -77,7 +77,7 @@ const TweetDemo = ({ content, type = 'normal' }) => {
 
 		// fixme: Turned off hashtag highlighting for now.
 		// myText.match(/\W(\#[a-zA-Z]+\b)(?!;)/gm).forEach((w) => {
-		// 	console.log(w);
+		// 	// console.log(w);
 		// 	myText.replace(
 		// 		w,
 		// 		`<span style="color: rgb(29, 155, 240);  cursor: pointer; font-family: sans-serif" >${w}</span>`

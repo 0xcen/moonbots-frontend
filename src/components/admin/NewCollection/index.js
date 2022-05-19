@@ -26,12 +26,12 @@ const NewCollection = () => {
 		if (formData.get('summaryTweet'))
 			tweets.push({ content: formData.get('summaryTweet'), tag: 'summary' });
 
-		console.log([...formData.entries()]);
+		// console.log([...formData.entries()]);
 
 		axios
 			.post('http://localhost:8000/api/v1/collections', formData)
-			.then(console.log)
-			.catch(console.log);
+			.then(// console.log)
+			.catch(// console.log);
 	};
 
 	return (

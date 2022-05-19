@@ -26,14 +26,14 @@ const Login = () => {
 				{ validateStatus: false }
 			);
 			const { data } = res;
-			console.log('🚀 ~ file: Login.js ~ line 27 ~ handleLogin ~ res', res);
+			// console.log('🚀 ~ file: Login.js ~ line 27 ~ handleLogin ~ res', res);
 
 			e.target.username.value = '';
 			e.target.password.value = '';
 
 			if (res.status === 200) {
 				updateUser(data.user);
-				console.log(
+				// console.log(
 					'🚀 ~ file: Login.js ~ line 36 ~ handleLogin ~ data.user',
 					data.user
 				);

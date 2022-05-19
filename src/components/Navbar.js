@@ -19,11 +19,9 @@ const Navbar = () => {
 		if (!target) return;
 
 		if (target.classList.contains('open')) {
-			console.log('opne');
 			return setOpenNav(true);
 		}
 		if (target.classList.contains('close')) {
-			console.log('close');
 			return setOpenNav(false);
 		}
 	};

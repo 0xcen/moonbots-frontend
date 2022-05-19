@@ -25,7 +25,7 @@ const TwitterSalesMockup = ({ props }) => {
 		maximumFractionDigits: 2,
 	}).format(props.usd * price);
 
-	console.log(props);
+	// console.log(props);
 	const displayRank = () => {
 		let rank = '';
 		if (Object.keys(props.mintObject.rarity).length === 0) return null;

@@ -24,7 +24,7 @@ const Twitter = () => {
 
 		if (formProps.collection.startsWith('https://magiceden.io/marketplace/')) {
 			setPopupState(false);
-			console.log('getting next collection');
+			// console.log('getting next collection');
 			const newCol = formProps.collection.split('/');
 
 			const { data } = await axios.get(
@@ -73,7 +73,7 @@ const Twitter = () => {
 							<h3>
 								Write anything, watch your tweet dynamically update in realtime.
 							</h3>
-							<p>Use placeholders for the dynamicly generated data.</p>
+							<p>Use placeholders for the dynamically generated data.</p>
 							<div className={active ? 'text-area' : 'text-area blur'}>
 								<div
 									className={active ? 'blur-title hidden' : 'blur-title'}

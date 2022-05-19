@@ -4,10 +4,6 @@ import { UserContext } from '../contextProviders/UserProvider';
 
 const ProtectedRoute = () => {
 	const user = useContext(UserContext);
-	console.log(
-		'🚀 ~ file: ProtectedRoute.js ~ line 19 ~ ProtectedRoute ~ user',
-		user
-	);
 
 	// if user is empty → get user → render spinner
 	// if no user is returned → set not allowed → render login

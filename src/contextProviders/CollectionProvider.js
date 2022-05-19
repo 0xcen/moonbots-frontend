@@ -108,7 +108,7 @@ const CollectionProvider = ({ children }) => {
 
 	useEffect(() => {
 		(async () => {
-			console.log('here');
+			// console.log('here');
 			const { data } = await axios.get(
 				`https://moonbots-dev.herokuapp.com/api/v1/collections/marketplaces/okay_bears`,
 				{

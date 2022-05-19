@@ -68,7 +68,7 @@ export const SignUpForm = () => {
 				clearTimeout(id);
 				navigate('/signup/fail');
 				window.location.reload();
-				console.log(e);
+				// console.log(e);
 				localStorage.clear();
 				sessionStorage.clear();
 			});
@@ -76,8 +76,7 @@ export const SignUpForm = () => {
 
 	useEffect(() => {
 		for (let key in data) {
-			if (data[key])
-				sessionStorage.setItem(key, JSON.stringify(data[key]));
+			if (data[key]) sessionStorage.setItem(key, JSON.stringify(data[key]));
 		}
 		return;
 	}, [data]);
@@ -104,7 +103,8 @@ export const SignUpForm = () => {
 			<Formik
 				initialValues={data}
 				validationSchema={SignUpValidation}
-				onSubmit={handleSubmit}>
+				onSubmit={handleSubmit}
+			>
 				{({ values, submitForm, isValid, isSubmitting }) => (
 					<Form className="form" autoComplete="off">
 						<Field
@@ -161,15 +161,10 @@ export const SignUpForm = () => {
 										as={MyTextField}
 										type="input"
 										key={i}
-										label={
-											capitalize(val.split('_')) +
-											' collection link'
-										}
+										label={capitalize(val.split('_')) + ' collection link'}
 										placeholder={`https://${val
 											.split('_')
-											.join(
-												''
-											)}.com/SolanaMonkeyBusiness`}
+											.join('')}.com/SolanaMonkeyBusiness`}
 									/>
 								))}
 						</div>
@@ -208,9 +203,7 @@ export const SignUpForm = () => {
 										' collection link'
 									}
 									placeholder={`https://${values.rarity.toLowerCase()}.${
-										values.rarity === 'moonRank'
-											? 'app'
-											: 'is'
+										values.rarity === 'moonRank' ? 'app' : 'is'
 									}/SolanaMonkeyBusiness`}
 									as={MyTextField}
 									name={values.rarity.toLowerCase() + '_link'}
@@ -218,9 +211,7 @@ export const SignUpForm = () => {
 								/>
 							)}
 						</div>
-						<CheckboxGroup
-							label="Choose your Bots"
-							className="primary-label">
+						<CheckboxGroup label="Choose your Bots" className="primary-label">
 							<CheckboxGroup
 								name="twitter_bots"
 								label="Twitter"
@@ -241,9 +232,9 @@ export const SignUpForm = () => {
 												className="link"
 												style={{
 													marginTop: '-1.8rem',
-												}}>
-												@{screen_name} Successfully
-												Linked
+												}}
+											>
+												@{screen_name} Successfully Linked
 											</p>
 										) : (
 											<ButtonWithLoading
@@ -251,9 +242,7 @@ export const SignUpForm = () => {
 												text="Authorize Twitter"
 												variant="contained"
 												href="https://callistobots.herokuapp.com/twitter/authorize"
-												onClick={() =>
-													handleRedirect(values)
-												}
+												onClick={() => handleRedirect(values)}
 											/>
 										)}
 									</div>
@@ -283,10 +272,7 @@ export const SignUpForm = () => {
 										as={MyTextField}
 										type="input"
 										key={i}
-										label={
-											capitalize([val]) +
-											' Channel Webhook'
-										}
+										label={capitalize([val]) + ' Channel Webhook'}
 										placeholder="https://discord.com/api/webhooks/926480261779189850/BKkflkmfeyDt_34IKgJnfvO0OBe3tumQ_oXQrn9c58FgijzUMRtyqpshZxfdc344RY7434pQ9"
 									/>
 								))}
@@ -295,10 +281,7 @@ export const SignUpForm = () => {
 							<div></div>
 
 							{isValid && isSubmitting ? (
-								<LoadingButton
-									loading
-									variant="contained"
-									size="large">
+								<LoadingButton loading variant="contained" size="large">
 									Submit
 								</LoadingButton>
 							) : (

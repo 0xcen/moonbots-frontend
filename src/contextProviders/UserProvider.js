@@ -27,7 +27,7 @@ const UserProvider = ({ children }) => {
 	useEffect(() => {
 		if (isEmpty(user)) {
 			(async () => {
-				console.log('Getting user');
+				// console.log('Getting user');
 				// setUser(await getUser());
 
 				setIsLoading(false);
