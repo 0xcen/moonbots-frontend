@@ -1,11 +1,4 @@
 import React from 'react';
-import dcf from '../../img/customer-logos/dcf.webp';
-import astrals from '../../img/customer-logos/astrals.webp';
-import cyborgapes from '../../img/customer-logos/cyborgapes.webp';
-import dogetrack from '../../img/customer-logos/dogetrack.webp';
-import ehecatl from '../../img/customer-logos/ehecatl.webp';
-import mekkafroggo from '../../img/customer-logos/mekkafroggo.webp';
-import ubik from '../../img/customer-logos/ubik.webp';
 
 const Customers = () => {
 	return (
@@ -14,13 +7,34 @@ const Customers = () => {
 			<div className="section-customers">
 				<h3 className="">Our customers → Serious ⍺lpha</h3>
 				<div className="customers-logo-carrusell">
-					<img src={cyborgapes} alt="" />
-					<img src={dogetrack} alt="" />
-					<img src={astrals} alt="" />
-					<img src={ubik} alt="" />
-					<img src={dcf} alt="" />
-					<img src={mekkafroggo} alt="" />
-					<img src={ehecatl} alt="" />
+					<img
+						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/ehecatl.webp"
+						alt="Ehecatl Universe Logo"
+					/>
+					<img
+						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/cyborgapes.webp"
+						alt="Cyborg Apes Logo"
+					/>
+					<img
+						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/ubik.webp"
+						alt="Ubik Logo"
+					/>
+					<img
+						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/astrals.webp"
+						alt="Astrals Logo"
+					/>
+					<img
+						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/dcf.webp"
+						alt="Degen Coin Flip Logo"
+					/>
+					<img
+						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/dogetrack.webp"
+						alt="Doge Track Logo"
+					/>
+					<img
+						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/mekkafroggo.webp"
+						alt="Mekka Froggo logo"
+					/>
 				</div>
 			</div>
 		</>

@@ -1,13 +1,4 @@
 import React, { useRef, useState } from 'react';
-import discordSale from '../../img/sales-demo.webp';
-import discordListing from '../../img/listings-demo.webp';
-import moonrankIcon from '../../img/favicon/moonrank.webp';
-import howrareIcon from '../../img/favicon/howrare.webp';
-import failImg from '../../img/whitelist/not-found.webp';
-import foundImg from '../../img/whitelist/found.webp';
-import sucessImg from '../../img/whitelist/sucess.webp';
-import instructionsImg from '../../img/whitelist/instructions.webp';
-import errorImg from '../../img/whitelist/error.webp';
 
 const Discord = () => {
 	const [activeTab, setActiveTab] = useState('sales');
@@ -78,22 +69,28 @@ const Discord = () => {
 					<div className="demo-img-container">
 						<img
 							className={activeTab === 'sales' ? 'demo-img active' : 'demo-img'}
-							src={discordSale}
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/sales-demo.webp"
 							alt=""
 						/>
 						<img
 							className={
 								activeTab === 'listings' ? 'demo-img active' : 'demo-img'
 							}
-							src={discordListing}
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/listings-demo.webp"
 							alt=""
 						/>
 					</div>
 				</div>
 				<div className="grid-card">
 					<div className="grid-icon">
-						<img src={moonrankIcon} alt="" />
-						<img src={howrareIcon} alt="" />
+						<img
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/moonrank.webp"
+							alt=""
+						/>
+						<img
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/howrare.webp"
+							alt=""
+						/>
 					</div>
 					<div className="content">
 						<h3>Rarity & Rank</h3>
@@ -216,7 +213,10 @@ const Discord = () => {
 								}
 							>
 								<h4>Simple instructions</h4>
-								<img src={instructionsImg} alt="" />
+								<img
+									src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/instructions.webp"
+									alt=""
+								/>
 							</div>
 							<div
 								className={
@@ -226,16 +226,15 @@ const Discord = () => {
 								}
 							>
 								<h4>Success notifications & check command</h4>
-								<img src={sucessImg} alt="" />
-								<img src={foundImg} alt="" />
-							</div>
-							{/* <img
-									className={
-										wlSliderPosition === 2 ? 'wl-img' : 'hidden wl-img'
-									}
-									src={sucessImg}
+								<img
+									src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/sucess.webp"
 									alt=""
-								/> */}
+								/>
+								<img
+									src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/found.webp"
+									alt=""
+								/>
+							</div>
 							<div
 								className={
 									wlSliderPosition === 3
@@ -244,7 +243,10 @@ const Discord = () => {
 								}
 							>
 								<h4>Action needed notifications</h4>
-								<img src={failImg} alt="" />
+								<img
+									src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/not-found.webp"
+									alt=""
+								/>
 							</div>
 							<div
 								className={
@@ -254,7 +256,10 @@ const Discord = () => {
 								}
 							>
 								<h4>Invalid submission notifications</h4>
-								<img src={errorImg} alt="" />
+								<img
+									src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/error.webp"
+									alt=""
+								/>
 							</div>
 						</div>
 					</div>

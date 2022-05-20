@@ -1,7 +1,4 @@
 import React from 'react';
-import degenFlipImg from '../../img/degen-flip-bot.webp';
-import staking1 from '../../img/staking-1.webp';
-import staking2 from '../../img/staking-2.webp';
 
 const More = () => {
 	return (
@@ -19,7 +16,10 @@ const More = () => {
 						<p>Win streaks for degens. 😎 Official #degen, unofficial bot.</p>
 					</div>
 					<div className="img">
-						<img src={degenFlipImg} alt="" />
+						<img
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/degen-flip-bot.webp"
+							alt=""
+						/>
 					</div>
 				</div>
 				<div className="card grid-2">
@@ -32,8 +32,14 @@ const More = () => {
 						</p>
 					</div>
 					<div className="staking-img-container">
-						<img src={staking1} alt="" />
-						<img src={staking2} alt="" />
+						<img
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/staking-1.webp"
+							alt=""
+						/>
+						<img
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/staking-2.webp"
+							alt=""
+						/>
 					</div>
 				</div>
 				<div className="card grid-2">

@@ -22,7 +22,6 @@ const Twitter = () => {
 
 		if (formProps.collection.startsWith('https://magiceden.io/marketplace/')) {
 			setPopupState(false);
-			// console.log('getting next collection');
 			const newCol = formProps.collection.split('/');
 
 			const { data } = await axios.get(

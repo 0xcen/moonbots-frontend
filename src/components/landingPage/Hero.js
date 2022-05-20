@@ -1,10 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import tweetScreenshot from '../../img/astrals-twitter-bot.webp';
-import twitterBird from '../../img/twitter-white.svg';
-import discordLogo from '../../img/Discord-Logo-White.svg';
-import discordSales from '../../img/okayBear-sale.webp';
-import discordListings from '../../img/okayBear-listing.webp';
 
 const Hero = () => {
 	return (
@@ -26,22 +21,31 @@ const Hero = () => {
 				<div className="grid-2 m-xl">
 					<div className="hero-tweet">
 						<img
-							src={twitterBird}
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/twitter-white.svg"
 							className="twitter-bird m-md"
 							alt="twitter logo"
 						/>
 						<img
 							className="hero-twitter-img"
-							src={tweetScreenshot}
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/tweet-screenshot.webp"
 							alt="tweet"
 						/>
 					</div>
 					<div className="hero-discord ">
-						<img className="discord-logo m-md" src={discordLogo} alt="" />
-						{/* add discord examples */}
+						<img
+							className="discord-logo m-md"
+							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/Discord-Logo-White.svg"
+							alt="discord logo"
+						/>
 						<div className="hero-discord-img">
-							<img src={discordSales} alt="" />
-							<img src={discordListings} alt="" />
+							<img
+								src="https://moonstore.fra1.digitaloceanspaces.com/web/okayBear-sale.webp"
+								alt="Okay bear sale"
+							/>
+							<img
+								src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/okayBear-listing.webp"
+								alt="Okay Bear Listing"
+							/>
 						</div>
 					</div>
 				</div>

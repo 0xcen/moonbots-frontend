@@ -1,7 +1,4 @@
 import React from 'react';
-import solanaLogo from '../../img/solanaLogo.svg';
-import twitterBird from '../../img/twitter-white.svg';
-import discordLogo from '../../img/Discord-Logo-White.svg';
 
 const Socials = () => {
 	return (
@@ -15,7 +12,10 @@ const Socials = () => {
 					>
 						<div className="card twitter-blue">
 							<div className="icons">
-								<img src={twitterBird} alt="" />
+								<img
+									src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/twitter-white.svg"
+									alt=""
+								/>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 20"
@@ -33,7 +33,7 @@ const Socials = () => {
 									<span>
 										<img
 											className="solana-logo"
-											src={solanaLogo}
+											src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/solanaLogo.svg"
 											alt="Solana logo"
 										/>
 									</span>
@@ -48,7 +48,10 @@ const Socials = () => {
 					>
 						<div className="card discord-purple">
 							<div className="icons">
-								<img src={discordLogo} alt="" />
+								<img
+									src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/Discord-Logo-White.svg"
+									alt=""
+								/>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="h-5 w-5"
