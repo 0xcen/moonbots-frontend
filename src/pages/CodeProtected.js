@@ -4,9 +4,9 @@ import { TextField } from '@mui/material';
 const CodeProtected = () => {
 	return (
 		<div className="full-page code-protected">
-			<h2>Already have an access code?</h2>
 			<form onSubmit={(e) => e.preventDefault()}>
-				<TextField />
+				<h2 className="">Already have an access code?</h2>
+				<TextField fullWidth />
 				<button className="btn-cta" type="submit">
 					Lets go!
 				</button>

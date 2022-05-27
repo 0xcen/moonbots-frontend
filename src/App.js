@@ -5,20 +5,16 @@ import './css/queries.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import { SignUpForm } from './components/SignUpForm';
 import Login from './components/auth/Login';
-import Home from './components/Home';
 import Success from './components/Success';
-import Fail from './components/Fail';
 import Footer from './components/Footer';
-import QuickTwitterOauth from './components/QuickTwitterOauth';
 import NewCollection from './components/admin/NewCollection';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './pages/ProtectedRoute';
 import AdminDashboard from './components/admin/AdminDashboard';
 import CollectionProvider from './contextProviders/CollectionProvider';
-import LandingPage from './components/landingPage/LandingPage';
+import LandingPage from './pages/LandingPage';
 import AppProvider from './contextProviders/AppProvider';
-import CodeProtected from './components/CodeProtected';
+import CodeProtected from './pages/CodeProtected';
 
 const App = () => {
 	return (
@@ -34,8 +30,6 @@ const App = () => {
 							<Route path="/signup" element={<CodeProtected />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/signup/success" element={<Success />} />
-							<Route path="/signup/fail" element={<Fail />} />
-							<Route path="/twitter-auth" element={<QuickTwitterOauth />} />
 							<Route element={<ProtectedRoute />}>
 								<Route path="/admin/dashboard" element={<AdminDashboard />} />
 								<Route path="/new-collection" element={<NewCollection />} />

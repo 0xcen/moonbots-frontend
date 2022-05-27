@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
 	return (
-		<div className="hero-container">
+		<header className="hero-container">
 			<div className="hero-content">
 				<h1>Let your collection's most relevant stats do the talking</h1>
 				<p>
@@ -50,7 +50,7 @@ const Hero = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 };
 

@@ -55,7 +55,7 @@ const Twitter = () => {
 	return (
 		<>
 			<div id="products"></div>
-			<div className="section-twitter" onClick={handlePopUpClick}>
+			<section className="section-twitter" onClick={handlePopUpClick}>
 				<h2 className="section-title">
 					Simple setup, even easier customization
 				</h2>
@@ -132,7 +132,7 @@ const Twitter = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 		</>
 	);
 };
