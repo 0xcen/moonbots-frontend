@@ -3,70 +3,46 @@ import './css/App.css';
 import './css/queries.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material';
 
 import Navbar from './components/Navbar';
-import { SignUpForm } from './components/SignUpForm';
-import Home from './components/Home';
+import Login from './pages/Login';
 import Success from './components/Success';
-import Fail from './components/Fail';
-import QuickTwitterOauth from './components/QuickTwitterOauth';
+import Footer from './components/Footer';
+import NewCollection from './components/admin/NewCollection';
+import ProtectedRoute from './pages/ProtectedRoute';
+import AdminDashboard from './components/admin/AdminDashboard';
+import CollectionProvider from './contextProviders/CollectionProvider';
+import LandingPage from './pages/LandingPage';
+import AppProvider from './contextProviders/AppProvider';
+import CodeProtected from './pages/CodeProtected';
 
 const App = () => {
-	// const [newThemeColor, setNewThemeColor] = useState('#fff');
-	// const [activeColor, setActiveColor] = useState('#fff');
-	const myTheme = createTheme({
-		palette: {
-			mode: 'dark',
-			primary: {
-				main: '#5aff47',
-			},
-		},
-		typography: {
-			fontFamily: 'Roboto Mono',
-			fontSize: 18,
-		},
-	});
-
 	return (
-		<ThemeProvider theme={myTheme}>
-			<div className="app">
-				<div className="moon"></div>
-				<Router>
-					<Navbar />
-					<h1 className="h1">
-						NFT Bots that really go BRR{' '}
-						<span role="img" aria-label="money face">
-							🤑
-						</span>
-					</h1>
-					{/* {/* <h1>Marketing tools for NFTs< */}
-					<div className="flow-wrapper-wrapper">
-						<div className="flow-wrapper">
-							<Routes>
-								<Route path="/" element={<Home />} />
-								<Route
-									path="/signup"
-									element={<SignUpForm />}
-								/>
-								<Route
-									path="/signup/success"
-									element={<Success />}
-								/>
-								<Route path="/signup/fail" element={<Fail />} />
-								<Route
-									path="/twitter-auth"
-									element={<QuickTwitterOauth />}
-								/>
-							</Routes>
+		<div className="app">
+			<Router>
+				<CollectionProvider>
+					<AppProvider>
+						<div className="app-wrapper">
+							<Navbar />
 						</div>
-					</div>
-				</Router>
-				<footer>
-					{<span>&#169; {new Date().getFullYear()} MoonBots</span>}
-				</footer>
-			</div>
-		</ThemeProvider>
+						<Routes>
+							<Route path="/" element={<LandingPage />} />
+							<Route path="/signup" element={<CodeProtected />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/signup/success" element={<Success />} />
+							<Route element={<ProtectedRoute />}>
+								<Route path="/admin/dashboard" element={<AdminDashboard />} />
+								<Route path="/new-collection" element={<NewCollection />} />
+							</Route>
+						</Routes>
+					</AppProvider>
+				</CollectionProvider>
+				<div className="app-wrapper">
+					<Footer />
+				</div>
+			</Router>
+			{/* <footer>{<span>&#169; {new Date().getFullYear()} MoonBots</span>}</footer> */}
+		</div>
 	);
 };
 
