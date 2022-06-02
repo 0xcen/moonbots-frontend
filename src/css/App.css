@@ -322,12 +322,18 @@ label {
 	transition: all 320ms;
 
 	opacity: 1;
+
+	cursor: pointer;
 }
 
 .btn-cta:hover {
 	filter: saturate(180%);
 }
 
+.btn-cta:active {
+	filter: saturate(180%);
+	filter: brightness(0.95);
+}
 .discord-embed-wrapper {
 	padding-top: 1.6rem;
 }
@@ -1525,6 +1531,7 @@ footer li {
 	height: 85vh;
 	width: 100%;
 	display: flex;
+	margin-bottom: 10rem;
 
 	/* gap: 5rem; */
 
@@ -1533,20 +1540,29 @@ footer li {
 	align-items: center;
 }
 
-.code-protected .btn-cta {
-	width: fit-content;
-	align-self: center;
+/* Login */
+.rounded-gradient-bg {
+	background: linear-gradient(
+		113.93deg,
+		rgba(60, 59, 63, 0) -9.23%,
+		rgba(60, 59, 63, 0.26) 31.18%,
+		rgba(94, 90, 60, 0.24) 70.74%,
+		rgba(94, 90, 60, 0) 120.1%
+	);
+	border-radius: 14px;
 }
 
-.code-protected form {
-	gap: 2rem;
+.input-container {
+	width: 80rem;
+	padding: 10rem;
+	margin: 2rem;
 }
-.code-protected h2 {
-	font-weight: 400;
-	font-size: 1.9rem;
-	line-height: 157.52%;
-	max-width: 65rem;
-	/* margin: 2rem auto 1rem; */
-	text-align: center;
-	color: #b1b1b1;
+
+.input-container h2 {
+	font-size: 3.2rem;
+	color: #fff;
+	margin-bottom: 3rem;
+}
+.error {
+	color: #f73232;
 }

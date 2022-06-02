@@ -452,4 +452,9 @@
 	.section-more .staking-img-container img {
 		max-width: 25rem;
 	}
+
+	.input-container {
+		width: 90%;
+		padding: 10rem 5rem;
+	}
 }

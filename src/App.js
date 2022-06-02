@@ -5,7 +5,7 @@ import './css/queries.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import Login from './components/auth/Login';
+import Login from './pages/Login';
 import Success from './components/Success';
 import Footer from './components/Footer';
 import NewCollection from './components/admin/NewCollection';

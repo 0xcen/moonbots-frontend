@@ -10,7 +10,7 @@ const AppThemeProvider = ({ children }) => {
 			},
 		},
 		typography: {
-			fontFamily: 'Roboto Mono',
+			// fontFamily: 'Roboto Mono',
 			fontSize: 18,
 		},
 	});
