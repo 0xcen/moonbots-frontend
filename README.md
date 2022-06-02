@@ -4,7 +4,18 @@ Moonbots is a suite of automated twitter and discord utilities to help you marke
 
 All of the bots query the blockchain and bring the data to where your comunity is. 
 
-## The Products
+## Goals
+🎨 Display the products in an interactive maner to give viewers an accurate depiction of the products. ✅
+
+📈 Create dynamic components to populate demos with real data and allow users to demo their collection in real time. ✅
+
+⚡️ Create a user dashboard that allows users to manage and deploy their bots. 
+
+💳 Add payments via Solana Pay for self service.
+
+
+
+## Products
 🐦 Twitter Sales Bots
 
 💬 Discord Sales & Listings Bots
@@ -15,7 +26,3 @@ All of the bots query the blockchain and bring the data to where your comunity i
 
 💎 Custom Solutions
 
-## The Goal 
-🎨 Display the products in an interactive maner to give viewers an accurate depiction of the products. 
-
-📈 Create dynamic components to populate the demos with real data and allow users to demo their collection in real time.
