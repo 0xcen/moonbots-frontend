@@ -20,7 +20,10 @@ const Security = () => {
 				<h3>Want more information?</h3>
 				<p>
 					Feel free to reach out{' '}
-					<a href="/security" className="holo-link">
+					<a
+						href="https://discord.com/users/924803349319147620"
+						className="holo-link"
+					>
 						here
 					</a>
 					<svg
