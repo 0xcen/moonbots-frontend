@@ -20,9 +20,11 @@ const CollectionProvider = ({ children }) => {
 					},
 				}
 			);
-			if (!data) return updateCollection(sale);
+			if (data.status === 'error') return updateCollection(sale);
+			const [latestSale, ..._] = data?.filter((t) => t.type === 'buyNow');
+			if (!latestSale) return updateCollection(sale);
 
-			updateCollection(data);
+			updateCollection(latestSale);
 		})();
 	}, []);
 

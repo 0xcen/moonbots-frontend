@@ -20,7 +20,7 @@ const Login = () => {
 		}
 		try {
 			const res = await axios.post(
-				`http://localhost:8000/api/v1/auth/login`,
+				`https://moonbots-dev.herokuapp.com/api/v1/auth/login`,
 				{
 					username: e.target.username.value,
 					password: e.target.password.value,

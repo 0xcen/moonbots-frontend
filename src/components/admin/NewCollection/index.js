@@ -29,7 +29,7 @@ const NewCollection = () => {
 		// console.log([...formData.entries()]);
 
 		axios
-			.post('http://localhost:8000/api/v1/collections', formData)
+			.post('https://moonbots-dev.herokuapp.com/api/v1/collections', formData)
 			.then(console.log)
 			.catch(console.log);
 	};
