@@ -20,11 +20,14 @@ const CollectionProvider = ({ children }) => {
 					},
 				}
 			);
-			if (data.status === 'error') return updateCollection(sale);
-			const [latestSale, ..._] = data?.filter((t) => t.type === 'buyNow');
-			if (!latestSale) return updateCollection(sale);
 
-			updateCollection(latestSale);
+			if (Array.isArray(data)) {
+				const [latestSale, ..._] = data?.filter((t) => t.type === 'buyNow');
+				if (!latestSale) return updateCollection(sale);
+				return updateCollection(latestSale);
+			} else {
+				return updateCollection(sale);
+			}
 		})();
 	}, []);
 
