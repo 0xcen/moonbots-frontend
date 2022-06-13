@@ -1558,6 +1558,11 @@ footer li {
 	margin: 2rem;
 }
 
+.input-container p {
+	font-size: 1.8rem;
+	color: #fff;
+}
+
 .input-container h2 {
 	font-size: 3.2rem;
 	color: #fff;

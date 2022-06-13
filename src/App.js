@@ -15,6 +15,7 @@ import CollectionProvider from './contextProviders/CollectionProvider';
 import LandingPage from './pages/LandingPage';
 import AppProvider from './contextProviders/AppProvider';
 import CodeProtected from './pages/CodeProtected';
+import TwitterOauth from './components/TwitterOauth';
 
 const App = () => {
 	return (
@@ -30,6 +31,7 @@ const App = () => {
 							<Route path="/signup" element={<CodeProtected />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/signup/success" element={<Success />} />
+							<Route path="/signup/twitter" element={<TwitterOauth />} />
 							<Route element={<ProtectedRoute />}>
 								<Route path="/admin/dashboard" element={<AdminDashboard />} />
 								<Route path="/new-collection" element={<NewCollection />} />
