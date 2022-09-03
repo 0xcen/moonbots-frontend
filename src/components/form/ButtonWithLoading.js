@@ -36,7 +36,8 @@ export const ButtonWithLoading = ({
 			variant={variant}
 			href={href}
 			type={type}
-			{...props}>
+			{...props}
+		>
 			{text}
 		</Button>
 	);

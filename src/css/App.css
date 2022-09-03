@@ -550,7 +550,8 @@ header {
 
 	text-shadow: -4px 4px 35px rgba(0, 0, 0, 0.55);
 }
-.customers-logo-carrusell img {
+.customers-logo-carrusell img,
+.bubbleLogo img {
 	/* height: 6.5rem; */
 	width: 20vh;
 	display: inline-block;
@@ -1556,6 +1557,11 @@ footer li {
 	width: 80rem;
 	padding: 10rem;
 	margin: 2rem;
+}
+
+.input-container p {
+	font-size: 1.8rem;
+	color: #fff;
 }
 
 .input-container h2 {

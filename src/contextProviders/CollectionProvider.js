@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import sale from '../dummy/sale';
 
@@ -10,20 +9,26 @@ const CollectionProvider = ({ children }) => {
 
 	// Get data from marketplace
 	useEffect(() => {
-		(async () => {
-			const { data } = await axios.get(
-				`https://moonbots-dev.herokuapp.com/api/v1/collections/marketplaces/okay_bears`,
-				{
-					validateStatus: false,
-					headers: {
-						'Access-Control-Allow-Origin': window.location.origin,
-					},
-				}
-			);
-			if (!data) return updateCollection(sale);
+		// (async () => {
+		// 	const { data } = await axios.get(
+		// 		`https://moonbots-dev.herokuapp.com/api/v1/collections/marketplaces/okay_bears`,
+		// 		{
+		// 			validateStatus: false,
+		// 			headers: {
+		// 				'Access-Control-Allow-Origin': window.location.origin,
+		// 			},
+		// 		}
+		// 	);
 
-			updateCollection(data);
-		})();
+		// 	if (Array.isArray(data)) {
+		// 		const [latestSale, ..._] = data?.filter((t) => t.type === 'buyNow');
+		// 		if (!latestSale) return updateCollection(sale);
+		// 		return updateCollection(latestSale);
+		// 	} else {
+		// 		return updateCollection(sale);
+		// 	}
+		// })();
+		updateCollection(sale);
 	}, []);
 
 	// parse new collection

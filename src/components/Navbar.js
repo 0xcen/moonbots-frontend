@@ -27,11 +27,7 @@ const Navbar = () => {
 		<div className="nav">
 			<div className="logo-wrapper">
 				<Link to="/">
-					<img
-						className="logo"
-						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/moonbots-logo.svg"
-						alt="moonbots logo"
-					/>
+					<img className="logo" src={logo} alt="moonbots logo" />
 				</Link>
 			</div>
 			<div

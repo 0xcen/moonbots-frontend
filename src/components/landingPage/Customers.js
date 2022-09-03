@@ -1,4 +1,10 @@
 import React from 'react';
+import astralsLogo from '../../img/customer-logos/astrals.webp';
+import dcfLogo from '../../img/customer-logos/dcf.webp';
+import ubikLogo from '../../img/customer-logos/ubik.webp';
+import bubblegooseLogo from '../../img/customer-logos/bubblegoose-logo.png';
+import ballonsvilleLogo from '../../img/customer-logos/balloonsville.png';
+import mekkaFroggo from '../../img/customer-logos/mekkafroggo.webp';
 
 const Customers = () => {
 	return (
@@ -7,34 +13,12 @@ const Customers = () => {
 			<div className="section-customers">
 				<h3 className="">Our customers → Serious ⍺lpha</h3>
 				<div className="customers-logo-carrusell">
-					<img
-						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/ehecatl.webp"
-						alt="Ehecatl Universe Logo"
-					/>
-					<img
-						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/cyborgapes.webp"
-						alt="Cyborg Apes Logo"
-					/>
-					<img
-						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/ubik.webp"
-						alt="Ubik Logo"
-					/>
-					<img
-						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/astrals.webp"
-						alt="Astrals Logo"
-					/>
-					<img
-						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/dcf.webp"
-						alt="Degen Coin Flip Logo"
-					/>
-					<img
-						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/dogetrack.webp"
-						alt="Doge Track Logo"
-					/>
-					<img
-						src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/mekkafroggo.webp"
-						alt="Mekka Froggo logo"
-					/>
+					<img src={ubikLogo} alt="ubik logo" />
+					<img src={ballonsvilleLogo} alt="balloonsville logo" />
+					<img src={dcfLogo} alt="degen coin flip logo" />
+					<img src={astralsLogo} alt="Astrals Logo" />
+					<img src={bubblegooseLogo} alt="bubble goose ballers logo" />
+					<img src={mekkaFroggo} alt="Degen Fat Cats logo" />
 				</div>
 			</div>
 		</>

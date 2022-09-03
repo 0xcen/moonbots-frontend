@@ -88,11 +88,11 @@ const Twitter = () => {
 									}}
 								/>
 							</div>
-							<span>
+							{/* <span>
 								If your collection is already in secondary marketplaces provide
 								a link to your collection to use the demo with your real
 								collection’s data.
-							</span>
+							</span> */}
 							<span className="only-desktop">
 								Experiece the full demo on desktop.
 							</span>
@@ -119,13 +119,13 @@ const Twitter = () => {
 									<button type="submit">Get my collection</button>
 								</form>
 							</div>
-							<button
+							{/* <button
 								onClick={() => {
 									setPopupState(true);
 								}}
 							>
 								Load my collection
-							</button>
+							</button> */}
 						</div>
 						<div className="demo">
 							<TweetDemo content={tweetText} />

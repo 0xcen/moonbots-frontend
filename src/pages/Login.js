@@ -4,6 +4,8 @@ import { TextField } from '@mui/material';
 import axios from 'axios';
 import { UpdateUserContext } from '../contextProviders/UserProvider';
 
+import config from '../config.js';
+
 axios.defaults.withCredentials = true;
 
 const Login = () => {
@@ -20,7 +22,7 @@ const Login = () => {
 		}
 		try {
 			const res = await axios.post(
-				`http://localhost:8000/api/v1/auth/login`,
+				`${config[process.env.NODE_ENV].MOONBOTS_API}/api/v1/auth/login`,
 				{
 					username: e.target.username.value,
 					password: e.target.password.value,
