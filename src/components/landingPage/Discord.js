@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react';
+import discordSale from '../../img/sales-demo.webp';
+import discordListing from '../../img/listings-demo.webp';
 
 const Discord = () => {
 	const [activeTab, setActiveTab] = useState('sales');
@@ -69,14 +71,14 @@ const Discord = () => {
 					<div className="demo-img-container">
 						<img
 							className={activeTab === 'sales' ? 'demo-img active' : 'demo-img'}
-							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/sales-demo.webp"
+							src={discordSale}
 							alt=""
 						/>
 						<img
 							className={
 								activeTab === 'listings' ? 'demo-img active' : 'demo-img'
 							}
-							src="https://moonstore.fra1.cdn.digitaloceanspaces.com/web/listings-demo.webp"
+							src={discordListing}
 							alt=""
 						/>
 					</div>

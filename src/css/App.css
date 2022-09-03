@@ -550,7 +550,8 @@ header {
 
 	text-shadow: -4px 4px 35px rgba(0, 0, 0, 0.55);
 }
-.customers-logo-carrusell img {
+.customers-logo-carrusell img,
+.bubbleLogo img {
 	/* height: 6.5rem; */
 	width: 20vh;
 	display: inline-block;
